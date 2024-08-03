@@ -1,0 +1,27 @@
+[
+    {
+        "Customer_ID": "1",
+        "CustomerName": "A",
+        "CustomerPhone": "034112355"
+    },
+    {
+        "Customer_ID": "2",
+        "CustomerName": "B",
+        "CustomerPhone": "0341123266"
+    },
+    {
+        "Customer_ID": "3",
+        "CustomerName": "C",
+        "CustomerPhone": "034112344"
+    },
+    {
+        "Customer_ID": "4",
+        "CustomerName": "D",
+        "CustomerPhone": "034112333"
+    },
+    {
+        "Customer_ID": "5",
+        "CustomerName": "E",
+        "CustomerPhone": "034112322"
+    }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "Function_ID": 1,
+        "FunctionName": "Dashboard",
+        "FunctionLink" : "/",
+        "FunctionIcon": "mdi-home"
+    },
+    {
+        "Function_ID": 2,
+        "FunctionName": "Accounts Management",
+        "FunctionLink" : "",
+        "FunctionIcon": "mdi-account-multiple-plus"
+    },
+    {
+        "Function_ID": 3,
+        "FunctionName": "Categories Management",
+        "FunctionLink" : "/categories",
+        "FunctionIcon": "mdi-format-list-bulleted"
+    },
+    {
+        "Function_ID": 4,
+        "FunctionName": "Products Management",
+        "FunctionLink" : "/products",
+        "FunctionIcon": "mdi-basket"
+    },
+    {
+        "Function_ID": 5,
+        "FunctionName": "Services Management",
+        "FunctionLink" : "/services",
+        "FunctionIcon": "mdi-emoticon-happy"
+    },
+    {
+        "Function_ID": 6,
+        "FunctionName": "Receipts Management",
+        "FunctionLink" : "/receipts",
+        "FunctionIcon": "mdi-car-wash"
+    },
+    {
+        "Function_ID": 7,
+        "FunctionName": "Statistic Management",
+        "FunctionLink" : "/statistic",
+        "FunctionIcon": "mdi-chart-areaspline"
+    }
+]

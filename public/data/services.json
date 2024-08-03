@@ -1,0 +1,72 @@
+[
+    {
+        "Service_ID": 1,
+        "ServiceName": "Haircut",
+        "ServicePrice": 25.00,
+        "ServiceDescription": "Professional haircut tailored to your style.",
+        "ServiceImage": "https://example.com/images/haircut.jpg"
+    },
+    {
+        "Service_ID": 2,
+        "ServiceName": "Beard Trim",
+        "ServicePrice": 15.00,
+        "ServiceDescription": "Precision beard trim for a clean and sharp look.",
+        "ServiceImage": "https://example.com/images/beard_trim.jpg"
+    },
+    {
+        "Service_ID": 3,
+        "ServiceName": "Shave",
+        "ServicePrice": 20.00,
+        "ServiceDescription": "Classic straight razor shave with hot towel treatment.",
+        "ServiceImage": "https://example.com/images/shave.jpg"
+    },
+    {
+        "Service_ID": 4,
+        "ServiceName": "Hair Wash",
+        "ServicePrice": 10.00,
+        "ServiceDescription": "Relaxing hair wash with premium shampoo and conditioner.",
+        "ServiceImage": "https://example.com/images/hair_wash.jpg"
+    },
+    {
+        "Service_ID": 5,
+        "ServiceName": "Facial",
+        "ServicePrice": 30.00,
+        "ServiceDescription": "Rejuvenating facial treatment for clean and healthy skin.",
+        "ServiceImage": "https://example.com/images/facial.jpg"
+    },
+    {
+        "Service_ID": 6,
+        "ServiceName": "Hair Coloring",
+        "ServicePrice": 60.00,
+        "ServiceDescription": "Professional hair coloring with a wide range of shades.",
+        "ServiceImage": "https://example.com/images/hair_coloring.jpg"
+    },
+    {
+        "Service_ID": 7,
+        "ServiceName": "Scalp Treatment",
+        "ServicePrice": 35.00,
+        "ServiceDescription": "Nourishing scalp treatment to promote hair growth and health.",
+        "ServiceImage": "https://example.com/images/scalp_treatment.jpg"
+    },
+    {
+        "Service_ID": 8,
+        "ServiceName": "Hot Towel Service",
+        "ServicePrice": 12.00,
+        "ServiceDescription": "Relaxing hot towel service to open pores and soften facial hair.",
+        "ServiceImage": "https://example.com/images/hot_towel.jpg"
+    },
+    {
+        "Service_ID": 9,
+        "ServiceName": "Mustache Trim",
+        "ServicePrice": 10.00,
+        "ServiceDescription": "Detailed mustache trim for a polished appearance.",
+        "ServiceImage": "https://example.com/images/mustache_trim.jpg"
+    },
+    {
+        "Service_ID": 10,
+        "ServiceName": "Eyebrow Grooming",
+        "ServicePrice": 15.00,
+        "ServiceDescription": "Precision eyebrow grooming to keep your brows neat and tidy.",
+        "ServiceImage": "https://example.com/images/eyebrow_grooming.jpg"
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "Product_ID": 1,
+        "ProductName": "Beard Oil",
+        "ProductPrice": 19.99,
+        "ProductDescription": "Organic beard oil to keep your beard soft and healthy.",
+        "ProductImage": "https://example.com/images/beard_oil.jpg",
+        "Category_ID": 201
+    },
+    {
+        "Product_ID": 2,
+        "ProductName": "Shaving Cream",
+        "ProductPrice": 14.99,
+        "ProductDescription": "Rich and creamy shaving cream for a smooth shave.",
+        "ProductImage": "https://example.com/images/shaving_cream.jpg",
+        "Category_ID": 202
+    },
+    {
+        "Product_ID": 3,
+        "ProductName": "Hair Pomade",
+        "ProductPrice": 12.99,
+        "ProductDescription": "Strong hold hair pomade for all-day style.",
+        "ProductImage": "https://example.com/images/hair_pomade.jpg",
+        "Category_ID": 203
+    },
+    {
+        "Product_ID": 4,
+        "ProductName": "Aftershave Balm",
+        "ProductPrice": 15.99,
+        "ProductDescription": "Soothing aftershave balm to calm and hydrate skin.",
+        "ProductImage": "https://example.com/images/aftershave_balm.jpg",
+        "Category_ID": 202
+    },
+    {
+        "Product_ID": 5,
+        "ProductName": "Mustache Wax",
+        "ProductPrice": 9.99,
+        "ProductDescription": "Premium mustache wax for styling and shaping.",
+        "ProductImage": "https://example.com/images/mustache_wax.jpg",
+        "Category_ID": 201
+    },
+    {
+        "Product_ID": 6,
+        "ProductName": "Hair Clipper",
+        "ProductPrice": 49.99,
+        "ProductDescription": "Professional hair clipper for precise and easy haircuts.",
+        "ProductImage": "https://example.com/images/hair_clipper.jpg",
+        "Category_ID": 204
+    },
+    {
+        "Product_ID": 7,
+        "ProductName": "Scissors",
+        "ProductPrice": 29.99,
+        "ProductDescription": "High-quality stainless steel scissors for cutting hair.",
+        "ProductImage": "https://example.com/images/scissors.jpg",
+        "Category_ID": 204
+    },
+    {
+        "Product_ID": 8,
+        "ProductName": "Comb Set",
+        "ProductPrice": 8.99,
+        "ProductDescription": "Durable comb set for styling and grooming hair.",
+        "ProductImage": "https://example.com/images/comb_set.jpg",
+        "Category_ID": 203
+    },
+    {
+        "Product_ID": 9,
+        "ProductName": "Shampoo",
+        "ProductPrice": 11.99,
+        "ProductDescription": "Gentle shampoo for daily use, suitable for all hair types.",
+        "ProductImage": "https://example.com/images/shampoo.jpg",
+        "Category_ID": 205
+    },
+    {
+        "Product_ID": 10,
+        "ProductName": "Conditioner",
+        "ProductPrice": 12.99,
+        "ProductDescription": "Nourishing conditioner to keep your hair soft and shiny.",
+        "ProductImage": "https://example.com/images/conditioner.jpg",
+        "Category_ID": 205
+    }
+]

@@ -1,0 +1,11 @@
+.marginButton{
+    margin: 20px 20px 20px 20px;
+}
+
+.tableResponsive {
+    overflow-x:auto;
+}
+
+.table_cursor :hover{
+    cursor: pointer;
+}
