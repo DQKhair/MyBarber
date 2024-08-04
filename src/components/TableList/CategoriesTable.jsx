@@ -1,83 +1,199 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
 import useCategories from "../../hook/useCategories";
+import { IconAdd, IconEdit, IconDelete } from "../Icons";
+import { AddFrom, EditForm, DeleteForm } from "../Forms/CategoryForm";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
+import { TablePagination } from "@mui/material";
 
 const CategoriesTable = () => {
-  const { categories, selectedCategory, selectCategory } = useCategories();
-  const navigate = useNavigate();
+  const [isAdd, setIsAdd] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
+  const [category, setCategory] = useState(null);
 
-  const handleClickDetail = (categoryID) =>{
-    navigate(`/categories/category_detail/${categoryID}`)
-  }
+  console.log("a");
+  const { loading, error, categories, getCategoryById } = useCategories();
 
-  const handleEdit = () => {
-    alert("edit");
-  };
-  const handleDelete = () => {
-    alert("delete");
-  };
   const handleAdd = () => {
-    alert("add");
+    setIsAdd(true);
   };
+  const handleEdit = async (categoryID) => {
+    const categoryById = await getCategoryById(categoryID);
+    setCategory(categoryById);
+    setIsEdit(true);
+  };
+  const handleDelete = async (categoryID) => {
+    const categoryById = await getCategoryById(categoryID);
+    setCategory(categoryById);
+    setIsDelete(true);
+  };
+
+  const handleCloseAdd = () => {
+    setIsAdd(false);
+  };
+  const handleCloseEdit = () => {
+    setIsEdit(false);
+  };
+  const handleCloseDelete = () => {
+    setIsDelete(false);
+  };
+
+  // pagination
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  //load page
+
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
+
   return (
-    <div className="col-lg-12 grid-margin stretch-card">
-      <div className="card">
-        <div className={`card-body ${stylesTableList.tableResponsive}`}>
-          <h4 className="card-title">{"Categories"}</h4>
-          <p className="card-description">{"List of categories"}</p>
+    <>
+      {/* Form */}
+      {isAdd === true ? (
+        <AddFrom openAdd={isAdd} handleClose={handleCloseAdd} />
+      ) : (
+        <></>
+      )}
 
-          <ButtonCircle
-            className={stylesTableList.marginButton}
-            nameButton="Add new"
-            colorButton={"blue"}
-            sizeButton={"sm"}
-            handleOnclick={handleAdd}
-          />
+      {/* Edit form */}
 
-          <table className={`table table-hover text-center `}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((item, index) => (
-                <tr
-                  className={`${stylesTableList.table_cursor}`}
-                  key={`${item.Category_ID}`}
-                  onClick={()=>handleClickDetail(item.Category_ID)}
-                >
-                  <td>{index + 1}</td>
-                  <td>{`${item.CategoryName}`}</td>
-                  <td>{`${item.CategoryDescription}`}</td>
-                  <td>
-                    <ButtonCircle
-                      className={stylesTableList.marginButton}
-                      nameButton="Edit"
-                      colorButton={"yellow"}
-                      sizeButton={"sm"}
-                      handleOnclick={handleEdit}
-                    />
-                    <ButtonCircle
-                      className={stylesTableList.marginButton}
-                      nameButton="Delete"
-                      colorButton={"red"}
-                      sizeButton={"sm"}
-                      handleOnclick={handleDelete}
-                    />
-                  </td>
+      {isEdit === true ? (
+        <EditForm
+          category={category}
+          openEdit={isEdit}
+          handleClose={handleCloseEdit}
+        />
+      ) : (
+        <></>
+      )}
+
+      {/* Delete form */}
+
+      {isDelete === true ? (
+        <DeleteForm
+          category={category}
+          openDelete={isDelete}
+          handleClose={handleCloseDelete}
+        />
+      ) : (
+        <></>
+      )}
+
+      {/* End Form */}
+
+      {/* Table */}
+      <div className="col-lg-12 grid-margin stretch-card">
+        <div className="card">
+          <div className={`card-body ${stylesTableList.tableResponsive}`}>
+            <h4 className="card-title">{"Categories"}</h4>
+            <p className="card-description">{"List of categories"}</p>
+
+            <ButtonCircle
+              className={stylesTableList.marginButton}
+              nameButton={
+                <>
+                  <IconAdd /> Add new
+                </>
+              }
+              colorButton={"blue"}
+              sizeButton={"sm"}
+              handleOnclick={handleAdd}
+            />
+
+            <table className={`table text-center `}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Category</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {categories
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <tr
+                      className={`${stylesTableList.table_cursor}`}
+                      key={`${item.Category_ID}`}
+                    >
+                      <td>{index + 1}</td>
+                      <td>{`${item.CategoryName}`}</td>
+                      <td>
+                        <ButtonCircle
+                          className={stylesTableList.marginButton}
+                          nameButton={
+                            <>
+                              <IconEdit />
+                            </>
+                          }
+                          colorButton={"yellow"}
+                          sizeButton={"sm"}
+                          titleButton="Modify"
+                          handleOnclick={() => handleEdit(item.Category_ID)}
+                        />
+                        <ButtonCircle
+                          className={stylesTableList.marginButton}
+                          nameButton={
+                            <>
+                              <IconDelete />
+                            </>
+                          }
+                          colorButton={"red"}
+                          sizeButton={"sm"}
+                          titleButton="Delete"
+                          handleOnclick={() => handleDelete(item.Category_ID)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+              {/* pagination */}
+              <TablePagination
+                className="paginationTable"
+                rowsPerPageOptions={[10, 25, 50]}
+                component="div"
+                count={categories.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                sx={{ "& p": { margin: "0px" } }}
+              />
+              {/* end pagination */}
+          </div>
         </div>
       </div>
-    </div>
+      {/*End Table */}
+    </>
   );
 };
 

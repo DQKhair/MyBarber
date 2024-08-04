@@ -5,6 +5,7 @@ const ButtonCircle = ({
   nameButton,
   colorButton,
   sizeButton,
+  titleButton = "",
   handleOnclick,
 }) => {
 
@@ -16,6 +17,7 @@ const ButtonCircle = ({
           colorButton={colorButton}
           typeButton={"circle"}
           sizeButton={sizeButton}
+          titleButton={titleButton}
           handleOnclick={handleOnclick}
         />
     </>

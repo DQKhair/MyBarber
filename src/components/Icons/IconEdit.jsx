@@ -1,12 +1,12 @@
 import React from "react";
 import { MdModeEdit } from "react-icons/md";
 
-const IconEdit = ({onClick}) =>{
+const IconEdit = () =>{
     const size = "20px"
     const color = "white"
     return (
         <>
-            <MdModeEdit color={color} size={size} onClick={onClick} />
+            <MdModeEdit color={color} size={size} />
         </>
     );
 }

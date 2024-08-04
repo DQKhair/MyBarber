@@ -2,9 +2,14 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../ButtonPage/Button";
 import ItemFunction from "./ItemFunction";
+import { ColorTextPage } from "../../constants/constants";
+
+import Avatar from "@mui/material/Avatar";
 
 const SideBar = () => {
   const navigate = useNavigate();
+  const userName = "Khải";
+  const charAvata = userName[0].toUpperCase();
 
   const handleAddReceipt = (e) => {
     navigate("/addReceipt");
@@ -16,7 +21,7 @@ const SideBar = () => {
         <li className="nav-item nav-profile">
           <Link to="/" className="nav-link">
             <div className="nav-profile-image">
-              <img src="./assets/images/faces/face1.jpg" alt="profile" />
+              <Avatar sx={{ bgcolor: ColorTextPage }}>{charAvata}</Avatar>
               <span className="login-status online"></span>
               {/* <!--change to offline or busy as needed--> */}
             </div>

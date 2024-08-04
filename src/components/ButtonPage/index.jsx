@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Tooltip from '@mui/material/Tooltip';
 
-const ButtonPage = ({nameButton,outlineButton,colorButton,typeButton,sizeButton,handleOnclick}) => {
+const ButtonPage = ({nameButton,outlineButton,colorButton,typeButton,sizeButton,titleButton,handleOnclick}) => {
 
     const [colorButtonState,setColorButtonState] = useState("btn-gradient-dark");
     const [typeButtonState, setTypeButtonState] = useState("");
@@ -29,7 +30,11 @@ const ButtonPage = ({nameButton,outlineButton,colorButton,typeButton,sizeButton,
 
     
     return (
-        <button onClick={handleOnclick} className = {`btn btn-block ${sizeButtonState } ${colorButtonState} ${typeButtonState} mx-1`}>{nameButton}</button>
+        <>
+         <Tooltip title={titleButton} placement="top">
+            <button onClick={handleOnclick} className = {`btn btn-block ${sizeButtonState } ${colorButtonState} ${typeButtonState} mx-1`}>{nameButton}</button>
+         </Tooltip>
+        </>
     );
 }
 

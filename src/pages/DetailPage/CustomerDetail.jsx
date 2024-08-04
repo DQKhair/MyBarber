@@ -11,7 +11,7 @@ const CustomerDetail = ({ mainPage }) => {
 
   const customer = getCustomerById(id);
 
-  const titleName = "Detail";
+  const titleName = "Information about customer";
   const breadcrumb = mainPage;
   const itemBreadcrumb = `Customer details`;
 

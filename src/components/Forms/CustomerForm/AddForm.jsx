@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { ColorTextPage } from "../../../constants/constants";
+import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,30 +13,31 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const EditForm = ({ customer, openEdit, handleClose }) => {
-  // initial values
-  const initialValues = {
-    customerName: customer.CustomerName,
-    customerPhone: customer.CustomerPhone,
-    customerAddress: customer.CustomerAddress,
-  };
+const initialValues = {
+  customerName: "",
+  customerPhone: "",
+  customerAddress: "",
+};
 
-  // schema
-  const regexPhone = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+const regexPhone = /^(\+\d{1,3}[- ]?)?\d{10}$/;
 
-  const customerSchema = yup.object({
+const categorySchema = yup.object({
     customerName: yup.string().required("Customer name is required"),
     customerPhone: yup
-      .string()
-      .required("phone number is required")
-      .matches(regexPhone, "Phone number is not valid"),
+    .string()
+    .required("phone number is required")
+    .matches(regexPhone, "Phone number is not valid"),
     customerAddress: yup.string().required("Customer address is required"),
-    customerAddress: yup.string().required("Customer address is required"),
-  });
 
-  const handleFormSubmit = (values) => {
+});
+
+const AddFrom = ({ openAdd, handleClose }) => {
+
+  const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
     handleClose();
+    //reset form
+    resetForm();
   };
 
   return (
@@ -44,7 +45,7 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        validationSchema={customerSchema}
+        validationSchema={categorySchema}
       >
         {({
           values,
@@ -52,12 +53,17 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
           touched,
           handleBlur,
           handleChange,
-          setFieldValue,
           handleSubmit,
+          setFieldValue,
+          resetForm,
         }) => (
           <Dialog
-            open={openEdit}
-            onClose={handleClose}
+            fullWidth
+            maxWidth="md"
+            open={openAdd}
+            onClose={() => {
+              handleClose();
+            }}
             PaperProps={{
               component: "form",
               onSubmit: handleSubmit,
@@ -74,7 +80,7 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
             </DialogTitle>
             <DialogContent>
               <DialogContentText sx={{ margin: "20px 0px" }}>
-                Modify information about customer
+                Add new customer
               </DialogContentText>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid
@@ -84,8 +90,7 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
                 >
                   <Grid item xs={4} sm={4} md={6}>
                     <TextField
-                      fullWidth
-                      variant="standard"
+                      variant="outlined"
                       type="text"
                       label="Customer name"
                       onBlur={(e) => {
@@ -93,41 +98,17 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
                         handleBlur(e);
                       }}
                       onChange={handleChange}
-                      value={values.customerName}
+                      value={values.CustomerName}
                       name="customerName"
                       error={!!touched.customerName && !!errors.customerName}
                       helperText={touched.customerName && errors.customerName}
-                      sx={{ gridColumn: "span 2" }}
+                      sx={{ gridColumn: "span 2", width: "100%" }}
                     />
                   </Grid>
 
                   <Grid item xs={4} sm={4} md={6}>
                     <TextField
-                      fullWidth
-                      variant="standard"
-                      type="text"
-                      label="Customer address"
-                      onBlur={(e) => {
-                        setFieldValue("customerAddress", e.target.value.trim());
-                        handleBlur(e);
-                      }}
-                      onChange={handleChange}
-                      value={values.customerAddress}
-                      name="customerAddress"
-                      error={
-                        !!touched.customerAddress && !!errors.customerAddress
-                      }
-                      helperText={
-                        touched.customerAddress && errors.customerAddress
-                      }
-                      sx={{ gridColumn: "span 2" }}
-                    />
-                  </Grid>
-
-                  <Grid item xs={4} sm={4} md={6}>
-                    <TextField
-                      fullWidth
-                      variant="standard"
+                      variant="outlined"
                       type="text"
                       label="Customer phone"
                       onBlur={(e) => {
@@ -135,19 +116,55 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
                         handleBlur(e);
                       }}
                       onChange={handleChange}
-                      value={values.customerPhone}
+                      value={values.CustomerPhone}
                       name="customerPhone"
                       error={!!touched.customerPhone && !!errors.customerPhone}
                       helperText={touched.customerPhone && errors.customerPhone}
-                      sx={{ gridColumn: "span 2" }}
+                      sx={{ gridColumn: "span 2", width: "100%" }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={4} sm={4} md={6}>
+                    <TextField
+                      variant="outlined"
+                      type="text"
+                      label="Customer address"
+                      onBlur={(e) => {
+                        setFieldValue("customerAddress", e.target.value.trim());
+                        handleBlur(e);
+                      }}
+                      onChange={handleChange}
+                      value={values.CustomerAddress}
+                      name="customerAddress"
+                      error={
+                        !!touched.customerAddress && !!errors.customerAddress
+                      }
+                      helperText={
+                        touched.customerAddress && errors.customerAddress
+                      }
+                      sx={{ gridColumn: "span 2", width: "100%" }}
                     />
                   </Grid>
                 </Grid>
               </Box>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button type="submit">Save</Button>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  handleClose();
+                  resetForm();
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ bgcolor: ColorButtonForm }}
+                type="submit"
+              >
+                Add new
+              </Button>
             </DialogActions>
           </Dialog>
         )}
@@ -156,4 +173,4 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
   );
 };
 
-export default EditForm;
+export default AddFrom;

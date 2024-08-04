@@ -5,7 +5,7 @@ import { CategoriesTable } from "../../components/TableList";
 
 const CategoriesPage = () => {
   const titleName = "Categories management";
-  const breadcrumb = "Categories management";
+  const breadcrumb = "Categories";
   const itemBreadcrumb = "list categories";
 
   return (

@@ -1,3 +1,4 @@
 import EditForm from "./EditForm";
+import AddFrom from "./AddForm";
 
-export {EditForm}
+export {AddFrom,EditForm}
