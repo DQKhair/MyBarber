@@ -21,9 +21,9 @@ const useItemCategories = () => {
     loadItemCategories();
   }, []);
 
-  const getItemCategoryById = async (itemCategoryID) => {
+  const getItemCategoryById = (itemCategoryID) => {
     try {
-      return await itemCategories.find(
+      return itemCategories.find(
         (i) => i.ItemCategory_ID === itemCategoryID
       );
     } catch (err) {

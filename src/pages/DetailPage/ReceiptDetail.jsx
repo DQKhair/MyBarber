@@ -2,22 +2,22 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
-import { CustomerById } from "../../components/ItemDetail";
-import useCustomers from "../../hook/useCustomers";
+import { ReceiptById } from "../../components/ItemDetail";
+import useReceipts from "../../hook/useReceipts";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
-const CustomerDetail = ({ mainPage }) => {
-  const { loading, error, getCustomerById } = useCustomers();
+const ReceiptDetail = ({ mainPage }) => {
+  const { loading, error, getReceiptById } = useReceipts();
   const { id } = useParams();
 
-  const customer = getCustomerById(id);
+  const receipt = getReceiptById(id);
 
-  const titleName = "Information about customer";
+  const titleName = "Information about receipt";
   const breadcrumb = mainPage;
-  const itemBreadcrumb = `Customer details`;
+  const itemBreadcrumb = `Receipt details`;
 
  //load page
 
@@ -45,10 +45,10 @@ if (error)
         itemBreadcrumb={itemBreadcrumb}
       />
       <div className={`${stylesPage.main_body} row`}>
-        <CustomerById customer={customer} />
+        <ReceiptById receipt={receipt} />
       </div>
     </>
   );
 };
 
-export default CustomerDetail;
+export default ReceiptDetail;

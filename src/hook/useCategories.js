@@ -26,9 +26,9 @@ const useCategories = () => {
     loadCategories();
   }, []);
 
-  const getCategoryById = async (categoryID) => {
+  const getCategoryById = (categoryID) => {
     try {
-      const category = await categories.find((c) => c.Category_ID === categoryID);
+      const category = categories.find((c) => c.Category_ID === categoryID);
       return category;
     } catch (err) {
       setError(err);

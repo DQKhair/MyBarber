@@ -9,7 +9,7 @@ import CategoriesPage from "../pages/CategoriesPage";
 import ProductsPage from "../pages/ProductsPage";
 import ServicesPage from "../pages/ServicesPage";
 import ReceiptsPage from "../pages/ReceiptsPage";
-import { CustomerDetail } from "../pages/DetailPage";
+import { CustomerDetail,EmployeeDetail,ProductDetail,ServiceDetail,ReceiptDetail } from "../pages/DetailPage";
 import {
   StatisticDayly,
   StatisticMonthly,
@@ -25,12 +25,31 @@ const AppRouter = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="/customers" element={<CustomersPage />} />
-          <Route path="customers/customer_detail/:id" element={<CustomerDetail mainPage={"Customers"} />} />
+          <Route
+            path="customers/customer_detail/:id"
+            element={<CustomerDetail mainPage={"Customers"} />}
+          />
           <Route path="/employees" element={<EmployeesPage />} />
+          <Route
+            path="employees/employee_detail/:id"
+            element={<EmployeeDetail mainPage={"Employees"} />}
+          />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route
+            path="products/product_detail/:id"
+            element={<ProductDetail mainPage={"Products"} />}
+          />
           <Route path="/services" element={<ServicesPage />} />
+          <Route
+            path="services/service_detail/:id"
+            element={<ServiceDetail mainPage={"Services"} />}
+          />
           <Route path="/receipts" element={<ReceiptsPage />} />
+          <Route
+            path="receipts/receipt_detail/:id"
+            element={<ReceiptDetail mainPage={"Receipts"} />}
+          />
           <Route path="/statisticDayly" element={<StatisticDayly />} />
           <Route path="/statisticMonthly" element={<StatisticMonthly />} />
           <Route path="/statisticYearly" element={<StatisticYearly />} />

@@ -26,9 +26,9 @@ const useEmployees = () => {
     loadEmployees();
   }, []);
 
-  const getEmployeeById = async (employeeID) => {
+  const getEmployeeById = (employeeID) => {
     try {
-      return await employees.find((e) => e.Employee_ID === employeeID);
+      return employees.find((e) => e.Employee_ID === employeeID);
     } catch (err) {
       setError(err);
       console.error("Fail to get employee by ID: ", err);

@@ -7,13 +7,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteForm = ({ category, openDelete, handleClose }) => {
-  // update category
-  //   const { updateCategoryHook } = useCategories();
+const DeleteForm = ({ employee, openDelete, handleClose }) => {
 
   // submit form
-  const handleAcceptDelete = (categoryID) => {
-    console.log("deleted: " + categoryID);
+  const handleAcceptDelete = (employeeID) => {
+    console.log("deleted: " + employeeID);
     handleClose();
   };
 
@@ -35,11 +33,11 @@ const DeleteForm = ({ category, openDelete, handleClose }) => {
             margin: "30px 0 0 0",
           }}
         >
-          {`DELETE ${category.CategoryName}`}
+          {`DELETE ${employee.EmployeeName}`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ textAlign: "center" }}>
-            {`Are you sure delete ${category.CategoryName} with ID: ${category.Category_ID} ?`}
+            {`Are you sure delete ${employee.EmployeeName} with ID: ${employee.Employee_ID} ?`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -54,7 +52,7 @@ const DeleteForm = ({ category, openDelete, handleClose }) => {
           <Button
             variant="contained"
             color="error"
-            onClick={() => handleAcceptDelete(category.Category_ID)}
+            onClick={() => handleAcceptDelete(employee.Employee_ID)}
           >
             Delete
           </Button>

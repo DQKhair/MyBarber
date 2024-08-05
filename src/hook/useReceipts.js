@@ -21,9 +21,9 @@ const useReceipts = () => {
     loadReceipt();
   }, []);
 
-  const getReceiptById = async (receiptID) => {
+  const getReceiptById = (receiptID) => {
     try {
-      return await receipts.find((r) => r.Receipt_ID === receiptID);
+      return receipts.find((r) => r.Receipt_ID === receiptID);
     } catch (err) {
       setError(err);
       console.error("Fail to get receipt by ID: ", err);

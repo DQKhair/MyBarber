@@ -2,22 +2,23 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
-import { CustomerById } from "../../components/ItemDetail";
-import useCustomers from "../../hook/useCustomers";
+import { ProductById } from "../../components/ItemDetail";
+import useItemCategories from "../../hook/useItemCategories";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
-const CustomerDetail = ({ mainPage }) => {
-  const { loading, error, getCustomerById } = useCustomers();
+
+const ProductDetail = ({ mainPage }) => {
+  const { loading, error, getItemCategoryById } = useItemCategories();
   const { id } = useParams();
 
-  const customer = getCustomerById(id);
+  const product = getItemCategoryById(id);
 
-  const titleName = "Information about customer";
+  const titleName = "Information about product";
   const breadcrumb = mainPage;
-  const itemBreadcrumb = `Customer details`;
+  const itemBreadcrumb = `Product details`;
 
  //load page
 
@@ -45,10 +46,10 @@ if (error)
         itemBreadcrumb={itemBreadcrumb}
       />
       <div className={`${stylesPage.main_body} row`}>
-        <CustomerById customer={customer} />
+        <ProductById product={product} />
       </div>
     </>
   );
 };
 
-export default CustomerDetail;
+export default ProductDetail;

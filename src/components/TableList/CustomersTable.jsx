@@ -12,12 +12,11 @@ import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
 
 const CustomersTable = () => {
-  const navigation = useNavigate();
-
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [customer, setCustomer] = useState(null);
-
+  
+  const navigation = useNavigate();
   const { loading, error, customers, getCustomerById } = useCustomers();
 
   const handleClickDetail = (customerID) => {
