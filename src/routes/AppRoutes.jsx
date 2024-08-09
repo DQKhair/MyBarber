@@ -9,7 +9,14 @@ import CategoriesPage from "../pages/CategoriesPage";
 import ProductsPage from "../pages/ProductsPage";
 import ServicesPage from "../pages/ServicesPage";
 import ReceiptsPage from "../pages/ReceiptsPage";
-import { CustomerDetail,EmployeeDetail,ProductDetail,ServiceDetail,ReceiptDetail } from "../pages/DetailPage";
+import AddReceiptPage from "../pages/AddReceiptPage";
+import {
+  CustomerDetail,
+  EmployeeDetail,
+  ProductDetail,
+  ServiceDetail,
+  ReceiptDetail,
+} from "../pages/DetailPage";
 import {
   StatisticDayly,
   StatisticMonthly,
@@ -50,6 +57,8 @@ const AppRouter = () => {
             path="receipts/receipt_detail/:id"
             element={<ReceiptDetail mainPage={"Receipts"} />}
           />
+          <Route path="receipts/add_new_receipt" element={<AddReceiptPage />} />
+
           <Route path="/statisticDayly" element={<StatisticDayly />} />
           <Route path="/statisticMonthly" element={<StatisticMonthly />} />
           <Route path="/statisticYearly" element={<StatisticYearly />} />

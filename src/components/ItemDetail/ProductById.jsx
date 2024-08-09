@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 const ProductById = ({ product }) => {
   if (!product) {
@@ -54,8 +55,8 @@ const ProductById = ({ product }) => {
             <Grid item xs={2} sm={4} md={4}>
               <TextField
                 id="standard-read-only-input"
-                label="Price"
-                defaultValue={`${product.ItemCategoryPrice} đ`}
+                label="Product Phone"
+                defaultValue={product.ItemCategoryPrice}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -74,6 +75,31 @@ const ProductById = ({ product }) => {
                 variant="standard"
               />
             </Grid>
+
+            <Grid item xs={4} sm={8} md={12}>
+              <TextField
+                id="standard-read-only-input"
+                label=""
+                defaultValue="Image"
+                InputProps={{
+                  readOnly: true,
+                  sx: { textAlign: "center" },
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                variant="standard"
+                sx={{ margin: "10px", width: "97%" }}
+              />
+              <Paper sx={{ borderRadius: "5%" }} elevation={3}>
+                <img
+                  style={{ width: "100%", borderRadius: "5%" }}
+                  src={product.ItemCategoryImage}
+                  alt="image"
+                />
+              </Paper>
+            </Grid>
+
           </Grid>
         </Box>
       </Container>

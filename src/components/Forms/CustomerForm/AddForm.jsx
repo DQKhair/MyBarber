@@ -21,18 +21,24 @@ const initialValues = {
 
 const regexPhone = /^(\+\d{1,3}[- ]?)?\d{10}$/;
 
-const categorySchema = yup.object({
-    customerName: yup.string().required("Customer name is required"),
-    customerPhone: yup
+const customerSchema = yup.object({
+  customerName: yup
     .string()
-    .required("phone number is required")
+    .required("Customer name is required")
+    .min(6, "Customer name must be at least 6 characters")
+    .max(50, "Name must be at most 50 characters"),
+  customerPhone: yup
+    .string()
+    .required("Phone number is required")
     .matches(regexPhone, "Phone number is not valid"),
-    customerAddress: yup.string().required("Customer address is required"),
-
+  customerAddress: yup
+    .string()
+    .required("Customer address is required")
+    .min(3, "Customer address must be at least 6 characters")
+    .max(100, "Customer address must be at most 100 characters"),
 });
 
 const AddFrom = ({ openAdd, handleClose }) => {
-
   const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
     handleClose();
@@ -45,7 +51,7 @@ const AddFrom = ({ openAdd, handleClose }) => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        validationSchema={categorySchema}
+        validationSchema={customerSchema}
       >
         {({
           values,

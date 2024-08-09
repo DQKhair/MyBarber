@@ -4,6 +4,7 @@ import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
 import useItemCategories from "../../hook/useItemCategories";
 import { IconDetail, IconEdit, IconAdd, IconDelete } from "../Icons";
+import { AddForm,EditForm,DeleteForm } from "../Forms/ItemCategoryForm";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -14,11 +15,13 @@ const ServicesTable = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [service, setService] = useState(null);
+  const [service, setService] = useState(false);
 
   const navigate = useNavigate();
-  const { loading, error, itemCategories, getItemCategoryById } =
+  const { loading, error, itemCategories,getItemCategoryById } =
     useItemCategories();
+
+  const Services = itemCategories.filter(item => item.Category_ID === "1");
 
   const handleClickDetail = (serviceID) => {
     navigate(`/services/service_detail/${serviceID}`);
@@ -27,16 +30,16 @@ const ServicesTable = () => {
   const handleAdd = () => {
     setIsAdd(true);
   };
-  const handleEdit = async (productID) => {
-    const serviceById = await getItemCategoryById(productID);
+  const handleEdit = async (serviceID) => {
+    const serviceById = await getItemCategoryById(serviceID);
 
     console.log(serviceById);
 
     setService(serviceById);
     setIsEdit(true);
   };
-  const handleDelete = async (productID) => {
-    const serviceById = await getItemCategoryById(productID);
+  const handleDelete = async (serviceID) => {
+    const serviceById = await getItemCategoryById(serviceID);
 
     console.log(serviceById);
 
@@ -88,35 +91,35 @@ const ServicesTable = () => {
   return (
     <>
       {/* Form */}
-      {/* {isAdd === true ? (
-        <AddFrom openAdd={isAdd} handleClose={handleCloseAdd} />
+      {isAdd === true ? (
+        <AddForm openAdd={isAdd} handleClose={handleCloseAdd} />
       ) : (
         <></>
-      )} */}
+      )}
 
       {/* Edit form */}
 
-      {/* {isEdit === true ? (
+      {isEdit === true ? (
         <EditForm
-          employee={employee}
+          itemCategory={service}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
         />
       ) : (
         <></>
-      )} */}
+      )}
 
       {/* Delete form */}
 
-      {/* {isDelete === true ? (
+      {isDelete === true ? (
         <DeleteForm
-          employee={employee}
+          itemCategory={service}
           openDelete={isDelete}
           handleClose={handleCloseDelete}
         />
       ) : (
         <></>
-      )} */}
+      )}
 
       {/* End Form */}
       {/* Table */}
@@ -143,12 +146,13 @@ const ServicesTable = () => {
                 <tr>
                   <th>ID</th>
                   <th>Service</th>
+                  <th>Image</th>
                   <th>Price</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {itemCategories
+                {Services
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <tr
@@ -156,7 +160,8 @@ const ServicesTable = () => {
                       key={`${item.ItemCategory_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.ItemCategoryName}`}</td>
+                      <td>{`${item.ItemCategoryName} `} </td>
+                      <td><img style={{borderRadius:"10%"}} src={item.ItemCategoryImage} alt="img" /></td>
                       <td>
                         {`${item.ItemCategoryPrice} `}
                         <u>đ</u>
@@ -212,7 +217,7 @@ const ServicesTable = () => {
               className="paginationTable"
               rowsPerPageOptions={[10, 25, 50]}
               component="div"
-              count={itemCategories.length}
+              count={Services.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}

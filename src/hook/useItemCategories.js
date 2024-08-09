@@ -18,14 +18,15 @@ const useItemCategories = () => {
         setLoading(false);
       }
     };
+
+    
     loadItemCategories();
+
   }, []);
 
   const getItemCategoryById = (itemCategoryID) => {
     try {
-      return itemCategories.find(
-        (i) => i.ItemCategory_ID === itemCategoryID
-      );
+      return itemCategories.find((i) => i.ItemCategory_ID === itemCategoryID);
     } catch (err) {
       setError(err);
       console.error("Fail to get item category by ID: ", err);
@@ -33,7 +34,12 @@ const useItemCategories = () => {
     }
   };
 
-  return { loading, error, itemCategories, getItemCategoryById };
+  return {
+    loading,
+    error,
+    itemCategories,
+    getItemCategoryById,
+  };
 };
 
 export default useItemCategories;

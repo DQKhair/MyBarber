@@ -33,9 +33,7 @@ const categorySchema = yup.object({
   employeePhone: yup
     .string()
     .required("Phone number is required")
-    .matches(regexPhone, "Phone number is not valid")
-    .min(6, "Phone number must be at least 6 characters")
-    .max(50, "Phone number must be at most 50 characters"),
+    .matches(regexPhone, "Phone number is not valid"),
   employeeAddress: yup
     .string()
     .required("Employee address is required")

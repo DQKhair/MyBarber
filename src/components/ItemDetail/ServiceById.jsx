@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 const ServiceById = ({ service }) => {
   if (!service) {
@@ -24,6 +25,7 @@ const ServiceById = ({ service }) => {
         <Box sx={{ flexGrow: 1 }}>
           <Grid
             container
+            justifyContent={"center"}
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
@@ -75,6 +77,29 @@ const ServiceById = ({ service }) => {
               />
             </Grid>
 
+            <Grid item xs={4} sm={8} md={12}>
+              <TextField
+                id="standard-read-only-input"
+                label=""
+                defaultValue="Image"
+                InputProps={{
+                  readOnly: true,
+                  sx: { textAlign: "center" },
+                  inputProps: {
+                    style: { textAlign: "center" },
+                  },
+                }}
+                variant="standard"
+                sx={{ margin: "10px", width: "97%" }}
+              />
+              <Paper sx={{ borderRadius: "5%" }} elevation={3}>
+                <img
+                  style={{ width: "100%", borderRadius: "5%" }}
+                  src={service.ItemCategoryImage}
+                  alt="image"
+                />
+              </Paper>
+            </Grid>
           </Grid>
         </Box>
       </Container>

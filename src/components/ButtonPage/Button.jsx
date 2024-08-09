@@ -1,9 +1,9 @@
 import React from "react";
 import ButtonPage from "./index";
 
-const Button = ({nameButton,colorButton, sizeButton,handleOnclick}) => {
+const Button = ({type,nameButton,colorButton, sizeButton,handleOnclick}) => {
     return (
-        <ButtonPage nameButton={nameButton} outlineButton={false} colorButton={colorButton} typeButton={""} sizeButton={sizeButton} handleOnclick={handleOnclick}  />
+        <ButtonPage type={type} nameButton={nameButton} outlineButton={false} colorButton={colorButton} typeButton={""} sizeButton={sizeButton} handleOnclick={handleOnclick}  />
     )
 }
 

@@ -12,7 +12,7 @@ const SideBar = () => {
   const charAvata = userName[0].toUpperCase();
 
   const handleAddReceipt = (e) => {
-    navigate("/addReceipt");
+    navigate("/receipts/add_new_receipt");
   };
 
   return (

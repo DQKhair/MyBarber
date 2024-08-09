@@ -4,7 +4,7 @@ import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
 import useEmployees from "../../hook/useEmployees";
 import { IconAdd, IconDetail, IconEdit, IconDelete } from "../Icons";
-import {AddFrom, EditForm,DeleteForm } from "../Forms/EmployeeForm";
+import { AddFrom, EditForm, DeleteForm } from "../Forms/EmployeeForm";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -177,7 +177,7 @@ const EmployeesTable = () => {
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(() => item.Employee_ID)}
+                          handleOnclick={() => handleEdit(item.Employee_ID)}
                         />
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -190,7 +190,7 @@ const EmployeesTable = () => {
                           sizeButton={"sm"}
                           titleButton="Delete"
                           handleOnclick={() => {
-                            handleDelete(() => item.Employee_ID);
+                            handleDelete(item.Employee_ID);
                           }}
                         />
                       </td>
