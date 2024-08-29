@@ -10,9 +10,9 @@ namespace MyBarBer.Data
         public Guid FunctionDetail_ID { get; set; }
         [MaxLength(100)]
         public string? Desccription { get; set; } = string.Empty;
-        public Guid? Role_ID { get; set; }
+        public Guid? Role_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Role_ID))]
-        public Guid? Function_ID { get; set; }
+        public Guid? Function_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Function_ID))]
 
         //relationships

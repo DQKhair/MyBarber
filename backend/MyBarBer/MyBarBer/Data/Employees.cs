@@ -22,11 +22,11 @@ namespace MyBarBer.Data
         [Required, MaxLength (100)]
         public string EmployeePassword {  get; set; } = string.Empty;
         public bool EmployeeIsActive { get; set; } = false;
-        public Guid? Role_ID { get; set; }
+        public Guid? Role_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Role_ID))]
 
         //relationship
-        public RolesUser? Role { get; set; }
+        public RolesUser? RolesUser { get; set; }
 
         public ICollection<Receipts> Receipts { get; set; }
 

@@ -12,9 +12,9 @@ namespace MyBarBer.Data
         public int ReceiptDetailQuantity { get; set; }
         [Range (1, 10000000)]
         public double ReceiptDetailPrice { get; set; } = 0;
-        public Guid? ItemCategory_ID { get; set; }
+        public Guid? ItemCategory_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(ItemCategory_ID))]
-        public Guid? Receipt_ID { get; set; }
+        public Guid? Receipt_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Receipt_ID))]
 
         //relationship

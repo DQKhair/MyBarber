@@ -13,13 +13,13 @@ namespace MyBarBer.Data
         [Range (1,10000000)]
         public double TotalPrice { get; set; } = 0;
         public DateTime ReceiptDate { get; set; } = DateTime.Now;
-        public Guid? Status_ID { get; set; }
+        public Guid? Status_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Status_ID))]
-        public Guid? Method_ID { get; set; }
+        public Guid? Method_ID { get; set; } = Guid.Empty;
         [ForeignKey (nameof(Method_ID))]
-        public Guid? Employee_ID { get; set; }
+        public Guid? Employee_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Employee_ID))]
-        public Guid? Customer_ID { get; set; }
+        public Guid? Customer_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Customer_ID))]
 
         //relationship

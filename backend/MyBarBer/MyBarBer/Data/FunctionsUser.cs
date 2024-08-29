@@ -13,7 +13,7 @@ namespace MyBarBer.Data
         public string FunctionName { get; set; } = string.Empty;
         [MaxLength(200)]
         public string? FunctionIcon {  get; set; } = string.Empty;
-        [MaxLength(500)]
+        [MaxLength(200)]
         public string? FunctionRoute {  get; set; } = string.Empty;
 
         //relationship

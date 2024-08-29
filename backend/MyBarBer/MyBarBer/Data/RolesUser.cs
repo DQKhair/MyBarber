@@ -10,7 +10,7 @@ namespace MyBarBer.Data
         public Guid Role_ID { get; set; }
         [Required]
         [MaxLength(100)]
-        public string RoleName { get; set; }
+        public string RoleName { get; set; } = string.Empty;
 
         //relationship
         public ICollection<FunctionDetails> FunctionDetails { get; set; }

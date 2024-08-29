@@ -22,7 +22,7 @@ namespace MyBarBer.Data
         [Required]
         [MaxLength(100)]
         public string AdminPassword { get; set; } = string.Empty;
-        public Guid? Role_ID { get; set; }
+        public Guid? Role_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Role_ID))]
         //relationship
         public RolesUser? RoleUser { get; set; }
