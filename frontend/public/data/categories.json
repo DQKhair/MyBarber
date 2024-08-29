@@ -1,0 +1,18 @@
+[
+    {
+        "Category_ID": "1",
+        "CategoryName": "Services"
+    },
+    {
+        "Category_ID": "2",
+        "CategoryName": "Sharp"
+    },
+    {
+        "Category_ID": "3",
+        "CategoryName": "Beauty hair"
+    },
+    {
+        "Category_ID": "4",
+        "CategoryName": "Oil"
+    }
+]

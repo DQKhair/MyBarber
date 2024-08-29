@@ -1,0 +1,44 @@
+[
+    {
+        "Customer_ID": "1",
+        "CustomerName": "Nguyễn Văn A",
+        "CustomerPhone": "034112355",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "2",
+        "CustomerName": "Nguyễn Văn B",
+        "CustomerPhone": "0341123266",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "3",
+        "CustomerName": "Nguyễn Văn C",
+        "CustomerPhone": "034112344",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "4",
+        "CustomerName": "Nguyễn Văn D",
+        "CustomerPhone": "034112333",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "5",
+        "CustomerName": "Nguyễn Văn E",
+        "CustomerPhone": "034112322",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "6",
+        "CustomerName": "Nguyễn Văn F",
+        "CustomerPhone": "034112355",
+        "CustomerAddress": "Tiền Giang"
+    },
+    {
+        "Customer_ID": "7",
+        "CustomerName": "Nguyễn Văn G",
+        "CustomerPhone": "034112355",
+        "CustomerAddress": "Tiền Giang"
+    }
+]

@@ -1,0 +1,163 @@
+[
+    {
+      "Receipt_ID": "R001",
+      "Customer_ID": "1",
+      "Date": "26/02/2024",
+      "Status_ID": "1",
+      "Method_ID": "1",
+      "Employee_ID": "E001",
+      "TotalPrice": 300.50,
+      "TotalQuantity": 8,
+      "ReceiptDetail": [
+        {
+          "Product_ID": "P001",
+          "ProductQuantity": 2,
+          "ProductPrice": 50.00,
+          "Service_ID": "S001",
+          "ServiceQuantity": 1,
+          "ServicePrice": 100.00,
+          "TotalQuantity": 3,
+          "TotalPrice": 200.00
+        },
+        {
+          "Product_ID": "P002",
+          "ProductQuantity": 1,
+          "ProductPrice": 50.50,
+          "Service_ID": "S002",
+          "ServiceQuantity": 2,
+          "ServicePrice": 25.00,
+          "TotalQuantity": 5,
+          "TotalPrice": 100.50
+        }
+      ]
+    },
+    {
+      "Receipt_ID": "R002",
+      "Customer_ID": "2",
+      "Date": "26/02/2024",
+      "Status_ID": "1",
+      "Method_ID": "1",
+      "Employee_ID": "E002",
+      "TotalPrice": 450.00,
+      "TotalQuantity": 10,
+      "ReceiptDetail": [
+        {
+          "Product_ID": "P003",
+          "ProductQuantity": 3,
+          "ProductPrice": 75.00,
+          "Service_ID": "S003",
+          "ServiceQuantity": 1,
+          "ServicePrice": 50.00,
+          "TotalQuantity": 4,
+          "TotalPrice": 275.00
+        },
+        {
+          "Product_ID": "P004",
+          "ProductQuantity": 2,
+          "ProductPrice": 50.00,
+          "Service_ID": "S004",
+          "ServiceQuantity": 1,
+          "ServicePrice": 75.00,
+          "TotalQuantity": 6,
+          "TotalPrice": 175.00
+        }
+      ]
+    },
+    {
+      "Receipt_ID": "R003",
+      "Customer_ID": "3",
+      "Date": "26/02/2024",
+      "Status_ID": "1",
+      "Method_ID": "1",
+      "Employee_ID": "E003",
+      "TotalPrice": 550.00,
+      "TotalQuantity": 9,
+      "ReceiptDetail": [
+        {
+          "Product_ID": "P005",
+          "ProductQuantity": 4,
+          "ProductPrice": 100.00,
+          "Service_ID": "S005",
+          "ServiceQuantity": 2,
+          "ServicePrice": 50.00,
+          "TotalQuantity": 6,
+          "TotalPrice": 500.00
+        },
+        {
+          "Product_ID": "P006",
+          "ProductQuantity": 1,
+          "ProductPrice": 25.00,
+          "Service_ID": "S006",
+          "ServiceQuantity": 2,
+          "ServicePrice": 12.50,
+          "TotalQuantity": 3,
+          "TotalPrice": 50.00
+        }
+      ]
+    },
+    {
+      "Receipt_ID": "R004",
+      "Customer_ID": "4",
+      "Date": "26/02/2024",
+      "Status_ID": "1",
+      "Method_ID": "1",
+      "Employee_ID": "E004",
+      "TotalPrice": 375.00,
+      "TotalQuantity": 7,
+      "ReceiptDetail": [
+        {
+          "Product_ID": "P007",
+          "ProductQuantity": 3,
+          "ProductPrice": 75.00,
+          "Service_ID": "S007",
+          "ServiceQuantity": 1,
+          "ServicePrice": 50.00,
+          "TotalQuantity": 4,
+          "TotalPrice": 275.00
+        },
+        {
+          "Product_ID": "P008",
+          "ProductQuantity": 1,
+          "ProductPrice": 50.00,
+          "Service_ID": "S008",
+          "ServiceQuantity": 1,
+          "ServicePrice": 50.00,
+          "TotalQuantity": 3,
+          "TotalPrice": 100.00
+        }
+      ]
+    },
+    {
+      "Receipt_ID": "R005",
+      "Customer_ID": "5",
+      "Date": "26/02/2024",
+      "Status_ID": "1",
+      "Method_ID": "1",
+      "Employee_ID": "E005",
+      "TotalPrice": 425.00,
+      "TotalQuantity": 6,
+      "ReceiptDetail": [
+        {
+          "Product_ID": "P009",
+          "ProductQuantity": 3,
+          "ProductPrice": 100.00,
+          "Service_ID": "S009",
+          "ServiceQuantity": 1,
+          "ServicePrice": 50.00,
+          "TotalQuantity": 4,
+          "TotalPrice": 350.00
+        },
+        {
+          "Product_ID": "P010",
+          "ProductQuantity": 2,
+          "ProductPrice": 25.00,
+          "Service_ID": "S010",
+          "ServiceQuantity": 2,
+          "ServicePrice": 25.00,
+          "TotalQuantity": 2,
+          "TotalPrice": 75.00
+        }
+      ]
+    }
+  ]
+  

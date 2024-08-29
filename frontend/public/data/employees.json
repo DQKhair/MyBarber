@@ -1,0 +1,57 @@
+[
+    {
+        "Employee_ID": "102",
+        "EmployeeName": "Nguyễn Văn A",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "Tân Bình",
+        "EmployeeEmail": "a@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": true
+
+    },
+    {
+        "Employee_ID": "202",
+        "EmployeeName": "Nguyễn Văn B",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "TP.HCM",
+        "EmployeeEmail": "b@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": true
+    },
+    {
+        "Employee_ID": "301",
+        "EmployeeName": "Nguyễn Thị C",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "Tiền Giang",
+        "EmployeeEmail": "c@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": false
+    },
+    {
+        "Employee_ID": "404",
+        "EmployeeName": "Đinh Quang D",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "Tiền Giang",
+        "EmployeeEmail": "d@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": false
+    },
+    {
+        "Employee_ID": "502",
+        "EmployeeName": "Trân Văn E",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "TP.HCM",
+        "EmployeeEmail": "e@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": false
+    },
+    {
+        "Employee_ID": "601",
+        "EmployeeName": "Huỳnh Văn F",
+        "EmployeePhone": "034112355",
+        "EmployeeAddress": "TP.HCM",
+        "EmployeeEmail": "f@gmail.com",
+        "EmployeePassword": "123",
+        "EmployeeIsActive": false
+    }
+]

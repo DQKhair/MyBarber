@@ -1,0 +1,130 @@
+[
+    {
+        "ItemCategory_ID": "1",
+        "ItemCategoryName": "Haircut",
+        "ItemCategoryPrice": 25.0,
+        "ItemCategoryDescription": "Professional haircut tailored to your style.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "2",
+        "ItemCategoryName": "Beard Trim",
+        "ItemCategoryPrice": 15.0,
+        "ItemCategoryDescription": "Precision beard trim for a clean and sharp look.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "3",
+        "ItemCategoryName": "Shave",
+        "ItemCategoryPrice": 20.0,
+        "ItemCategoryDescription": "Classic straight razor shave with hot towel treatment.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "4",
+        "ItemCategoryName": "Hair Wash",
+        "ItemCategoryPrice": 10.0,
+        "ItemCategoryDescription": "Relaxing hair wash with premium shampoo and conditioner.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "5",
+        "ItemCategoryName": "Hair Coloring",
+        "ItemCategoryPrice": 60.0,
+        "ItemCategoryDescription": "Professional hair coloring with a wide range of shades.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "6",
+        "ItemCategoryName": "Hot Towel Service",
+        "ItemCategoryPrice": 12.0,
+        "ItemCategoryDescription": "Relaxing hot towel service to open pores and soften facial hair.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "1"
+    },
+    {
+        "ItemCategory_ID": "11",
+        "ItemCategoryName": "Beard Oil",
+        "ItemCategoryPrice": 19.99,
+        "ItemCategoryDescription": "Organic beard oil to keep your beard soft and healthy.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "3"
+    },
+    {
+        "ItemCategory_ID": "12",
+        "ItemCategoryName": "Shaving Cream",
+        "ItemCategoryPrice": 14.99,
+        "ItemCategoryDescription": "Rich and creamy shaving cream for a smooth shave.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "3"
+    },
+    {
+        "ItemCategory_ID": "13",
+        "ItemCategoryName": "Hair Pomade",
+        "ItemCategoryPrice": 12.99,
+        "ItemCategoryDescription": "Strong hold hair pomade for all-day style.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "2"
+    },
+    {
+        "ItemCategory_ID": "14",
+        "ItemCategoryName": "Aftershave Balm",
+        "ItemCategoryPrice": 15.99,
+        "ItemCategoryDescription": "Soothing aftershave balm to calm and hydrate skin.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "2"
+    },
+    {
+        "ItemCategory_ID": "15",
+        "ItemCategoryName": "Mustache Wax",
+        "ItemCategoryPrice": 9.99,
+        "ItemCategoryDescription": "Premium mustache wax for styling and shaping.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "2"
+    },
+    {
+        "ItemCategory_ID": "16",
+        "ItemCategoryName": "Hair Clipper",
+        "ItemCategoryPrice": 49.99,
+        "ItemCategoryDescription": "Professional hair clipper for precise and easy haircuts.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "4"
+    },
+    {
+        "ItemCategory_ID": "17",
+        "ItemCategoryName": "Scissors",
+        "ItemCategoryPrice": 29.99,
+        "ItemCategoryDescription": "High-quality stainless steel scissors for cutting hair.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "4"
+    },
+    {
+        "ItemCategory_ID": "18",
+        "ItemCategoryName": "Comb Set",
+        "ItemCategoryPrice": 8.99,
+        "ItemCategoryDescription": "Durable comb set for styling and grooming hair.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "4"
+    },
+    {
+        "ItemCategory_ID": "19",
+        "ItemCategoryName": "Shampoo",
+        "ItemCategoryPrice": 11.99,
+        "ItemCategoryDescription": "Gentle shampoo for daily use, suitable for all hair types.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "4"
+    },
+    {
+        "ItemCategory_ID": "20",
+        "ItemCategoryName": "Conditioner",
+        "ItemCategoryPrice": 12.99,
+        "ItemCategoryDescription": "Nourishing conditioner to keep your hair soft and shiny.",
+        "ItemCategoryImage": "https://images.news18.com/ibnlive/uploads/2022/11/001-10-1-16678274214x3.png?impolicy=website&width=640&height=480",
+        "Category_ID": "4"
+    }
+]
