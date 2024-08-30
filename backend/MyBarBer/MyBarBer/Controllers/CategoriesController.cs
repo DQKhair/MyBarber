@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyBarBer.Data;
 using MyBarBer.Models;
+using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
@@ -14,36 +15,43 @@ namespace MyBarBer.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly MyDBContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriesController(MyDBContext context)
+        public CategoriesController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Categories
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Categories>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+              var _categories = await _unitOfWork.Categories.GetAllAsync();
+            if (_categories != null)
+            {
+                return Ok(_categories);
+            }else
+            {
+                return BadRequest();
+            }    
+
+           
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Categories>> GetCategories(int id)
         {
-            var categories = await _context.Categories.FindAsync(id);
+            var categories = await _unitOfWork.Categories.GetCategoryById(id);
 
             if (categories == null)
             {
                 return NotFound();
             }
 
-            return categories;
+            return Ok(categories);
         }
 
-        // PUT: api/Categories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategories(int id, Categories categories)
         {
@@ -52,22 +60,22 @@ namespace MyBarBer.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(categories).State = EntityState.Modified;
-
+            await _unitOfWork.Categories.UpdateAsync(categories);
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.CompleteAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoriesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest();
+                //if (!CategoriesExists(id))
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
+                //    throw;
+                //}
             }
 
             return NoContent();
@@ -82,8 +90,8 @@ namespace MyBarBer.Controllers
             {
                 CategoryName = categoriesVM.CategoryName,
             };
-            _context.Categories.Add(_category);
-            await _context.SaveChangesAsync();
+            await  _unitOfWork.Categories.AddAsync(_category);
+            await _unitOfWork.CompleteAsync();
 
             return CreatedAtAction("GetCategories", new { id = categoriesVM.Category_ID }, categoriesVM);
         }
@@ -92,21 +100,20 @@ namespace MyBarBer.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategories(int id)
         {
-            var categories = await _context.Categories.FindAsync(id);
-            if (categories == null)
+            var isComplete = await _unitOfWork.Categories.DeleteCategoryById(id);
+            if(isComplete == true)
             {
-                return NotFound();
-            }
-
-            _context.Categories.Remove(categories);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+                await _unitOfWork.CompleteAsync();
+                return NoContent();
+            }else
+            {
+                return BadRequest();
+            }    
         }
 
-        private bool CategoriesExists(int id)
-        {
-            return _context.Categories.Any(e => e.Category_ID == id);
-        }
+        //private bool CategoriesExists(int id)
+        //{
+        //    return _context.Categories.Any(e => e.Category_ID == id);
+        //}
     }
 }
