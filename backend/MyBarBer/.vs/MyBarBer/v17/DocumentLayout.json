@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\rolesusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\rolesusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\helper\\authjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\helper\\authjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,17 +38,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RolesUserController.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\RolesUserController.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\RolesUserController.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\RolesUserController.cs",
+              "RelativeToolTip": "MyBarBer\\Controllers\\RolesUserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T08:05:54.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\EmployeesController.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "MyBarBer\\Controllers\\EmployeesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T08:05:38.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\CustomersController.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "MyBarBer\\Controllers\\CustomersController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T08:01:05.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\CategoriesController.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "MyBarBer\\Controllers\\CategoriesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T04:54:24.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "MyBarBer\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T04:38:29.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthJWT.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Helper\\AuthJWT.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Helper\\AuthJWT.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Helper\\AuthJWT.cs",
+              "RelativeToolTip": "MyBarBer\\Helper\\AuthJWT.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T04:22:25.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Program.cs",
               "RelativeDocumentMoniker": "MyBarBer\\Program.cs",
               "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Program.cs",
               "RelativeToolTip": "MyBarBer\\Program.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAACUAAAAUAAAA",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAiwEsAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-05T10:47:22.724Z",
               "EditorCaption": ""

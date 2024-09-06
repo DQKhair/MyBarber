@@ -30,26 +30,35 @@ namespace MyBarBer.Controllers
                 var resultAdmin = await _unitOfWork.Administrator.IsAuthenticatedAdmin(email,password);
                 if(resultAdmin != null)
                 {
-                    _logger.LogInformation("Login admin is success!");
-                    return StatusCode(StatusCodes.Status200OK, new APIResVM
+                    var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultAdmin.Role_ID.ToString()??""));
+                    if(_roleUser != null)
                     {
-                        Success = true,
-                        Message = "Authentication success",
-                        Data = authJWT.GenerateToken(resultAdmin)
-                    });
+                        _logger.LogInformation("Login admin is success!");
+                        return StatusCode(StatusCodes.Status200OK, new APIResVM
+                        {
+                            Success = true,
+                            Message = "Authentication success",
+                            Data = authJWT.GenerateToken(resultAdmin, _roleUser)
+                        });
+                    }    
                 }
                 else
                 {
                     var resultEmployee = await _unitOfWork.AuthenticationRepository.IsAuthenticatedEmployee(email,password);
                     if (resultEmployee != null)
                     {
-                        _logger.LogInformation("Login employee is success!");
-                        return StatusCode(StatusCodes.Status200OK, new APIResVM
+                        var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultEmployee.Role_ID.ToString() ?? ""));
+
+                        if(_roleUser != null)
                         {
-                            Success = true,
-                            Message = "Authentication success",
-                            Data = authJWT.GenerateToken(resultEmployee)
-                        });
+                            _logger.LogInformation("Login employee is success!");
+                            return StatusCode(StatusCodes.Status200OK, new APIResVM
+                            {
+                                Success = true,
+                                Message = "Authentication success",
+                                Data = authJWT.GenerateToken(resultEmployee, _roleUser)
+                            });
+                        }    
                     }
                 }
                 _logger.LogWarning("Authentication user is fail");

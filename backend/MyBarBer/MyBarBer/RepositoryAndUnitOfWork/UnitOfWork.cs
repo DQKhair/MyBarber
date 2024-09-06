@@ -11,6 +11,7 @@ namespace MyBarBer.Repository
         private readonly ILogger _logger;
 
         public IAuthenticationRepository AuthenticationRepository { get; private set; }
+        public IRolesUserRepository RolesUser { get; private set; }
         public IAdminRepository Administrator { get; private set; }
         public ICategoriesRepository Categories {  get; private set; }
         public IEmployeesRepository Employees { get; private set; }
@@ -21,6 +22,7 @@ namespace MyBarBer.Repository
             _logger = loggerFactory.CreateLogger("logs");
 
             AuthenticationRepository = new AuthenticationRepository(_context,_logger);
+            RolesUser = new RolesUserRepository(_context,_logger);
             Administrator = new AdminRepository(_context,_logger);
             Categories = new CategoriesRepository(_context, _logger);
             Employees = new EmployeesRepository(_context, _logger);

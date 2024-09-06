@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize]
+    [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase

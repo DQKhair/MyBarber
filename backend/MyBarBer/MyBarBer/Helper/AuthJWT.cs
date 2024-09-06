@@ -16,7 +16,7 @@ namespace MyBarBer.Helper
             this._configuration = configuration;
         }
 
-        public string GenerateToken(Employees employees)
+        public string GenerateToken(Employees employees,RolesUser rolesUser)
         {
             try
             {
@@ -28,13 +28,14 @@ namespace MyBarBer.Helper
                 {
                     Subject = new ClaimsIdentity(new[]
                     {
-                    new Claim(ClaimTypes.Name,employees.EmployeeName),
-                    new Claim(ClaimTypes.Email,employees.EmployeeEmail),
-                    new Claim("User_ID",employees.Employee_ID.ToString()),
-                    new Claim("Role_ID",employees.Role_ID.ToString()??""),
+                        new Claim(ClaimTypes.Name,employees.EmployeeName),
+                        new Claim(ClaimTypes.Email,employees.EmployeeEmail),
+                        new Claim(ClaimTypes.Role,rolesUser.RoleName),
+                        new Claim("User_ID",employees.Employee_ID.ToString()),
+                        new Claim("Role_ID",employees.Role_ID.ToString()??""),
 
-                    new Claim("Token_ID", Guid.NewGuid().ToString())
-                }),
+                        new Claim("Token_ID", Guid.NewGuid().ToString())
+                    }),
                     Expires = DateTime.UtcNow.AddHours(6),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes), SecurityAlgorithms.HmacSha256Signature)
 
@@ -50,7 +51,7 @@ namespace MyBarBer.Helper
 
         }
 
-        public string GenerateToken(Administrator administrator)
+        public string GenerateToken(Administrator administrator,RolesUser rolesUser)
         {
             try
             {
@@ -62,13 +63,14 @@ namespace MyBarBer.Helper
                 {
                     Subject = new ClaimsIdentity(new[]
                     {
-                    new Claim(ClaimTypes.Name,administrator.AdminName),
-                    new Claim(ClaimTypes.Email,administrator.AdminEmail),
-                    new Claim("User_ID",administrator.Admin_ID.ToString()),
-                    new Claim("Role_ID",administrator.Role_ID.ToString()??""),
+                        new Claim(ClaimTypes.Name,administrator.AdminName),
+                        new Claim(ClaimTypes.Email,administrator.AdminEmail),
+                        new Claim(ClaimTypes.Role,rolesUser.RoleName),
+                        new Claim("User_ID",administrator.Admin_ID.ToString()),
+                        new Claim("Role_ID",administrator.Role_ID.ToString()??""),
 
-                    new Claim("Token_ID", Guid.NewGuid().ToString())
-                }),
+                        new Claim("Token_ID", Guid.NewGuid().ToString())
+                    }),
                     Expires = DateTime.UtcNow.AddHours(6),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes), SecurityAlgorithms.HmacSha256Signature)
 
