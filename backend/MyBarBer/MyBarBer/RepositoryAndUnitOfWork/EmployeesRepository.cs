@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using MyBarBer.Data;
 using MyBarBer.DTO;
 using MyBarBer.Helper;
@@ -19,22 +20,28 @@ namespace MyBarBer.RepositoryAndUnitOfWork
             {
                 if (employeesVM != null)
                 {
-                    var RoleUser = await _context.RolesUser.FirstOrDefaultAsync(r => r.RoleName == "Employee");
-                    if(RoleUser != null)
+                    var _roleUser = await _context.RolesUser.FirstOrDefaultAsync(r => r.RoleName == "Employee");
+                    if(_roleUser != null)
                     {
-                        var _employee = new Employees
+                        //var _employee = new Employees
+                        //{
+                        //    Employee_ID = Guid.NewGuid(),
+                        //    EmployeeName = employeesVM.EmployeeName,
+                        //    EmployeeAddress = employeesVM.EmployeeAddress,
+                        //    EmployeePhone = employeesVM.EmployeePhone,
+                        //    EmployeeEmail = employeesVM.EmployeeEmail,
+                        //    EmployeePassword = HashPassword.ConvertPasswordToHash(employeesVM.EmployeePassword),
+                        //    EmployeeIsActive = true,
+                        //    Role_ID = _roleUser.Role_ID,
+                        //};
+                        var _employee = EmployeesDTO.CreateNewEmployee(employeesVM, _roleUser.Role_ID);
+                        if(_employee != null)
                         {
-                            Employee_ID = Guid.NewGuid(),
-                            EmployeeName = employeesVM.EmployeeName,
-                            EmployeeAddress = employeesVM.EmployeeAddress,
-                            EmployeePhone = employeesVM.EmployeePhone,
-                            EmployeeEmail = employeesVM.EmployeeEmail,
-                            EmployeePassword = HashPassword.ConvertPasswordToHash(employeesVM.EmployeePassword),
-                            EmployeeIsActive = true,
-                            Role_ID = RoleUser.Role_ID,
-                        };
-                        await _context.Employees.AddAsync(_employee);
-                        return true;
+                            await _context.Employees.AddAsync(_employee);
+                            return true;
+                        }
+                        _logger.LogWarning($"Create employee is fail");
+                        return false;
                     }else
                     {
                         _logger.LogWarning($"Name role user employee is null");
@@ -50,6 +57,50 @@ namespace MyBarBer.RepositoryAndUnitOfWork
             {
                 _logger.LogError(ex,$"Error create new employee {employeesVM.EmployeeName}");
                 return false;
+            }
+        }
+
+        public async Task<EmployeesVM> GetEmployeeByEmail(string email)
+        {
+            try
+            {
+                var _employee = await _context.Employees.FirstOrDefaultAsync(e => e.EmployeeEmail == email);
+                if (_employee != null)
+                {
+                    var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employee);
+                    if (_employeeVM != null)
+                    {
+                        return _employeeVM;
+                    }
+                }
+                return null!;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error get employee by email: {email}");
+                return null!;
+            }
+        }
+
+        public async Task<EmployeesVM> GetEmployeeByPhone(string phone)
+        {
+            try
+            {
+                var _employee = await _context.Employees.FirstOrDefaultAsync(e => e.EmployeePhone == phone);
+                if (_employee != null)
+                {
+                    var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employee);
+                    if (_employeeVM != null)
+                    {
+                        return _employeeVM;
+                    }    
+                }    
+                return null!;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error get employee by phone number: {phone}");
+                return null!;
             }
         }
 

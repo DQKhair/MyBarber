@@ -71,17 +71,35 @@ namespace MyBarBer.Controllers
         {
             try
             {
-                var _result = await _unitOfWork.Employees.AddNewEmployee(employeeVM);
-                if(_result == true)
+                var _checkPhoneNumberExists = await _unitOfWork.Employees.GetEmployeeByPhone(employeeVM.EmployeePhone);
+                var _checkEmailExists = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+
+                if(_checkEmailExists == null)
                 {
-                    await _unitOfWork.CompleteAsync();
-                    _logger.LogInformation($"Add new employee {employeeVM.EmployeeName} is success");
-                    return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeVM.Employee_ID }, employeeVM);
-                }else
+                    if (_checkPhoneNumberExists == null)
+                    {
+                        var _result = await _unitOfWork.Employees.AddNewEmployee(employeeVM);
+
+                        if(_result == true)
+                        {
+                            await _unitOfWork.CompleteAsync();
+                            _logger.LogInformation($"Create new employee {employeeVM.EmployeeName} is success");
+                            return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeVM.Employee_ID }, employeeVM);
+                        }else
+                        {
+                            _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
+                            return StatusCode(StatusCodes.Status400BadRequest);
+                        }
+                    }else
+                    {
+                        _logger.LogWarning("Add new employee is fail with phone number already exists");
+                        return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This phone number already exists " });
+                    }    
+                } else
                 {
-                    _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
+                    _logger.LogWarning("Add new employee is fail with email already exists");
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This email already exists " } );
+                }    
             }catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error create new employee {employeeVM.EmployeeName}");
@@ -113,21 +131,87 @@ namespace MyBarBer.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmployee(Guid id, EmployeesVM employeesVM)
+        public async Task<IActionResult> UpdateEmployee(Guid id, EmployeesVM employeeVM)
         {
-            if(id != employeesVM.Employee_ID)
+            if(id != employeeVM.Employee_ID)
             {
-                _logger.LogWarning($"Modify employee by Id: {employeesVM.Employee_ID} is not match");
+                _logger.LogWarning($"Modify employee by Id: {employeeVM.Employee_ID} is not match");
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
             try
             {
-                var result = await _unitOfWork.Employees.ModifyEmployee(id, employeesVM);
+                var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
+                string _phoneNumberOld = _employee.EmployeePhone;
+                string _emailOld = _employee.EmployeeEmail;
+                  
+                var result = await _unitOfWork.Employees.ModifyEmployee(id, employeeVM);
                 if (result == true)
                 {
-                    await _unitOfWork.CompleteAsync();
-                    _logger.LogInformation("Modify employee by Id: {Id} successful!", employeesVM.Employee_ID);
-                    return StatusCode(StatusCodes.Status200OK,employeesVM);
+                    if(_phoneNumberOld == employeeVM.EmployeePhone && _emailOld == employeeVM.EmployeeEmail)
+                    {
+                        await _unitOfWork.CompleteAsync();
+                        _logger.LogInformation("Modify employee by Id: {Id} successful!", employeeVM.Employee_ID);
+                        return StatusCode(StatusCodes.Status200OK, employeeVM);
+                    }else
+                    {
+                        if(_phoneNumberOld == employeeVM.EmployeePhone)
+                        {
+                            var _checkEmailExists = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+
+                            if(_checkEmailExists == null)
+                            {
+                                await _unitOfWork.CompleteAsync();
+                                _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
+                                return StatusCode(StatusCodes.Status200OK, employeeVM);
+                            }
+                            else
+                            {
+                                _logger.LogWarning($"Modify employee {id} is fail with email already exists");
+                                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This email already exists " });
+                            }
+                        }
+                        else if(_emailOld == employeeVM.EmployeeEmail)
+                        {
+                            var _checkPhoneNumberExists = await _unitOfWork.Employees.GetEmployeeByPhone(employeeVM.EmployeePhone);
+
+                            if (_checkPhoneNumberExists == null)
+                            {
+                                    await _unitOfWork.CompleteAsync();
+                                    _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
+                                    return StatusCode(StatusCodes.Status200OK, employeeVM);
+                            }
+                            else
+                            {
+                                _logger.LogWarning($"Update employee {id} is fail with phone number already exists");
+                                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This phone number already exists " });
+                            }
+                        }
+                        else
+                        {
+                            var _checkEmailExists = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                            var _checkPhoneNumberExists = await _unitOfWork.Employees.GetEmployeeByPhone(employeeVM.EmployeePhone);
+
+                            if (_checkPhoneNumberExists == null)
+                            {
+                                if (_checkEmailExists == null)
+                                {
+                                    await _unitOfWork.CompleteAsync();
+                                    _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
+                                    return StatusCode(StatusCodes.Status200OK, employeeVM);
+                                }
+                                else
+                                {
+                                    _logger.LogWarning($"Modify employee {id} is fail with email already exists");
+                                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This email already exists " });
+                                }
+                            }
+                            else
+                            {
+                                _logger.LogWarning($"Update employee {id} is fail with phone number already exists");
+                                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "This phone number already exists " });
+                            }
+                        }    
+                    }    
                 }else
                 {
                     _logger.LogWarning($"Modify category by Id: {id} fail!");

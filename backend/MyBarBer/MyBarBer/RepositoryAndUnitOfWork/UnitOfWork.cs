@@ -15,6 +15,8 @@ namespace MyBarBer.Repository
         public IAdminRepository Administrator { get; private set; }
         public ICategoriesRepository Categories {  get; private set; }
         public IEmployeesRepository Employees { get; private set; }
+        public ICustomersRepository Customers { get; private set; }
+        public IFunctionsUserRepository FunctionsUser { get; private set; }
 
         public UnitOfWork(MyDBContext context, ILoggerFactory loggerFactory)
         {
@@ -26,6 +28,8 @@ namespace MyBarBer.Repository
             Administrator = new AdminRepository(_context,_logger);
             Categories = new CategoriesRepository(_context, _logger);
             Employees = new EmployeesRepository(_context, _logger);
+            Customers = new CustomerRepository(_context,_logger);
+            FunctionsUser = new FunctionsUserRepository(_context,_logger);
         }
 
         public async Task<bool> CompleteAsync()

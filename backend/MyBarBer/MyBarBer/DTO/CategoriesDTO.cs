@@ -5,7 +5,7 @@ namespace MyBarBer.DTO
 {
     public class CategoriesDTO
     {
-        private static readonly ILogger<CategoriesDTO> _logger;
+
         public static Categories CategoriesVMToCategories(CategoriesVM categoriesVM, Categories categories)
         {
             try
@@ -13,10 +13,9 @@ namespace MyBarBer.DTO
                 categories.CategoryName = categoriesVM.CategoryName;
 
                 return categories;
-            }catch (Exception ex)
+            }catch
             {
-                _logger.LogError(ex, "Error convert categoriesVM to categories");
-                return null;
+                return null!;
             }
         }
 
@@ -29,10 +28,9 @@ namespace MyBarBer.DTO
 
                 return categoriesVM;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(ex, "Error convert categories to categoriesVM");
-                return null;
+                return null!;
             }
         }
     }

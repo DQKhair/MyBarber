@@ -8,5 +8,7 @@ namespace MyBarBer.RepositoryAndUnitOfWork
     {
         Task<bool> AddNewEmployee(EmployeesVM employeeVM);
         Task<bool> ModifyEmployee(Guid id, EmployeesVM employeesVM);
+        Task<EmployeesVM> GetEmployeeByEmail(string email);
+        Task<EmployeesVM> GetEmployeeByPhone(string phone);
     }
 }

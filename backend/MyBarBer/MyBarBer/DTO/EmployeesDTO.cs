@@ -6,8 +6,6 @@ namespace MyBarBer.DTO
 {
     public class EmployeesDTO
     {
-        private static readonly ILogger<EmployeesDTO>? _logger;
-
         public static Employees EmployeesVMToEmployees(EmployeesVM employeesVM, Employees employees)
         {
             try
@@ -20,31 +18,54 @@ namespace MyBarBer.DTO
                 employees.EmployeeIsActive = employeesVM.EmployeeIsActive;
 
                 return employees;
-            }catch (Exception ex)
+            }catch
             {
-                _logger?.LogError(ex, "Error convert employeesVM to employees");
                 return null!;
             }
         }
 
-        public static EmployeesVM EmployeeToEmployeesVM(Employees employees, EmployeesVM employeesVM)
+        public static EmployeesVM EmployeeToEmployeesVM(Employees employees)
         {
             try
             {
-                employeesVM.Employee_ID = employees.Employee_ID;
-                employeesVM.EmployeeName = employees.EmployeeName;
-                employeesVM.EmployeePhone = employees.EmployeePhone;
-                employeesVM.EmployeeAddress = employees.EmployeeAddress;
-                employeesVM.EmployeeEmail = employees.EmployeeEmail;
-                employeesVM.EmployeePassword = employees.EmployeePassword;
-                employeesVM.EmployeeIsActive = employees.EmployeeIsActive;
-                employeesVM.Role_ID = employees.Role_ID;
-
-                return employeesVM;
+                var _employeeVM = new EmployeesVM
+                { 
+                    Employee_ID = employees.Employee_ID,
+                    EmployeeName = employees.EmployeeName,
+                    EmployeePhone = employees.EmployeePhone,
+                    EmployeeAddress = employees.EmployeeAddress,
+                    EmployeeEmail = employees.EmployeeEmail,
+                    EmployeePassword = employees.EmployeePassword,
+                    EmployeeIsActive = employees.EmployeeIsActive,
+                    Role_ID = employees.Role_ID
+                };
+                
+                return _employeeVM;
             }
-            catch (Exception ex)
+            catch
             {
-                _logger?.LogError(ex, "Error convert employees to employeesVM");
+                return null!;
+            }
+        }
+
+        public static Employees CreateNewEmployee(EmployeesVM employeesVM,Guid roleId)
+        {
+            try
+            {
+                var _employee = new Employees
+                {
+                    Employee_ID = Guid.NewGuid(),
+                    EmployeeName = employeesVM.EmployeeName,
+                    EmployeePhone = employeesVM.EmployeePhone,
+                    EmployeeAddress = employeesVM.EmployeeAddress,
+                    EmployeeEmail = employeesVM.EmployeeEmail,
+                    EmployeePassword = HashPassword.ConvertPasswordToHash(employeesVM.EmployeePassword),
+                    EmployeeIsActive = true,
+                    Role_ID = roleId
+                };
+                return _employee;
+            }catch
+            {
                 return null!;
             }
         }

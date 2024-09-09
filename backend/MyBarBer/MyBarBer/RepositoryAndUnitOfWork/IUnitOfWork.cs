@@ -9,6 +9,8 @@ namespace MyBarBer.Repository
         IAdminRepository Administrator { get; }
         ICategoriesRepository Categories { get; }
         IEmployeesRepository Employees { get; }
+        ICustomersRepository Customers { get; }
+        IFunctionsUserRepository FunctionsUser { get; }
 
         Task<bool> CompleteAsync();
     }
