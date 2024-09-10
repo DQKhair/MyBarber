@@ -12,7 +12,6 @@ using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize(Roles ="Administrator")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase

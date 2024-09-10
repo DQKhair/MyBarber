@@ -3,7 +3,8 @@ import { API_URL } from "../constants/constants";
 
 const fetchCategories = async () => {
   try {
-    const response = await axios.get(`${API_URL}/categories.json`);
+    const response = await axios.get(`https://localhost:7012/api/Categories`);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error("Failed to fetch categories: ", error);

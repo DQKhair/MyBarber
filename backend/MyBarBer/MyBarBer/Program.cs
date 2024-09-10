@@ -6,6 +6,7 @@ using MyBarBer.Data;
 using MyBarBer.Repository;
 using System.Text;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Repository and unit of work pattern
@@ -51,6 +52,16 @@ builder.Services.AddDbContext<MyDBContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("MyDB"));
 });
+//add cors
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://192.168.0.102:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 //add authen
 var secretKey = builder.Configuration["JWT:SecretKey"] ?? "ykdcesijauessskiudszeakyxfijwwtj";
 var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
@@ -86,6 +97,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 

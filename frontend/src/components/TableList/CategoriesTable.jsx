@@ -142,10 +142,10 @@ const CategoriesTable = () => {
                   .map((item, index) => (
                     <tr
                       className={`${stylesTableList.table_cursor}`}
-                      key={`${item.Category_ID}`}
+                      key={`${item.category_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.CategoryName}`}</td>
+                      <td>{`${item.categoryName}`}</td>
                       <td>
                         <ButtonCircle
                           className={stylesTableList.marginButton}

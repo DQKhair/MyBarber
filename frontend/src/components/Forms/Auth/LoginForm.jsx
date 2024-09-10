@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -6,18 +6,16 @@ import Button from "../../../components/ButtonPage/Button";
 import StyleLogin from "../../../pages/Login/Login.module.css";
 
 import TextField from "@mui/material/TextField";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../redux/actions/userAction";
 
 const initialValues = {
-  phoneNumber: "",
+  email: "",
   password: "",
 };
-const regexPhone = /^(\+\d{1,3}[- ]?)?\d{10}$/;
 
 const authSchema = yup.object({
-  phoneNumber: yup
-    .string()
-    .matches(regexPhone, "Phone number is not valid")
-    .required("Phone number is required"),
+  email: yup.string().required("Email is required"),
   password: yup
     .string()
     .required("Password is required")
@@ -27,34 +25,30 @@ const authSchema = yup.object({
 
 const LoginForm = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
     isChecked ? alert("Unchecked") : alert("Checked");
   };
 
-  const handleTextPhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const handleTextPasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  const dispatch = useDispatch();
+  const { userInfo, loading, error } = useSelector((state) => state.user);
 
   const navigation = useNavigate();
-  const handleLogin = (values) => {
-    console.log(values)
 
-    if (values.phoneNumber === "0000000000" && values.password === "000000") {
-      alert(
-        `Login success! phone number: ${values.phoneNumber} & password: ${values.password} & is checked: ${isChecked}`
-      );
-      navigation("/");
-    } else {
-      alert(`Login false`);
+  useEffect(() => {
+    if(userInfo)
+    {
+      if(userInfo.success)
+      {
+        navigation("/");
+      }
     }
+  },[userInfo,navigation]);
+
+  const handleLogin = (values) => {
+    console.log(values);
+    dispatch(loginUser({emailUser: values.email, passwordUser: values.password}))
   };
 
   return (
@@ -75,21 +69,22 @@ const LoginForm = () => {
           resetForm,
         }) => (
           <form onSubmit={handleSubmit} className="pt-3">
+            <p style={{textAlign:"center", color:"red"}}>{error}</p>
             <div className="form-group">
               <TextField
                 variant="outlined"
-                type="tel"
-                label="Phone number"
+                type="email"
+                label="Email"
                 onBlur={(e) => {
-                  setFieldValue("phoneNumber", e.target.value.trim());
+                  setFieldValue("email", e.target.value.trim());
                   handleBlur(e);
                 }}
                 onChange={handleChange}
-                value={values.phoneNumber}
-                id="inputPhoneNumber"
-                name="phoneNumber"
-                error={!!touched.phoneNumber && !!errors.phoneNumber}
-                helperText={touched.phoneNumber && errors.phoneNumber}
+                value={values.email}
+                id="inputEmail"
+                name="email"
+                error={!!touched.email && !!errors.email}
+                helperText={touched.email && errors.email}
                 className="form-control form-control-lg"
               />
             </div>
