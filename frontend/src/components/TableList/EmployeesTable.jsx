@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -18,7 +18,17 @@ const EmployeesTable = () => {
   const [employee, setEmployee] = useState(null);
 
   const navigate = useNavigate();
-  const { loading, error, employees, getEmployeeById } = useEmployees();
+  const {
+    loading,
+    errorLoad,
+    error,
+    employees,
+    setError,
+    getEmployeeByIdLocal,
+    addEmployeeHook,
+    deleteEmployeeHook,
+    updateEmployeeHook,
+  } = useEmployees();
 
   const handleClickDetail = (employeeID) => {
     navigate(`/employees/employee_detail/${employeeID}`);
@@ -27,13 +37,13 @@ const EmployeesTable = () => {
   const handleAdd = () => {
     setIsAdd(true);
   };
-  const handleEdit = async (employeeID) => {
-    const employeeById = await getEmployeeById(employeeID);
+  const handleEdit = (employeeID) => {
+    const employeeById = getEmployeeByIdLocal(employeeID);
     setEmployee(employeeById);
     setIsEdit(true);
   };
-  const handleDelete = async (employeeID) => {
-    const employeeById = await getEmployeeById(employeeID);
+  const handleDelete = (employeeID) => {
+    const employeeById = getEmployeeByIdLocal(employeeID);
     setEmployee(employeeById);
     setIsDelete(true);
   };
@@ -61,6 +71,14 @@ const EmployeesTable = () => {
     setPage(0);
   };
 
+  //alert
+  useEffect(() => {
+    if (error != null) {
+      alert(error.response.data.message);
+      setError(null);
+    }
+  }, [error]);
+
   //load page
 
   if (loading)
@@ -72,10 +90,10 @@ const EmployeesTable = () => {
       </div>
     );
 
-  if (error)
+  if (errorLoad)
     return (
       <div>
-        <Alert severity="error">Error: {error.message}</Alert>
+        <Alert severity="error">Error: {errorLoad.message}</Alert>
       </div>
     );
 
@@ -83,7 +101,11 @@ const EmployeesTable = () => {
     <>
       {/* Form */}
       {isAdd === true ? (
-        <AddFrom openAdd={isAdd} handleClose={handleCloseAdd} />
+        <AddFrom
+          addEmployee={addEmployeeHook}
+          openAdd={isAdd}
+          handleClose={handleCloseAdd}
+        />
       ) : (
         <></>
       )}
@@ -92,6 +114,7 @@ const EmployeesTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          updateEmployee={updateEmployeeHook}
           employee={employee}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
@@ -104,6 +127,7 @@ const EmployeesTable = () => {
 
       {isDelete === true ? (
         <DeleteForm
+          deleteEmployee={deleteEmployeeHook}
           employee={employee}
           openDelete={isDelete}
           handleClose={handleCloseDelete}
@@ -147,11 +171,11 @@ const EmployeesTable = () => {
                   .map((item, index) => (
                     <tr
                       className={`${stylesTableList.table_cursor}`}
-                      key={`${item.Employee_ID}`}
+                      key={`${item.employee_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.EmployeeName}`}</td>
-                      <td>{`${item.EmployeePhone}`}</td>
+                      <td>{`${item.employeeName}`}</td>
+                      <td>{`${item.employeePhone}`}</td>
                       <td>
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -164,7 +188,7 @@ const EmployeesTable = () => {
                           sizeButton={"sm"}
                           titleButton="Info"
                           handleOnclick={() =>
-                            handleClickDetail(item.Employee_ID)
+                            handleClickDetail(item.employee_ID)
                           }
                         />
                         <ButtonCircle
@@ -177,7 +201,7 @@ const EmployeesTable = () => {
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.Employee_ID)}
+                          handleOnclick={() => handleEdit(item.employee_ID)}
                         />
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -190,7 +214,7 @@ const EmployeesTable = () => {
                           sizeButton={"sm"}
                           titleButton="Delete"
                           handleOnclick={() => {
-                            handleDelete(item.Employee_ID);
+                            handleDelete(item.employee_ID);
                           }}
                         />
                       </td>

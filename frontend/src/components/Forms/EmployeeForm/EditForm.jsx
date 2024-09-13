@@ -12,15 +12,17 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 
-const EditForm = ({ employee, openEdit, handleClose }) => {
-  console.log(employee);
+const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
   // initial values
   const initialValues = {
-    employeeName: employee.EmployeeName,
-    employeePhone: employee.EmployeePhone,
-    employeeAddress: employee.EmployeeAddress,
-    employeeEmail: employee.EmployeeEmail,
+    employeeName: employee.employeeName,
+    employeePhone: employee.employeePhone,
+    employeeAddress: employee.employeeAddress,
+    employeeEmail: employee.employeeEmail,
+    employeePassword: employee.employeePassword,
+    employeeIsActive: employee.employeeIsActive
   };
 
   // schema
@@ -49,10 +51,17 @@ const EditForm = ({ employee, openEdit, handleClose }) => {
       .email("Email is invalid")
       .min(3, "Employee email must be at least 3 characters")
       .max(50, "Employee email must be at most 50 characters"),
+      employeeIsActive: yup
+        .boolean()
+        .required(`Employee is active is required`)
   });
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = async (values) => {
+    const result = await updateEmployee(employee.employee_ID, values);
+    console.log(result);
+    if (result) {
+      alert("Update successful");
+    }
     handleClose();
   };
 
@@ -162,6 +171,7 @@ const EditForm = ({ employee, openEdit, handleClose }) => {
 
                   <Grid item xs={4} sm={4} md={6}>
                     <TextField
+                      disabled
                       fullWidth
                       variant="standard"
                       type="text"
@@ -177,6 +187,41 @@ const EditForm = ({ employee, openEdit, handleClose }) => {
                       helperText={touched.employeeEmail && errors.employeeEmail}
                       sx={{ gridColumn: "span 2" }}
                     />
+                  </Grid>
+
+                  <Grid item xs={4} sm={4} md={6}>
+                    <Box sx={{ minWidth: 120 }}>
+                      <FormControl
+                        fullWidth
+                        variant="standard"
+                        error={
+                          !!touched.employeeIsActive &&
+                          !!errors.employeeIsActive
+                        }
+                      >
+                        <InputLabel id="employee-active-label">
+                          Employee status
+                        </InputLabel>
+                        <Select
+                          labelId="employee-active-label"
+                          id="employee-active"
+                          name="employeeIsActive"
+                          value={values.employeeIsActive}
+                          label="Active"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        >
+                          <MenuItem value={true}>Active</MenuItem>
+                          <MenuItem value={false}>Block</MenuItem>
+                        </Select>
+                        {touched.employeeIsActive &&
+                          errors.employeeIsActive && (
+                            <FormHelperText>
+                              {errors.employeeIsActive}
+                            </FormHelperText>
+                          )}
+                      </FormControl>
+                    </Box>
                   </Grid>
                 </Grid>
               </Box>

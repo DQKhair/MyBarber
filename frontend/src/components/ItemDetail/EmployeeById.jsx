@@ -32,7 +32,7 @@ const EmployeeById = ({ employee }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Employee ID"
-                defaultValue={employee.Employee_ID}
+                defaultValue={employee.employee_ID}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -44,7 +44,7 @@ const EmployeeById = ({ employee }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Employee name"
-                defaultValue={employee.EmployeeName}
+                defaultValue={employee.employeeName}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -56,7 +56,7 @@ const EmployeeById = ({ employee }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Employee Phone"
-                defaultValue={employee.EmployeePhone}
+                defaultValue={employee.employeePhone}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -68,7 +68,7 @@ const EmployeeById = ({ employee }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Employee address"
-                defaultValue={employee.EmployeeAddress}
+                defaultValue={employee.employeeAddress}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -80,7 +80,19 @@ const EmployeeById = ({ employee }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Email"
-                defaultValue={employee.EmployeeEmail}
+                defaultValue={employee.employeeEmail}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="standard"
+              />
+            </Grid>
+
+            <Grid item xs={2} sm={4} md={4}>
+              <TextField
+                id="standard-read-only-input"
+                label="Active"
+                defaultValue={employee.employeeIsActive}
                 InputProps={{
                   readOnly: true,
                 }}

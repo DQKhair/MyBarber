@@ -21,9 +21,13 @@ const categorySchema = yup.object({
   categoryName: yup.string().required("Category name required"),
 });
 
-const AddFrom = ({ openAdd, handleClose }) => {
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+const AddFrom = ({ addCategory, openAdd, handleClose }) => {
+  const handleFormSubmit = async (values, { resetForm }) => {
+    const result = await addCategory(values);
+    if(result)
+    {
+      alert("Add new category successful!");
+    }
     handleClose();
     //reset form
     resetForm();

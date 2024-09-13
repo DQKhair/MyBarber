@@ -15,8 +15,8 @@ namespace MyBarBer.Models
         public required string EmployeePhone { get; set; }
         [Required,MaxLength(100),MinLength(5)]
         public required string EmployeeEmail { get; set; }
-        [Required,MaxLength(100,ErrorMessage ="Password must be less than 100 characters"),MinLength(3,ErrorMessage ="Password must be more than 2 characters")]
-        public required string EmployeePassword { get; set; }
+        [MaxLength(100, ErrorMessage = "Password must be less than 100 characters"), MinLength(3, ErrorMessage = "Password must be more than 2 characters")]
+        public string EmployeePassword { get; set; } = string.Empty;
         public bool EmployeeIsActive { get; set; }
         public Guid? Role_ID { get; set; }
     }

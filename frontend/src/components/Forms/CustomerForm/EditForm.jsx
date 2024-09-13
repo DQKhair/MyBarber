@@ -31,14 +31,13 @@ const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
       .required("phone number is required")
       .matches(regexPhone, "Phone number is not valid"),
     customerAddress: yup.string().required("Customer address is required"),
-    customerAddress: yup.string().required("Customer address is required"),
   });
 
   const handleFormSubmit = async (values) => {
     const result = await updateCustomer(customer.customer_ID,values)
     if(result)
     {
-      alert('update success !')
+      alert('Update successful !')
     }
     handleClose();
   };

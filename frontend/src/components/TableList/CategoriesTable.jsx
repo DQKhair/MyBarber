@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
 import useCategories from "../../hook/useCategories";
@@ -16,14 +16,23 @@ const CategoriesTable = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [category, setCategory] = useState(null);
 
-  console.log("a");
-  const { loading, error, categories, getCategoryById } = useCategories();
+  const {
+    loading,
+    errorLoad,
+    error,
+    categories,
+    setError,
+    getCategoryById,
+    addCategoryHook,
+    deleteCategoryHook,
+    updateCategoryHook,
+  } = useCategories();
 
   const handleAdd = () => {
     setIsAdd(true);
   };
-  const handleEdit = async (categoryID) => {
-    const categoryById = await getCategoryById(categoryID);
+  const handleEdit = (categoryID) => {
+    const categoryById = getCategoryById(categoryID);
     setCategory(categoryById);
     setIsEdit(true);
   };
@@ -56,6 +65,14 @@ const CategoriesTable = () => {
     setPage(0);
   };
 
+  // alert
+  useEffect(() => {
+    if (error != null) {
+      alert(error.response.data.message);
+      setError(null);
+    }
+  }, [error]);
+
   //load page
 
   if (loading)
@@ -67,10 +84,10 @@ const CategoriesTable = () => {
       </div>
     );
 
-  if (error)
+  if (errorLoad)
     return (
       <div>
-        <Alert severity="error">Error: {error.message}</Alert>
+        <Alert severity="error">Error: {errorLoad.message}</Alert>
       </div>
     );
 
@@ -78,7 +95,11 @@ const CategoriesTable = () => {
     <>
       {/* Form */}
       {isAdd === true ? (
-        <AddFrom openAdd={isAdd} handleClose={handleCloseAdd} />
+        <AddFrom
+          addCategory={addCategoryHook}
+          openAdd={isAdd}
+          handleClose={handleCloseAdd}
+        />
       ) : (
         <></>
       )}
@@ -87,6 +108,7 @@ const CategoriesTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          updateCategory={updateCategoryHook}
           category={category}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
@@ -99,6 +121,7 @@ const CategoriesTable = () => {
 
       {isDelete === true ? (
         <DeleteForm
+          deleteCategory={deleteCategoryHook}
           category={category}
           openDelete={isDelete}
           handleClose={handleCloseDelete}
@@ -157,7 +180,7 @@ const CategoriesTable = () => {
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.Category_ID)}
+                          handleOnclick={() => handleEdit(item.category_ID)}
                         />
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -169,26 +192,26 @@ const CategoriesTable = () => {
                           colorButton={"red"}
                           sizeButton={"sm"}
                           titleButton="Delete"
-                          handleOnclick={() => handleDelete(item.Category_ID)}
+                          handleOnclick={() => handleDelete(item.category_ID)}
                         />
                       </td>
                     </tr>
                   ))}
               </tbody>
             </table>
-              {/* pagination */}
-              <TablePagination
-                className="paginationTable"
-                rowsPerPageOptions={[10, 25, 50]}
-                component="div"
-                count={categories.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                sx={{ "& p": { margin: "0px" } }}
-              />
-              {/* end pagination */}
+            {/* pagination */}
+            <TablePagination
+              className="paginationTable"
+              rowsPerPageOptions={[10, 25, 50]}
+              component="div"
+              count={categories.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{ "& p": { margin: "0px" } }}
+            />
+            {/* end pagination */}
           </div>
         </div>
       </div>

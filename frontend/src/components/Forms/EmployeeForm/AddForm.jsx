@@ -19,7 +19,7 @@ const initialValues = {
   employeeAddress: "",
   employeeEmail: "",
   employeePassword: "",
-  employeeRepassword: ""
+  employeeRepassword: "",
 };
 
 const regexPhone = /^(\+\d{1,3}[- ]?)?\d{10}$/;
@@ -45,20 +45,24 @@ const categorySchema = yup.object({
     .email("Email is invalid")
     .min(3, "Employee email must be at least 3 characters")
     .max(50, "Employee email must be at most 50 characters"),
-    employeePassword: yup
+  employeePassword: yup
     .string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
     .max(50, "Password must be at most 50 characters"),
-    employeeRepassword: yup
+  employeeRepassword: yup
     .string()
-    .oneOf([yup.ref('employeePassword'), null], "Passwords must match")
-    .required("Confirm text is required")
+    .oneOf([yup.ref("employeePassword"), null], "Passwords must match")
+    .required("Confirm text is required"),
 });
 
-const AddFrom = ({ openAdd, handleClose }) => {
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+const AddFrom = ({ addEmployee, openAdd, handleClose }) => {
+  const handleFormSubmit = async (values, { resetForm }) => {
+    const result = await addEmployee(values);
+    if(result)
+    {
+      alert("Add new employee successful")
+    }
     handleClose();
     //reset form
     resetForm();
@@ -182,12 +186,8 @@ const AddFrom = ({ openAdd, handleClose }) => {
                       onChange={handleChange}
                       value={values.EmployeeEmail}
                       name="employeeEmail"
-                      error={
-                        !!touched.employeeEmail && !!errors.employeeEmail
-                      }
-                      helperText={
-                        touched.employeeEmail && errors.employeeEmail
-                      }
+                      error={!!touched.employeeEmail && !!errors.employeeEmail}
+                      helperText={touched.employeeEmail && errors.employeeEmail}
                       sx={{ gridColumn: "span 2", width: "100%" }}
                     />
                   </Grid>
@@ -198,7 +198,10 @@ const AddFrom = ({ openAdd, handleClose }) => {
                       type="password"
                       label="Password"
                       onBlur={(e) => {
-                        setFieldValue("employeePassword", e.target.value.trim());
+                        setFieldValue(
+                          "employeePassword",
+                          e.target.value.trim()
+                        );
                         handleBlur(e);
                       }}
                       onChange={handleChange}
@@ -220,14 +223,18 @@ const AddFrom = ({ openAdd, handleClose }) => {
                       type="password"
                       label="Confirm password"
                       onBlur={(e) => {
-                        setFieldValue("employeeRepassword", e.target.value.trim());
+                        setFieldValue(
+                          "employeeRepassword",
+                          e.target.value.trim()
+                        );
                         handleBlur(e);
                       }}
                       onChange={handleChange}
                       value={values.CustomerRepassword}
                       name="employeeRepassword"
                       error={
-                        !!touched.employeeRepassword && !!errors.employeeRepassword
+                        !!touched.employeeRepassword &&
+                        !!errors.employeeRepassword
                       }
                       helperText={
                         touched.employeeRepassword && errors.employeeRepassword

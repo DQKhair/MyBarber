@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
@@ -10,10 +10,17 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
 const EmployeeDetail = ({ mainPage }) => {
-  const { loading, error, getEmployeeById } = useEmployees();
+  const { loading, error, getEmployeeByIdHook } = useEmployees();
   const { id } = useParams();
+  const [employee,setEmployee] = useState();
 
-  const employee = getEmployeeById(id);
+  useEffect(() => {
+    const getEmployee = async () => {
+      const employeeData = await getEmployeeByIdHook(id);
+      setEmployee(employeeData);
+    }
+    getEmployee();
+  },[id]);
 
   const titleName = "Information about employee";
   const breadcrumb = mainPage;

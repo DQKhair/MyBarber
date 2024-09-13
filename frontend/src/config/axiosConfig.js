@@ -11,7 +11,7 @@ axiosRoot.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem("accessToken");
 
-    if (accessToken != "null" && accessToken != null) {
+    if (accessToken !== "null" && accessToken !== null) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;

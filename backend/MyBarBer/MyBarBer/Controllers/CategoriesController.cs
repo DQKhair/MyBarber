@@ -139,11 +139,8 @@ namespace MyBarBer.Controllers
                         _logger.LogInformation("Delete category successful! Id: {id}", id);
                         return StatusCode(StatusCodes.Status200OK);
                     }
-                    else
-                    {
-                        _logger.LogWarning("Delete category is fail by Id: {id}", id);
-                        return StatusCode(StatusCodes.Status400BadRequest);
-                    }
+                    _logger.LogWarning("Delete category is fail by Id: {id}", id);
+                    return StatusCode(StatusCodes.Status400BadRequest);
             }
             catch (Exception ex)
             {
@@ -158,21 +155,27 @@ namespace MyBarBer.Controllers
         {
             try
             {
-                var result = await _unitOfWork.Categories.ModifyCategory(id, categoriesVM);
-                var _category = await _unitOfWork.Categories.GetCategoryById(id);
-                var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_category);
-
-                if (result == true && _categoryVM != null)
+                var checkCategoryNameExists = await _unitOfWork.Categories.GetCategoryByName(categoriesVM.CategoryName);
+                if (checkCategoryNameExists == null)
                 {
-                    await _unitOfWork.CompleteAsync();
-                    _logger.LogInformation("Modify category by Id: {Id} successful!", _categoryVM.Category_ID);
-                    return StatusCode(StatusCodes.Status200OK, _categoryVM);
+                    var result = await _unitOfWork.Categories.ModifyCategory(id, categoriesVM);
+                    var _category = await _unitOfWork.Categories.GetCategoryById(id);
+                    var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_category);
+
+                    if (result == true && _categoryVM != null)
+                    {
+                        await _unitOfWork.CompleteAsync();
+                        _logger.LogInformation("Modify category by Id: {Id} successful!", _categoryVM.Category_ID);
+                        return StatusCode(StatusCodes.Status200OK, _categoryVM);
+                    }
+                    _logger.LogWarning("Modify category by Id: {Id} fail!", id);
+                    return StatusCode(StatusCodes.Status400BadRequest);
                 }
                 else
                 {
-                    _logger.LogWarning("Modify category by Id: {Id} fail!",id);
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
+                    _logger.LogWarning($"Category {categoriesVM.CategoryName} is exists!");
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = $"Category {categoriesVM.CategoryName} is exists!" });
+                }    
             }
             catch (Exception ex)
             {

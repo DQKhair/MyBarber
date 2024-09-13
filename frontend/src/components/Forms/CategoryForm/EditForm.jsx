@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { ColorTextPage,ColorButtonForm } from "../../../constants/constants";
+import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
 // import useCategories from "../../../hook/useCategories";
 
 import Button from "@mui/material/Button";
@@ -14,22 +14,23 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const EditForm = ({ category, openEdit, handleClose }) => {
+const EditForm = ({ updateCategory, category, openEdit, handleClose }) => {
   // initial value
   const initialValues = {
-    categoryName: category.CategoryName,
+    categoryName: category.categoryName,
   };
   // schema
   const categorySchema = yup.object({
     categoryName: yup.string().required("Category name required"),
   });
 
-  // update category
-  //   const { updateCategoryHook } = useCategories();
-
   // submit form
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+  const handleFormSubmit = async (values, { resetForm }) => {
+    const result = await updateCategory(category.category_ID,values);
+    if(result)
+    {
+      alert("Update category successful!");
+    }
     handleClose();
     //reset form
     resetForm();
@@ -64,7 +65,13 @@ const EditForm = ({ category, openEdit, handleClose }) => {
               onSubmit: handleSubmit,
             }}
           >
-            <DialogTitle sx={{ textAlign: "center", fontWeight: "bold",color: ColorTextPage}}>
+            <DialogTitle
+              sx={{
+                textAlign: "center",
+                fontWeight: "bold",
+                color: ColorTextPage,
+              }}
+            >
               Fill in
             </DialogTitle>
             <DialogContent>
@@ -99,7 +106,7 @@ const EditForm = ({ category, openEdit, handleClose }) => {
             </DialogContent>
             <DialogActions>
               <Button
-              variant="outlined"
+                variant="outlined"
                 onClick={() => {
                   handleClose();
                   resetForm();
@@ -107,7 +114,13 @@ const EditForm = ({ category, openEdit, handleClose }) => {
               >
                 Cancel
               </Button>
-              <Button variant="contained" sx={{bgcolor: ColorButtonForm}} type="submit">Save</Button>
+              <Button
+                variant="contained"
+                sx={{ bgcolor: ColorButtonForm }}
+                type="submit"
+              >
+                Save
+              </Button>
             </DialogActions>
           </Dialog>
         )}
