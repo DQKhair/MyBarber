@@ -3,13 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../ButtonPage/Button";
 import ItemFunction from "./ItemFunction";
 import { ColorTextPage } from "../../constants/constants";
+import DecodeToken from "../../utils/DecodeToken";
 
 import Avatar from "@mui/material/Avatar";
 
 const SideBar = () => {
   const navigate = useNavigate();
-  const userName = "Khải";
+  const dataUser = DecodeToken();
+  const userName = dataUser.unique_name;
   const charAvata = userName[0].toUpperCase();
+  const roleName = dataUser.role;
 
   const handleAddReceipt = (e) => {
     navigate("/receipts/add_new_receipt");
@@ -26,8 +29,8 @@ const SideBar = () => {
               {/* <!--change to offline or busy as needed--> */}
             </div>
             <div className="nav-profile-text d-flex flex-column">
-              <span className="font-weight-bold mb-2">K02</span>
-              <span className="text-secondary text-small">Administrator</span>
+              <span className="font-weight-bold mb-2">{userName}</span>
+              <span className="text-secondary text-small">{roleName}</span>
             </div>
             <i className="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
           </Link>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBarBer.Data;
+using MyBarBer.DTO;
 using MyBarBer.Helper;
+using MyBarBer.Models;
 using MyBarBer.Repository;
 
 namespace MyBarBer.RepositoryAndUnitOfWork
@@ -29,6 +31,31 @@ namespace MyBarBer.RepositoryAndUnitOfWork
             }catch(Exception ex)
             {
                 _logger.LogError(ex, "Error Authentication admin");
+                return null!;
+            }
+        }
+
+        public async Task<Administrator> ModifyAdminInfomation(Guid id,AdministratorVM administratorVM)
+        {
+           try
+            {
+                if(administratorVM != null)
+                {
+                    var _admin = await _context.Administrators.FindAsync(id);
+                    if(_admin != null)
+                    {
+                        var _adminUpdate = AdministratorDTO.AdministratorVMToAdministrator(administratorVM,_admin);
+                        if (_adminUpdate != null)
+                        {
+                            return _adminUpdate;
+                        }    
+                    }    
+                }    
+                _logger.LogWarning("Modify admin infomation is fail");
+                return null!;
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex,"Error modify admin infomation!");
                 return null!;
             }
         }

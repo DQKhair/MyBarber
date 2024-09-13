@@ -24,12 +24,25 @@ import {
 } from "../pages/StatisticPage";
 import LoginLayout from "../layouts/LoginLayout";
 import Login from "../pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/login" element={<LoginLayout />}>
+          <Route index element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Dashboard />} />
           <Route path="/customers" element={<CustomersPage />} />
           <Route
@@ -62,10 +75,6 @@ const AppRouter = () => {
           <Route path="/statisticDaily" element={<StatisticDaily />} />
           <Route path="/statisticMonthly" element={<StatisticMonthly />} />
           <Route path="/statisticYearly" element={<StatisticYearly />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route path="/login" element={<LoginLayout />}>
-          <Route index element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

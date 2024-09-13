@@ -23,17 +23,6 @@ namespace MyBarBer.RepositoryAndUnitOfWork
                     var _roleUser = await _context.RolesUser.FirstOrDefaultAsync(r => r.RoleName == "Employee");
                     if(_roleUser != null)
                     {
-                        //var _employee = new Employees
-                        //{
-                        //    Employee_ID = Guid.NewGuid(),
-                        //    EmployeeName = employeesVM.EmployeeName,
-                        //    EmployeeAddress = employeesVM.EmployeeAddress,
-                        //    EmployeePhone = employeesVM.EmployeePhone,
-                        //    EmployeeEmail = employeesVM.EmployeeEmail,
-                        //    EmployeePassword = HashPassword.ConvertPasswordToHash(employeesVM.EmployeePassword),
-                        //    EmployeeIsActive = true,
-                        //    Role_ID = _roleUser.Role_ID,
-                        //};
                         var _employee = EmployeesDTO.CreateNewEmployee(employeesVM, _roleUser.Role_ID);
                         if(_employee != null)
                         {

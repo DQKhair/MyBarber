@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -15,9 +15,18 @@ const CustomersTable = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [customer, setCustomer] = useState(null);
-  
+
   const navigation = useNavigate();
-  const { loading, error, customers, getCustomerById } = useCustomers();
+  const {
+    loading,
+    errorLoad,
+    error,
+    customers,
+    setError,
+    getCustomerByIdLocal,
+    addCustomerHook,
+    updateCustomerHook,
+  } = useCustomers();
 
   const handleClickDetail = (customerID) => {
     navigation(`/customers/customer_detail/${customerID}`);
@@ -26,8 +35,8 @@ const CustomersTable = () => {
   const handleAdd = () => {
     setIsAdd(true);
   };
-  const handleEdit = async (customerID) => {
-    const customerById = await getCustomerById(customerID);
+  const handleEdit = (customerID) => {
+    const customerById = getCustomerByIdLocal(customerID);
     setCustomer(customerById);
     setIsEdit(true);
   };
@@ -52,6 +61,15 @@ const CustomersTable = () => {
     setPage(0);
   };
 
+  // alert
+  useEffect(() => {
+    if (error != null) {
+      alert(error.response.data.message);
+      setError(null);
+    }
+  },[error]);
+  
+
   //load page
 
   if (loading)
@@ -63,10 +81,10 @@ const CustomersTable = () => {
       </div>
     );
 
-  if (error)
+  if (errorLoad)
     return (
       <div>
-        <Alert severity="error">Error: {error.message}</Alert>
+        <Alert severity="error">Error: {errorLoad.message}</Alert>
       </div>
     );
 
@@ -74,7 +92,11 @@ const CustomersTable = () => {
     <>
       {/* Form */}
       {isAdd === true ? (
-        <AddFrom openAdd={isAdd} handleClose={handleCloseAdd} />
+        <AddFrom
+          addCustomer={addCustomerHook}
+          openAdd={isAdd}
+          handleClose={handleCloseAdd}
+        />
       ) : (
         <></>
       )}
@@ -83,6 +105,7 @@ const CustomersTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          updateCustomer={updateCustomerHook}
           customer={customer}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
@@ -126,11 +149,11 @@ const CustomersTable = () => {
                   .map((item, index) => (
                     <tr
                       className={`${stylesTableList.table_cursor}`}
-                      key={`${item.Customer_ID}`}
+                      key={`${item.customer_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.CustomerName}`}</td>
-                      <td>{`${item.CustomerPhone}`}</td>
+                      <td>{`${item.customerName}`}</td>
+                      <td>{`${item.customerPhone}`}</td>
                       <td>
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -142,7 +165,7 @@ const CustomersTable = () => {
                           sizeButton={"sm"}
                           titleButton="Info"
                           handleOnclick={() =>
-                            handleClickDetail(item.Customer_ID)
+                            handleClickDetail(item.customer_ID)
                           }
                         />
                         <ButtonCircle
@@ -155,7 +178,7 @@ const CustomersTable = () => {
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.Customer_ID)}
+                          handleOnclick={() => handleEdit(item.customer_ID)}
                         />
                       </td>
                     </tr>

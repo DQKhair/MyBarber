@@ -38,12 +38,17 @@ const customerSchema = yup.object({
     .max(100, "Customer address must be at most 100 characters"),
 });
 
-const AddFrom = ({ openAdd, handleClose }) => {
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+const AddFrom = ({ addCustomer, openAdd, handleClose }) => {
+  const handleFormSubmit = async (values, { resetForm }) => {
+   const result = await addCustomer(values);
+    if(result)
+    {
+      alert("Add new customer is success !");
+    }
     handleClose();
     //reset form
     resetForm();
+    
   };
 
   return (

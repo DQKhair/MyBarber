@@ -31,7 +31,7 @@ const CustomerById = ({ customer }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Customer ID"
-                defaultValue={customer.Customer_ID}
+                defaultValue={customer.customer_ID}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -43,7 +43,7 @@ const CustomerById = ({ customer }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Customer name"
-                defaultValue={customer.CustomerName}
+                defaultValue={customer.customerName}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -55,7 +55,7 @@ const CustomerById = ({ customer }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Customer Phone"
-                defaultValue={customer.CustomerPhone}
+                defaultValue={customer.customerPhone}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -67,7 +67,7 @@ const CustomerById = ({ customer }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Customer address"
-                defaultValue={customer.CustomerAddress}
+                defaultValue={customer.customerAddress}
                 InputProps={{
                   readOnly: true,
                 }}

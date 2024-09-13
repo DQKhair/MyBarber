@@ -30,35 +30,50 @@ namespace MyBarBer.Repository
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error get category by Id ");
+                _logger.LogError(ex, $"Error get category by Id {id}");
                 return null!;
             }
 
         }
-
-        public async Task<bool> AddNewCategory(CategoriesVM categoriesVM)
+        public async Task<Categories> GetCategoryByName(string name)
         {
             try
             {
-                if (categoriesVM != null)
+                var _category = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == name);
+                if (_category != null)
+                {
+                    return _category;
+                }
+                _logger.LogWarning($"Could not find category {name}");
+                return null!;
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error get category by name {name}");
+                return null!;
+            }
+        }
+
+        public async Task<Categories> AddNewCategory(CategoriesVM categoriesVM)
+        {
+            try
+            {
+                var _categoryNew = CategoriesDTO.CreateNewCategory(categoriesVM);
+                if (categoriesVM != null && _categoryNew != null)
                 {
 
-                    var _category = new Categories
-                    {
-                        CategoryName = categoriesVM.CategoryName,
-                    };
-                    await _context.Categories.AddAsync(_category);
-                    return true;
+                   await _context.Categories.AddAsync(_categoryNew);
+
+                   return _categoryNew;
                 }else
                 {
                     _logger.LogWarning("Category is null");
-                    return false;
+                    return null!;
                 }    
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error add new category");
-                return false;
+                return null!;
             }
         }
 
@@ -115,5 +130,6 @@ namespace MyBarBer.Repository
             }
         }
 
+       
     }
 }

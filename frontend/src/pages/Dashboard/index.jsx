@@ -7,8 +7,15 @@ import {
   StatisticReceipt,
   StatisticServicesAndProducts,
 } from "../../components/Chart/MonthLy";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const accessToken = localStorage.getItem("accessToken")
+  const navigate = useNavigate()
+  if (accessToken === null || accessToken === "null")
+  {
+    navigate("/login");
+  }
   return (
     <>
       <div className="page-header">

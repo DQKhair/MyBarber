@@ -1,12 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ColorTextPage } from "../../constants/constants";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/reducers/userReducer";
+import DecodeToken from "../../utils/DecodeToken";
 
 import Avatar from "@mui/material/Avatar";
 
 const Navbar = () => {
-  const userName = "Khải";
+
+  const dataUser = DecodeToken();
+  const userName = dataUser.unique_name;
   const charAvata = userName[0].toUpperCase();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    console.log("logout")
+  };
 
   return (
     <>
@@ -49,10 +60,13 @@ const Navbar = () => {
               >
                 <div className="nav-profile-img">
                   <Avatar sx={{ bgcolor: ColorTextPage }}>{charAvata}</Avatar>
-                  <span className="availability-status online" style={{bottom: "-2px"}}></span>
+                  <span
+                    className="availability-status online"
+                    style={{ bottom: "-2px" }}
+                  ></span>
                 </div>
                 <div className="nav-profile-text">
-                  <p className="mb-1 text-black">K02</p>
+                  <p className="mb-1 text-black">{userName}</p>
                 </div>
               </a>
               <div
@@ -64,14 +78,16 @@ const Navbar = () => {
                   Log{" "}
                 </Link>
                 <div className="dropdown-divider"></div>
-                <Link className="dropdown-item" to="/login">
-                  <i className="mdi mdi-logout me-2 text-primary"></i> Signout{" "}
+                <Link  to="/login" style={{textDecoration:"none"}}>
+                  <div className="dropdown-item" onClick={handleLogout}>
+                    <i className="mdi mdi-logout me-2 text-primary"></i> Signout{" "}
+                  </div>
                 </Link>
               </div>
             </li>
             <li className="nav-item nav-logout d-none d-lg-block">
               <Link className="nav-link" to="/login">
-                <i className="mdi mdi-power"></i>
+                <i onClick={handleLogout} className="mdi mdi-power"></i>
               </Link>
             </li>
             <li className="nav-item nav-settings d-none d-lg-block">

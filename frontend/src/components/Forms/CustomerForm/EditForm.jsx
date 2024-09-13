@@ -13,12 +13,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const EditForm = ({ customer, openEdit, handleClose }) => {
+const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
   // initial values
   const initialValues = {
-    customerName: customer.CustomerName,
-    customerPhone: customer.CustomerPhone,
-    customerAddress: customer.CustomerAddress,
+    customerName: customer.customerName,
+    customerPhone: customer.customerPhone,
+    customerAddress: customer.customerAddress,
   };
 
   // schema
@@ -34,8 +34,12 @@ const EditForm = ({ customer, openEdit, handleClose }) => {
     customerAddress: yup.string().required("Customer address is required"),
   });
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = async (values) => {
+    const result = await updateCustomer(customer.customer_ID,values)
+    if(result)
+    {
+      alert('update success !')
+    }
     handleClose();
   };
 

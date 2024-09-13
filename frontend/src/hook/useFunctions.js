@@ -8,6 +8,7 @@ const useFunctions = () => {
 
   useEffect(() => {
     const loadFunctions = async () => {
+      setLoading(true)
       try {
         const data = await fetchFunctions();
         setFunctions(data);

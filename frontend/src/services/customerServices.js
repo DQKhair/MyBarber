@@ -1,9 +1,8 @@
-import axios from "axios";
-import { API_URL } from "../constants/constants";
+import axiosRoot from "../config/axiosConfig";
 
 const fetchCustomers = async () => {
   try {
-    const response = await axios.get(`${API_URL}/customers.json`);
+    const response = await axiosRoot.get(`/api/customers`);
     return response.data;
   } catch (err) {
     console.error("Failed to fetch customers:", err);
@@ -11,37 +10,27 @@ const fetchCustomers = async () => {
   }
 };
 
+const getCustomerById = async (customerID) => {
+  const response = await axiosRoot.get(`/api/customers/${customerID}`);
+  return response.data;
+}
+
 const addCustomer = async (customer) => {
-  try {
-    const response = await axios.post(`${API_URL}/customers`, customer);
-    return response.data;
-  } catch (err) {
-    console.error("Failed to add customers:", err);
-    return [];
-  }
+  const response = await axiosRoot.post(`/api/customers`, customer);
+  return response.data;
 };
 
 const deleteCustomer = async (customerID) => {
-  try {
-    const response = await axios.delete(`${API_URL}/customers/${customerID}`);
-    return response.data;
-  } catch (err) {
-    console.error("Failed to delete customers:", err);
-    return [];
-  }
+  const response = await axiosRoot.delete(`/api/customers/${customerID}`);
+  return response.data;
 };
 
 const updateCustomer = async (customerID, customer) => {
-  try {
-    const response = await axios.put(
-      `${API_URL}/customers/${customerID}`,
-      customer
-    );
-    return response.data;
-  } catch (err) {
-    console.error("Failed to update customers:", err);
-    return [];
-  }
+  const response = await axiosRoot.put(
+    `/api/customers/${customerID}`,
+    customer
+  );
+  return response.data;
 };
 
-export { fetchCustomers, addCustomer, deleteCustomer, updateCustomer };
+export { fetchCustomers,getCustomerById, addCustomer, deleteCustomer, updateCustomer };

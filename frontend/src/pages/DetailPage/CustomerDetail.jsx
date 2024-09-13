@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
@@ -10,32 +10,39 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
 const CustomerDetail = ({ mainPage }) => {
-  const { loading, error, getCustomerById } = useCustomers();
+  const { loading,error, getCustomerByIdHook } = useCustomers();
   const { id } = useParams();
+  const [customer,setCustomer] = useState();
 
-  const customer = getCustomerById(id);
+  useEffect(() => {
+    const getCustomer = async () => {
+
+     const customerData = await getCustomerByIdHook(id)
+      setCustomer(customerData);
+    }
+    getCustomer();
+  },[id]);
 
   const titleName = "Information about customer";
   const breadcrumb = mainPage;
   const itemBreadcrumb = `Customer details`;
 
- //load page
+  //load page
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
 
- if (loading)
-  return (
-    <div>
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress /> Loading...
-      </Box>
-    </div>
-  );
-
-if (error)
-  return (
-    <div>
-      <Alert severity="error">Error: {error.message}</Alert>
-    </div>
-  );
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
 
   return (
     <>

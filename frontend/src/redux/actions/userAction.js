@@ -21,13 +21,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // }
 
 // export { loginUser,logoutUser };
-const URL = "https://localhost:7012";
 const loginUser = createAsyncThunk(
   "user/login",
   async ({ emailUser, passwordUser }, { rejectWithValue }) => {
     try {
       console.log("res")
-      const response = await axios.post(`${URL}/api/Authentication/Login?email=${emailUser}&password=${passwordUser}`, { email: emailUser, password: passwordUser });
+      const response = await axios.post(`${API_URL}/api/Authentication/Login?email=${emailUser}&password=${passwordUser}`, { email: emailUser, password: passwordUser });
       return response.data;
     } catch (err) {
       console.error('Login error:', err.response); 

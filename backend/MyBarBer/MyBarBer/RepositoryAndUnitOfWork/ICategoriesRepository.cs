@@ -7,7 +7,8 @@ namespace MyBarBer.Repository
     {
         // Add methods specific
         Task<Categories> GetCategoryById(int id);
-        Task<bool> AddNewCategory(CategoriesVM categoryVM);
+        Task<Categories> GetCategoryByName(string name);
+        Task<Categories> AddNewCategory(CategoriesVM categoryVM);
         Task<bool> DeleteCategoryById(int id);
         Task<bool> ModifyCategory(int id,CategoriesVM categoryVM);
     }

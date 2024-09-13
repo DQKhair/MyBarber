@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBarBer.Data;
+using MyBarBer.DTO;
 using MyBarBer.Models;
 using MyBarBer.Repository;
 
@@ -27,10 +28,11 @@ namespace MyBarBer.Controllers
             try
             {
                 var _employees = await _unitOfWork.Employees.GetAllAsync();
-                if(_employees != null)
+                var _employeesVM = EmployeesDTO.ListEmployeeToListEmployeesVM(_employees);
+                if(_employees != null && _employeesVM != null)
                 {
                     _logger.LogInformation("Get list employees is success");
-                    return StatusCode(StatusCodes.Status200OK, _employees);
+                    return StatusCode(StatusCodes.Status200OK, _employeesVM);
                 }else
                 {
                     _logger.LogWarning("Get list employees is fail");
@@ -49,10 +51,11 @@ namespace MyBarBer.Controllers
             try
             {
                var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
-                if (_employee != null)
+                var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employee);
+                if (_employee != null && _employeeVM != null)
                 {
                     _logger.LogInformation($"Get employee by id: ${id} is success");
-                    return StatusCode(StatusCodes.Status200OK, _employee);
+                    return StatusCode(StatusCodes.Status200OK, _employeeVM);
                 }
                 else
                 {
@@ -78,13 +81,21 @@ namespace MyBarBer.Controllers
                 {
                     if (_checkPhoneNumberExists == null)
                     {
-                        var _result = await _unitOfWork.Employees.AddNewEmployee(employeeVM);
-
+                        bool _result = await _unitOfWork.Employees.AddNewEmployee(employeeVM);
                         if(_result == true)
                         {
                             await _unitOfWork.CompleteAsync();
-                            _logger.LogInformation($"Create new employee {employeeVM.EmployeeName} is success");
-                            return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeVM.Employee_ID }, employeeVM);
+
+                            var _employeeNewVM = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                            if(_employeeNewVM != null)
+                            {
+                                _logger.LogInformation($"Create new employee {_employeeNewVM.EmployeeName} is success");
+                                return CreatedAtAction(nameof(GetEmployeeById), new { id = _employeeNewVM.Employee_ID }, _employeeNewVM);
+                            }else
+                            {
+                                _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
+                                return StatusCode(StatusCodes.Status400BadRequest);
+                            }    
                         }else
                         {
                             _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
@@ -133,11 +144,6 @@ namespace MyBarBer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployee(Guid id, EmployeesVM employeeVM)
         {
-            if(id != employeeVM.Employee_ID)
-            {
-                _logger.LogWarning($"Modify employee by Id: {employeeVM.Employee_ID} is not match");
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
             try
             {
                 var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
@@ -150,8 +156,17 @@ namespace MyBarBer.Controllers
                     if(_phoneNumberOld == employeeVM.EmployeePhone && _emailOld == employeeVM.EmployeeEmail)
                     {
                         await _unitOfWork.CompleteAsync();
-                        _logger.LogInformation("Modify employee by Id: {Id} successful!", employeeVM.Employee_ID);
-                        return StatusCode(StatusCodes.Status200OK, employeeVM);
+
+                        var _updatedEmployee = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                        if (_updatedEmployee != null)
+                        {
+                            _logger.LogInformation("Modify employee by Id: {Id} successful!", _updatedEmployee.Employee_ID);
+                            return StatusCode(StatusCodes.Status200OK, _updatedEmployee);
+                        }else
+                        {
+                            _logger.LogWarning($"Modify category by Id: {id} fail!");
+                            return StatusCode(StatusCodes.Status400BadRequest);
+                        }    
                     }else
                     {
                         if(_phoneNumberOld == employeeVM.EmployeePhone)
@@ -161,8 +176,17 @@ namespace MyBarBer.Controllers
                             if(_checkEmailExists == null)
                             {
                                 await _unitOfWork.CompleteAsync();
-                                _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
-                                return StatusCode(StatusCodes.Status200OK, employeeVM);
+
+                                var _employeeUpdatedVM = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                                if (_employeeUpdatedVM != null)
+                                {
+                                    _logger.LogInformation("Update employee by Id: {Id} successful!", _employeeUpdatedVM.Employee_ID);
+                                    return StatusCode(StatusCodes.Status200OK, _employeeUpdatedVM);
+                                }else
+                                {
+                                    _logger.LogWarning($"Modify employee {id} is fail!");
+                                    return StatusCode(StatusCodes.Status400BadRequest);
+                                }    
                             }
                             else
                             {
@@ -177,8 +201,17 @@ namespace MyBarBer.Controllers
                             if (_checkPhoneNumberExists == null)
                             {
                                     await _unitOfWork.CompleteAsync();
-                                    _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
-                                    return StatusCode(StatusCodes.Status200OK, employeeVM);
+                                var _employeeUpdatedVM = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                                if (_employeeUpdatedVM != null)
+                                {
+                                    _logger.LogInformation("Update employee by Id: {Id} successful!", _employeeUpdatedVM.Employee_ID);
+                                    return StatusCode(StatusCodes.Status200OK, _employeeUpdatedVM);
+                                }
+                                else
+                                {
+                                    _logger.LogWarning($"Update employee {id} is fail!");
+                                    return StatusCode(StatusCodes.Status400BadRequest);
+                                }    
                             }
                             else
                             {
@@ -196,8 +229,17 @@ namespace MyBarBer.Controllers
                                 if (_checkEmailExists == null)
                                 {
                                     await _unitOfWork.CompleteAsync();
-                                    _logger.LogInformation("Update employee by Id: {Id} successful!", employeeVM.Employee_ID);
-                                    return StatusCode(StatusCodes.Status200OK, employeeVM);
+
+                                    var _employeeUpdatedVM = await _unitOfWork.Employees.GetEmployeeByEmail(employeeVM.EmployeeEmail);
+                                    if (_employeeUpdatedVM != null)
+                                    {
+                                        _logger.LogInformation("Update employee by Id: {Id} successful!", _employeeUpdatedVM.Employee_ID);
+                                        return StatusCode(StatusCodes.Status200OK, _employeeUpdatedVM);
+                                    }else
+                                    {
+                                        _logger.LogWarning($"Modify employee {id} is fail!");
+                                        return StatusCode(StatusCodes.Status400BadRequest);
+                                    }    
                                 }
                                 else
                                 {

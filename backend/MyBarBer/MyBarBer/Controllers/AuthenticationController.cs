@@ -34,11 +34,11 @@ namespace MyBarBer.Controllers
                     if(_roleUser != null)
                     {
                         _logger.LogInformation("Login admin is success!");
-                        return StatusCode(StatusCodes.Status200OK, new APIResVM
+                        return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
                         {
                             Success = true,
                             Message = "Authentication success",
-                            Data = authJWT.GenerateToken(resultAdmin, _roleUser)
+                            AccessToken = authJWT.GenerateToken(resultAdmin, _roleUser)
                         });
                     }    
                 }
@@ -52,17 +52,17 @@ namespace MyBarBer.Controllers
                         if(_roleUser != null)
                         {
                             _logger.LogInformation("Login employee is success!");
-                            return StatusCode(StatusCodes.Status200OK, new APIResVM
+                            return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
                             {
                                 Success = true,
                                 Message = "Authentication success",
-                                Data = authJWT.GenerateToken(resultEmployee, _roleUser)
+                                AccessToken = authJWT.GenerateToken(resultEmployee, _roleUser)
                             });
                         }    
                     }
                 }
                 _logger.LogWarning("Authentication user is fail");
-                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM 
+                return StatusCode(StatusCodes.Status400BadRequest, new APIAuthenticationResVM 
                 { Success = false,
                     Message = "Email or password is incorrect" 
                 });

@@ -1,10 +1,12 @@
-import axios from "axios";
-import { API_URL } from "../constants/constants"
+import DecodeToken from "../utils/DecodeToken";
+import axiosRoot from "../config/axiosConfig";
 
 export const fetchFunctions = async () =>{
     try
     {
-        const response = await axios.get(`${API_URL}/functions.json`);
+        const accessToken = localStorage.getItem("accessToken");
+        const decoded = DecodeToken(accessToken);
+        const response = await axiosRoot.get(`/api/FunctionsUser/${decoded.Role_ID}`);
         return response.data;
     }catch(error)
     {

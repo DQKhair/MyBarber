@@ -27,10 +27,11 @@ namespace MyBarBer.Controllers
             try
             {
                 var _customers = await _unitOfWork.Customers.GetAllAsync();
-                if (_customers != null)
+                var _customersVM = CustomersDTO.ListCustomersToListCustomersVM(_customers);
+                if (_customers != null && _customersVM != null)
                 {
                     _logger.LogInformation("Get list customer is success!");
-                    return StatusCode(StatusCodes.Status200OK, _customers);
+                    return StatusCode(StatusCodes.Status200OK, _customersVM);
                 }
                 _logger.LogWarning("Get list customer is fail!");
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -46,10 +47,11 @@ namespace MyBarBer.Controllers
             try
             {
                 var _customer = await _unitOfWork.Customers.GetByIdAsync(id);
-                if (_customer != null)
+                var _customerVM = CustomersDTO.CustomersToCustomersVM(_customer);
+                if (_customer != null && _customerVM != null)
                 {
                     _logger.LogInformation($"Get customer by Id: {id} is success!");
-                    return StatusCode(StatusCodes.Status200OK,_customer);
+                    return StatusCode(StatusCodes.Status200OK, _customerVM);
                 }
                 _logger.LogWarning($"Get customer by id: {id} is fail!");
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -118,7 +120,6 @@ namespace MyBarBer.Controllers
         {
             try
             {
-                 
                 var _customerByphone = await _unitOfWork.Customers.GetByIdAsync(id);
                 string oldPhone = _customerByphone.CustomerPhone;
 
@@ -126,14 +127,17 @@ namespace MyBarBer.Controllers
              
                 if(result)
                 {
+                    var _customerVMRes = CustomersDTO.CustomersToCustomersVM(_customerByphone);
+
                     if (oldPhone != customersVM.CustomerPhone)
                     {
                         bool _checkPhoneNumberExists = await _unitOfWork.Customers.CheckPhoneNumberCustomerExist(customersVM.CustomerPhone);
                         if (!_checkPhoneNumberExists)
                         {
                             await _unitOfWork.CompleteAsync();
+                          
                             _logger.LogInformation($"Update customer by id: {id} is success!");
-                            return StatusCode(StatusCodes.Status200OK, customersVM);
+                            return StatusCode(StatusCodes.Status200OK, _customerVMRes);
                         }
                         else
                         {
@@ -145,7 +149,7 @@ namespace MyBarBer.Controllers
                     {
                         await _unitOfWork.CompleteAsync();
                         _logger.LogInformation($"Update customer by id: {id} is success!");
-                        return StatusCode(StatusCodes.Status200OK, customersVM);
+                        return StatusCode(StatusCodes.Status200OK, _customerVMRes);
                     }
                        
                 }

@@ -8,9 +8,9 @@ const ItemFunction = () =>{
     return (
         <>
             {functions.map((item) => {
-          if (item.FunctionName === "Accounts Management") {
+          if (item.functionName === "Accounts Management") {
             return (
-              <li className="nav-item" key={item.Function_ID}>
+              <li className="nav-item" key={item.function_ID}>
                 <a
                   className="nav-link"
                   data-bs-toggle="collapse"
@@ -18,9 +18,9 @@ const ItemFunction = () =>{
                   aria-expanded="false"
                   aria-controls="ui-basic"
                 >
-                  <span className="menu-title">{item.FunctionName}</span>
+                  <span className="menu-title">{item.functionName}</span>
                   <i className="menu-arrow"></i>
-                  <i className={`mdi ${item.FunctionIcon} menu-icon`}></i>
+                  <i className={`mdi ${item.functionIcon} menu-icon`}></i>
                 </a>
                 <div className="collapse" id="ui-basic">
                   <ul className="nav flex-column sub-menu">
@@ -40,9 +40,9 @@ const ItemFunction = () =>{
                 </div>
               </li>
             );
-          } else if (item.FunctionName === "Statistic Management") {
+          } else if (item.functionName === "Statistic Management") {
             return (
-              <li className="nav-item" key={item.Function_ID}>
+              <li className="nav-item" key={item.function_ID}>
                 <Link
                   className="nav-link"
                   data-bs-toggle="collapse"
@@ -50,9 +50,9 @@ const ItemFunction = () =>{
                   aria-expanded="false"
                   aria-controls="general-pages"
                 >
-                  <span className="menu-title">{item.FunctionName}</span>
+                  <span className="menu-title">{item.functionName}</span>
                   <i className="menu-arrow"></i>
-                  <i className={`mdi ${item.FunctionIcon} menu-icon`}></i>
+                  <i className={`mdi ${item.functionIcon} menu-icon`}></i>
                 </Link>
                 <div className="collapse" id="general-pages">
                   <ul className="nav flex-column sub-menu">
@@ -83,10 +83,10 @@ const ItemFunction = () =>{
             );
           } else {
             return (
-              <li className="nav-item" key={item.Function_ID}>
-                <Link className="nav-link" to={`${item.FunctionLink}`}>
-                  <span className="menu-title">{item.FunctionName}</span>
-                  <i className={`mdi ${item.FunctionIcon} menu-icon`}></i>
+              <li className="nav-item" key={item.function_ID}>
+                <Link className="nav-link" to={`${item.functionRoute}`}>
+                  <span className="menu-title">{item.functionName}</span>
+                  <i className={`mdi ${item.functionIcon} menu-icon`}></i>
                 </Link>
               </li>
             );
