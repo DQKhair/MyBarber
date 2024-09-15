@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import {ColorButtonForm } from "../../../constants/constants";
+import { ColorButtonForm } from "../../../constants/constants";
 import useItemCategories from "../../../hook/useItemCategories";
 
 import Button from "@mui/material/Button";
@@ -14,12 +14,13 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Container from "@mui/material/Container";
 import Autocomplete from "@mui/material/Autocomplete";
+import useCustomers from "../../../hook/useCustomers";
 
 const initialValues = {
   customerName: "",
   customerPhone: "",
   customerAddress: "",
-  serviceInput: [],
+  servicesInput: [],
   productsInput: [],
   productsQuantityInput: [],
 };
@@ -41,12 +42,12 @@ const receiptSchema = yup.object({
     .string()
     .required("Phone number is required")
     .matches(regexPhone, "Phone number is not valid"),
-  serviceInput: yup.array().of(yup.object()).nullable(),
+  servicesInput: yup.array().of(yup.object()).nullable(),
   productsInput: yup
     .array()
     .of(
       yup.object().shape({
-        ItemCategoryName: yup.string().required("Not empty"),
+        itemCategoryName: yup.string().required("Not empty"),
       })
     )
     .nullable(),
@@ -66,16 +67,48 @@ const AddForm = () => {
   const [productQuantity, setProductQuantity] = useState(0);
   const [serviceQuantity, setServiceQuantity] = useState(0);
   const { itemCategories } = useItemCategories();
-  const services = itemCategories.filter((i) => i.Category_ID === "1");
-  const products = itemCategories.filter((i) => i.Category_ID !== "1");
+  const { customers } = useCustomers();
+  const services = itemCategories.filter((i) => i.category_ID === 1);
+  const products = itemCategories.filter((i) => i.category_ID !== 1);
 
+  const listAddress = [...new Set(customers.map((c) => c.customerAddress))];
   console.log(services);
 
-  const handleChangeNumPro = (event) => {
-    setProductQuantity(event.target.value);
+  const handleChangeNumSer = (event, setFieldValue, values) => {
+    const newQuantity = event.target.value;
+    setServiceQuantity(newQuantity);
+
+    const updatedServiceInput = [...values.servicesInput];
+    if (newQuantity > updatedServiceInput.length) {
+      for (let i = updatedServiceInput.length; i < newQuantity; i++) {
+        updatedServiceInput.push(null);
+      }
+    } else if (newQuantity < updatedServiceInput.length) {
+      updatedServiceInput.length = newQuantity;
+    }
+
+    setFieldValue("servicesInput", updatedServiceInput);
   };
-  const handleChangeNumSer = (event) => {
-    setServiceQuantity(event.target.value);
+
+  const handleChangeNumPro = (event, setFieldValue, values) => {
+    const newQuantity = event.target.value;
+    setProductQuantity(newQuantity);
+
+    const updatedProductInput = [...values.productsInput];
+    const updatedProductsQuantityInput = [...values.productsQuantityInput];
+
+    if (newQuantity > updatedProductInput.length) {
+      for (let i = updatedProductInput.length; i < newQuantity; i++) {
+        updatedProductInput.push(null);
+        updatedProductsQuantityInput.push(null);
+      }
+    } else if (newQuantity < updatedProductInput.length) {
+      updatedProductInput.length = newQuantity;
+      updatedProductsQuantityInput.length = newQuantity;
+    }
+
+    setFieldValue("productsQuantityInput", updatedProductsQuantityInput);
+    setFieldValue("productsInput", updatedProductInput);
   };
   const handleFormSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -112,60 +145,102 @@ const AddForm = () => {
                   columns={{ xs: 4, sm: 8, md: 12 }}
                 >
                   <Grid item xs={4} sm={4} md={4}>
-                    <TextField
-                      variant="outlined"
-                      type="text"
-                      label="Customer name"
-                      onBlur={(e) => {
-                        setFieldValue("customerName", e.target.value.trim());
-                        handleBlur(e);
-                      }}
-                      onChange={handleChange}
-                      value={values.customerName}
-                      name="customerName"
-                      error={!!touched.customerName && !!errors.customerName}
-                      helperText={touched.customerName && errors.customerName}
-                      sx={{ gridColumn: "span 2", width: "100%" }}
+                    <Autocomplete
+                      id="customerName_auto"
+                      freeSolo
+                      options={customers.map((option) => option.customerName)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="outlined"
+                          type="text"
+                          label="Customer name"
+                          onBlur={(e) => {
+                            setFieldValue(
+                              "customerName",
+                              e.target.value.trim()
+                            );
+                            handleBlur(e);
+                          }}
+                          onChange={handleChange}
+                          value={values.customerName}
+                          name="customerName"
+                          error={
+                            !!touched.customerName && !!errors.customerName
+                          }
+                          helperText={
+                            touched.customerName && errors.customerName
+                          }
+                          sx={{ gridColumn: "span 2", width: "100%" }}
+                        />
+                      )}
                     />
                   </Grid>
 
                   <Grid item xs={4} sm={4} md={4}>
-                    <TextField
-                      variant="outlined"
-                      type="text"
-                      label="Customer phone"
-                      onBlur={(e) => {
-                        setFieldValue("customerPhone", e.target.value.trim());
-                        handleBlur(e);
-                      }}
-                      onChange={handleChange}
-                      value={values.customerPhone}
-                      name="customerPhone"
-                      error={!!touched.customerPhone && !!errors.customerPhone}
-                      helperText={touched.customerPhone && errors.customerPhone}
-                      sx={{ gridColumn: "span 2", width: "100%" }}
+                    <Autocomplete
+                      id="CustomerPhone_auto"
+                      freeSolo
+                      options={customers.map((option) => option.customerPhone)}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="outlined"
+                          type="text"
+                          label="Customer phone"
+                          onBlur={(e) => {
+                            setFieldValue(
+                              "customerPhone",
+                              e.target.value.trim()
+                            );
+                            handleBlur(e);
+                          }}
+                          onChange={handleChange}
+                          value={values.customerPhone}
+                          name="customerPhone"
+                          error={
+                            !!touched.customerPhone && !!errors.customerPhone
+                          }
+                          helperText={
+                            touched.customerPhone && errors.customerPhone
+                          }
+                          sx={{ gridColumn: "span 2", width: "100%" }}
+                        />
+                      )}
                     />
                   </Grid>
 
                   <Grid item xs={4} sm={4} md={4}>
-                    <TextField
-                      variant="outlined"
-                      type="text"
-                      label="Customer address"
-                      onBlur={(e) => {
-                        setFieldValue("customerAddress", e.target.value.trim());
-                        handleBlur(e);
-                      }}
-                      onChange={handleChange}
-                      value={values.customerAddress}
-                      name="customerAddress"
-                      error={
-                        !!touched.customerAddress && !!errors.customerAddress
-                      }
-                      helperText={
-                        touched.customerAddress && errors.customerAddress
-                      }
-                      sx={{ gridColumn: "span 2", width: "100%" }}
+                    <Autocomplete
+                      id="CustomerAddress_auto"
+                      freeSolo
+                      options={listAddress}
+                      renderInput={(params) => (
+                        <TextField
+                        {...params}
+                          variant="outlined"
+                          type="text"
+                          label="Customer address"
+                          onBlur={(e) => {
+                            setFieldValue(
+                              "customerAddress",
+                              e.target.value.trim()
+                            );
+                            handleBlur(e);
+                          }}
+                          onChange={handleChange}
+                          value={values.customerAddress}
+                          name="customerAddress"
+                          error={
+                            !!touched.customerAddress &&
+                            !!errors.customerAddress
+                          }
+                          helperText={
+                            touched.customerAddress && errors.customerAddress
+                          }
+                          sx={{ gridColumn: "span 2", width: "100%" }}
+                        />
+                      )}
                     />
                   </Grid>
 
@@ -173,14 +248,16 @@ const AddForm = () => {
                   <Grid item xs={4} sm={4} md={4}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
-                        Product quantity
+                        Service quantity
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={serviceQuantity}
-                        label="Product quantity"
-                        onChange={handleChangeNumSer}
+                        label="Service quantity"
+                        onChange={(e) =>
+                          handleChangeNumSer(e, setFieldValue, values)
+                        }
                       >
                         {Array.from({ length: 11 }).map((_, i) => (
                           <MenuItem key={i} value={i}>
@@ -201,7 +278,9 @@ const AddForm = () => {
                         id="demo-simple-select"
                         value={productQuantity}
                         label="Product quantity"
-                        onChange={handleChangeNumPro}
+                        onChange={(e) =>
+                          handleChangeNumPro(e, setFieldValue, values)
+                        }
                       >
                         {Array.from({ length: 11 }).map((_, i) => (
                           <MenuItem key={i} value={i}>
@@ -217,30 +296,30 @@ const AddForm = () => {
                     <Grid key={i} item xs={4} sm={4} md={8}>
                       <Autocomplete
                         clearOnBlur
-                        options={products}
+                        options={services}
                         getOptionLabel={(option) =>
-                          option.ItemCategoryName || ""
+                          option.itemCategoryName || ""
                         }
-                        value={values.serviceInput[i] || null}
+                        value={values.servicesInput[i] || null}
                         onChange={(event, newValue) => {
-                          const updateServiceInput = [...values.serviceInput];
+                          const updateServiceInput = [...values.servicesInput];
                           updateServiceInput[i] = newValue;
-                          setFieldValue("serviceInput", updateServiceInput);
+                          setFieldValue("servicesInput", updateServiceInput);
                         }}
                         id={`clear-on-product-${i}`}
                         renderInput={(params) => (
                           <TextField
                             {...params}
                             type="text"
-                            name={`serviceInput[${i}]`}
+                            name={`servicesInput[${i}]`}
                             label={`Service ${i + 1}`}
                             error={
-                              !!touched.serviceInput?.[i] &&
-                              !!errors.serviceInput?.[i]
+                              !!touched.servicesInput?.[i] &&
+                              !!errors.servicesInput?.[i]
                             }
                             helperText={
-                              touched.serviceInput?.[i] &&
-                              errors.serviceInput?.[i]
+                              touched.servicesInput?.[i] &&
+                              errors.servicesInput?.[i]
                             }
                           />
                         )}
@@ -248,7 +327,14 @@ const AddForm = () => {
                     </Grid>
                   ))}
                   {/* Divider */}
-                  <div style={{backgroundColor: "#000",height:"1px", width: "100%", margin:"3% 0 0 3%"}}></div>
+                  <div
+                    style={{
+                      backgroundColor: "#000",
+                      height: "1px",
+                      width: "100%",
+                      margin: "3% 0 0 3%",
+                    }}
+                  ></div>
                   {/* arr product */}
                   {Array.from({ length: productQuantity }).map((_, i) => (
                     <React.Fragment key={i}>
@@ -257,7 +343,7 @@ const AddForm = () => {
                           clearOnBlur
                           options={products}
                           getOptionLabel={(option) =>
-                            option.ItemCategoryName || ""
+                            option.itemCategoryName || ""
                           }
                           value={values.productsInput[i] || null}
                           onChange={(event, newValue) => {
@@ -295,6 +381,7 @@ const AddForm = () => {
                           variant="outlined"
                           type="number"
                           label="Quantity"
+                          inputProps={{ min: 1, max: 99 }}
                           onBlur={(e) => {
                             const newQuantity = Number(e.target.value);
                             const updatedProductsQuantityInput = [

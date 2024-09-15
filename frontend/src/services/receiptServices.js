@@ -3,7 +3,7 @@ import { API_URL } from "../constants/constants";
 
 const fetchReceipts = async () => {
   try {
-    const response = await axios.get(`${API_URL}/receipts.json`);
+    const response = await axios.get(`/data/receipts.json`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch receipts: ", error);
