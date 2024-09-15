@@ -16,6 +16,7 @@ namespace MyBarBer.Data
         [Required]
         [MaxLength(11)]
         public string EmployeePhone { get; set; } = string.Empty;
+        public DateTime? EmployeeDate { get; set; } = DateTime.Now;
         [Required]
         [MaxLength (100)]
         public string EmployeeEmail {  get; set; } = string.Empty;

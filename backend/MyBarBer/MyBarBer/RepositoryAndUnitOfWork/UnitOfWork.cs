@@ -18,6 +18,10 @@ namespace MyBarBer.Repository
         public ICustomersRepository Customers { get; private set; }
         public IFunctionsUserRepository FunctionsUser { get; private set; }
         public IItemCategoriesRepository ItemCategories { get; private set; }
+        public IReceiptsRepository Receipts { get; private set; }
+        public IReceiptDetailsRepository ReceiptDetails { get; private set; }
+        public IMethodsRepository Methods { get; private set; }
+        public IStatusesRepository Statuss { get; private set; }
 
         public UnitOfWork(MyDBContext context, ILoggerFactory loggerFactory)
         {
@@ -32,6 +36,10 @@ namespace MyBarBer.Repository
             Customers = new CustomerRepository(_context,_logger);
             FunctionsUser = new FunctionsUserRepository(_context,_logger);
             ItemCategories = new ItemCategoriesRepository(_context,_logger);
+            Receipts = new ReceiptsRepository(_context,_logger);
+            ReceiptDetails = new ReceiptDetailsRepository(_context,_logger);
+            Methods = new MethodsRepository(_context,_logger);
+            Statuss = new StatusesRepository(_context,_logger);
         }
 
         public async Task<bool> CompleteAsync()

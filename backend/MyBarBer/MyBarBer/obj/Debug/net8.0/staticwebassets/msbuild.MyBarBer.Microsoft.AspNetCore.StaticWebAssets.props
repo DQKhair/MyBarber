@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>MyBarBer</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyBarBer</BasePath>
-      <RelativePath>images/6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg</RelativePath>
+      <RelativePath>images/83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -14,14 +14,14 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>MyBarBer</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyBarBer</BasePath>
-      <RelativePath>images/c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png</RelativePath>
+      <RelativePath>images/9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -30,7 +30,39 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyBarBer</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyBarBer</BasePath>
+      <RelativePath>images/a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyBarBer</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyBarBer</BasePath>
+      <RelativePath>images/c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

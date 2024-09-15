@@ -19,6 +19,10 @@ namespace MyBarBer.Data
         [ForeignKey (nameof(Method_ID))]
         public Guid? Employee_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Employee_ID))]
+        public Guid? Employee2_ID { get; set; }
+        public DateTime? Employee2_Time {  get; set; }
+        public Guid? Employee3_ID { get; set; }
+        public DateTime? Employee3_Time { get; set; }
         public Guid? Customer_ID { get; set; } = Guid.Empty;
         [ForeignKey(nameof(Customer_ID))]
 

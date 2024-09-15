@@ -12,6 +12,10 @@ namespace MyBarBer.Repository
         ICustomersRepository Customers { get; }
         IFunctionsUserRepository FunctionsUser { get; }
         IItemCategoriesRepository ItemCategories { get; }
+        IReceiptsRepository Receipts { get; }
+        IReceiptDetailsRepository ReceiptDetails { get; }
+        IMethodsRepository Methods { get; }
+        IStatusesRepository Statuss { get; }
 
         Task<bool> CompleteAsync();
     }

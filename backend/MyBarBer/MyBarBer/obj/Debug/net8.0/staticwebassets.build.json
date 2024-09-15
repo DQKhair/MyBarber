@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zPdfZROvPfkKSI2MdOw98ByvozWgYoxw+j5OClHcFlg=",
+  "Hash": "KGyr9pvR3fNNrotArbWIJaszLTTB06vhAxWeHsd7514=",
   "Source": "MyBarBer",
   "BasePath": "_content/MyBarBer",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg",
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
       "SourceId": "MyBarBer",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
       "BasePath": "_content/MyBarBer",
-      "RelativePath": "images/6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg",
+      "RelativePath": "images/83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,15 +33,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg"
     },
     {
-      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png",
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg",
       "SourceId": "MyBarBer",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
       "BasePath": "_content/MyBarBer",
-      "RelativePath": "images/c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png",
+      "RelativePath": "images/9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -52,7 +52,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png"
+      "OriginalItemSpec": "wwwroot\\images\\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg"
     }
   ]
 }
