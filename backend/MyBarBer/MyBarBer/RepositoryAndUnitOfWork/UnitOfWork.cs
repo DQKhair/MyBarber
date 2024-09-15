@@ -17,11 +17,12 @@ namespace MyBarBer.Repository
         public IEmployeesRepository Employees { get; private set; }
         public ICustomersRepository Customers { get; private set; }
         public IFunctionsUserRepository FunctionsUser { get; private set; }
+        public IItemCategoriesRepository ItemCategories { get; private set; }
 
         public UnitOfWork(MyDBContext context, ILoggerFactory loggerFactory)
         {
             _context = context;
-            _logger = loggerFactory.CreateLogger("logs");
+            _logger = loggerFactory.CreateLogger("logs Entity");
 
             AuthenticationRepository = new AuthenticationRepository(_context,_logger);
             RolesUser = new RolesUserRepository(_context,_logger);
@@ -30,6 +31,7 @@ namespace MyBarBer.Repository
             Employees = new EmployeesRepository(_context, _logger);
             Customers = new CustomerRepository(_context,_logger);
             FunctionsUser = new FunctionsUserRepository(_context,_logger);
+            ItemCategories = new ItemCategoriesRepository(_context,_logger);
         }
 
         public async Task<bool> CompleteAsync()

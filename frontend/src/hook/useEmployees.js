@@ -40,7 +40,8 @@ const useEmployees = () => {
   };
 
   const getEmployeeByIdHook = async (employeeID) => {
-    setError(null)
+    setLoading(null);
+    setError(null);
     try
     {
       const employee = await getEmployeeById(employeeID)

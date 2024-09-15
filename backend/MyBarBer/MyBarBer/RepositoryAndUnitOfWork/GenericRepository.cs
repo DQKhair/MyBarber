@@ -95,13 +95,13 @@ namespace MyBarBer.Repository
                 }else
                 {
                     _logger.LogWarning("Get list entity is not found");
-                    return null; 
+                    return null!; 
                 }    
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex,"Error get list entity");
-                return null;
+                return null!;
             }
            
         }
@@ -119,13 +119,13 @@ namespace MyBarBer.Repository
                 }else
                 {
                     _logger.LogWarning("Entity with ID '{id}' not found.",id);
-                    return null;
+                    return null!;
                 }    
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting entity with id {Id}", id);
-                return null;
+                return null!;
             }
            
         }

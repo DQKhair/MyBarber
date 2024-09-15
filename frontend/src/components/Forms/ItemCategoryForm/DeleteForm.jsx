@@ -7,11 +7,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteForm = ({ itemCategory, openDelete, handleClose }) => {
+const DeleteForm = ({ deleteItemCategory, itemCategory, openDelete, handleClose }) => {
 
   // submit form
-  const handleAcceptDelete = (itemCategoryID) => {
-    console.log("deleted: " + itemCategoryID);
+  const handleAcceptDelete = async (itemCategoryID) => {
+    const result = await deleteItemCategory(itemCategoryID);
+    if(result)
+    {
+      alert("Delete Successful!")
+    }
     handleClose();
   };
 
@@ -33,11 +37,11 @@ const DeleteForm = ({ itemCategory, openDelete, handleClose }) => {
             margin: "30px 0 0 0",
           }}
         >
-          {`DELETE ${itemCategory.ItemCategoryName}`}
+          {`DELETE ${itemCategory.itemCategoryName}`}
         </DialogTitle>
         <DialogContent>
           <DialogContentText sx={{ textAlign: "center" }}>
-            {`Are you sure delete ${itemCategory.ItemCategoryName} with ID: ${itemCategory.ItemCategory_ID} ?`}
+            {`Are you sure delete ${itemCategory.itemCategoryName} with ID: ${itemCategory.itemCategory_ID} ?`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -52,7 +56,7 @@ const DeleteForm = ({ itemCategory, openDelete, handleClose }) => {
           <Button
             variant="contained"
             color="error"
-            onClick={() => handleAcceptDelete(itemCategory.ItemCategory_ID)}
+            onClick={() => handleAcceptDelete(itemCategory.itemCategory_ID)}
           >
             Delete
           </Button>

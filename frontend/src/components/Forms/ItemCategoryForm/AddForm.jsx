@@ -64,10 +64,21 @@ const categorySchema = yup.object({
   category_ID: yup.string().required("Category is required"),
 });
 
-const AddForm = ({ openAdd, handleClose }) => {
+const AddForm = ({ addItemCategory, openAdd, handleClose }) => {
   const { categories } = useCategories();
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+  const handleFormSubmit = async (values, { resetForm }) => {
+
+    const formData = new FormData();
+    formData.append('itemCategoryName',values.itemCategoryName);
+    formData.append('itemCategoryPrice',values.itemCategoryPrice);
+    formData.append('itemCategoryDescription',values.itemCategoryDescription);
+    formData.append('itemCategoryImage',values.itemCategoryImage);
+    formData.append('category_ID',values.category_ID);
+
+    const result = await addItemCategory(formData);
+    if (result) {
+      alert("Add new product successful!");
+    }
     handleClose();
     //reset form
     resetForm();
@@ -174,8 +185,8 @@ const AddForm = ({ openAdd, handleClose }) => {
 
                   <Grid item xs={4} sm={8} md={12}>
                     <TextField
-                     multiline
-                     maxRows={4}
+                      multiline
+                      maxRows={4}
                       variant="outlined"
                       type="text"
                       label="Description"
@@ -216,10 +227,10 @@ const AddForm = ({ openAdd, handleClose }) => {
                       >
                         {categories.map((category) => (
                           <MenuItem
-                            key={category.Category_ID}
-                            value={category.Category_ID}
+                            key={category.category_ID}
+                            value={category.category_ID}
                           >
-                            {category.CategoryName}
+                            {category.categoryName}
                           </MenuItem>
                         ))}
                       </Select>
@@ -247,7 +258,6 @@ const AddForm = ({ openAdd, handleClose }) => {
                       </div>
                     )}
                   </Grid>
-                  
                 </Grid>
               </Box>
             </DialogContent>

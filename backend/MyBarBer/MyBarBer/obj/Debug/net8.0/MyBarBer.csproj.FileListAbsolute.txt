@@ -254,3 +254,4 @@ D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\MyBarBer.staticwebassets.runtime.json

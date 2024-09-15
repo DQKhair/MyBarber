@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import { API_URL } from "../../constants/constants";
 
 const ServiceById = ({ service }) => {
   if (!service) {
@@ -33,7 +34,7 @@ const ServiceById = ({ service }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Service ID"
-                defaultValue={service.ItemCategory_ID}
+                defaultValue={service.itemCategory_ID}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -45,7 +46,7 @@ const ServiceById = ({ service }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Service name"
-                defaultValue={service.ItemCategoryName}
+                defaultValue={service.itemCategoryName}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -57,7 +58,7 @@ const ServiceById = ({ service }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Service Phone"
-                defaultValue={service.ItemCategoryPrice}
+                defaultValue={service.itemCategoryPrice}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -69,7 +70,19 @@ const ServiceById = ({ service }) => {
               <TextField
                 id="standard-read-only-input"
                 label="Category ID"
-                defaultValue={service.Category_ID}
+                defaultValue={service.category_ID}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="standard"
+              />
+            </Grid>
+
+            <Grid item xs={2} sm={4} md={4}>
+              <TextField
+                id="standard-read-only-input"
+                label="Description"
+                defaultValue={service.itemCategoryDescription}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -95,7 +108,7 @@ const ServiceById = ({ service }) => {
               <Paper sx={{ borderRadius: "5%" }} elevation={3}>
                 <img
                   style={{ width: "100%", borderRadius: "5%" }}
-                  src={service.ItemCategoryImage}
+                  src={`${API_URL}${service.itemCategoryImage}`}
                   alt="image"
                 />
               </Paper>

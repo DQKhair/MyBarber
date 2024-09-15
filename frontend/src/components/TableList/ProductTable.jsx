@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -10,6 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
+import { API_URL } from "../../constants/constants";
 
 const ProductsTable = () => {
   const [isAdd, setIsAdd] = useState(false);
@@ -18,10 +19,20 @@ const ProductsTable = () => {
   const [product, setProduct] = useState(null);
 
   const navigate = useNavigate();
-  const { loading, error, itemCategories, getItemCategoryById } =
-    useItemCategories();
+  const {
+    loading,
+    errorLoad,
+    error,
+    itemCategories,
+    setError,
+    getItemCategoryByIdLocal,
+    addItemCategoryHook,
+    deleteItemCategoryHook,
+    updateItemCategoryInformationHook,
+    updateItemCategoryImageHook,
+  } = useItemCategories();
 
-  const products = itemCategories.filter((p) => p.Category_ID !== "1");
+  const products = itemCategories.filter((p) => p.category_ID !== 1);
 
   const handleClickDetail = (productID) => {
     navigate(`/products/product_detail/${productID}`);
@@ -30,18 +41,14 @@ const ProductsTable = () => {
   const handleAdd = () => {
     setIsAdd(true);
   };
-  const handleEdit = async (productID) => {
-    const productById = await getItemCategoryById(productID);
-
-    console.log(productById);
+  const handleEdit = (productID) => {
+    const productById = getItemCategoryByIdLocal(productID);
 
     setProduct(productById);
     setIsEdit(true);
   };
   const handleDelete = async (productID) => {
-    const productById = await getItemCategoryById(productID);
-
-    console.log(productById);
+    const productById = await getItemCategoryByIdLocal(productID);
 
     setProduct(productById);
     setIsDelete(true);
@@ -70,6 +77,14 @@ const ProductsTable = () => {
     setPage(0);
   };
 
+  //alert
+  useEffect(() => {
+    if (error != null) {
+      alert(error.response.data.message);
+      setError(null);
+    }
+  }, [error]);
+
   //load page
 
   if (loading)
@@ -81,7 +96,7 @@ const ProductsTable = () => {
       </div>
     );
 
-  if (error)
+  if (errorLoad)
     return (
       <div>
         <Alert severity="error">Error: {error.message}</Alert>
@@ -92,7 +107,11 @@ const ProductsTable = () => {
     <>
       {/* Form */}
       {isAdd === true ? (
-        <AddForm openAdd={isAdd} handleClose={handleCloseAdd} />
+        <AddForm
+          addItemCategory={addItemCategoryHook}
+          openAdd={isAdd}
+          handleClose={handleCloseAdd}
+        />
       ) : (
         <></>
       )}
@@ -101,6 +120,8 @@ const ProductsTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          updateItemCategoryInformation={updateItemCategoryInformationHook}
+          updateItemCategoryImage={updateItemCategoryImageHook}
           itemCategory={product}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
@@ -113,6 +134,7 @@ const ProductsTable = () => {
 
       {isDelete === true ? (
         <DeleteForm
+          deleteItemCategory={deleteItemCategoryHook}
           itemCategory={product}
           openDelete={isDelete}
           handleClose={handleCloseDelete}
@@ -144,7 +166,7 @@ const ProductsTable = () => {
             <table className={`table text-center `}>
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Product</th>
                   <th>Image</th>
                   <th>Price</th>
@@ -157,19 +179,19 @@ const ProductsTable = () => {
                   .map((item, index) => (
                     <tr
                       className={`${stylesTableList.table_cursor}`}
-                      key={`${item.ItemCategory_ID}`}
+                      key={`${item.itemCategory_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.ItemCategoryName}`}</td>
+                      <td>{`${item.itemCategoryName}`}</td>
                       <td>
                         <img
                           style={{ borderRadius: "10%" }}
-                          src={item.ItemCategoryImage}
+                          src={`${API_URL}${item.itemCategoryImage}`}
                           alt="img"
                         />
                       </td>
-                      <td>
-                        {`${item.ItemCategoryPrice} `}
+                      <td style={{ color: "red" }}>
+                        {`${item.itemCategoryPrice} `}
                         <u>đ</u>
                       </td>
                       <td>
@@ -184,7 +206,7 @@ const ProductsTable = () => {
                           sizeButton={"sm"}
                           titleButton="Info"
                           handleOnclick={() =>
-                            handleClickDetail(item.ItemCategory_ID)
+                            handleClickDetail(item.itemCategory_ID)
                           }
                         />
                         <ButtonCircle
@@ -197,7 +219,7 @@ const ProductsTable = () => {
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.ItemCategory_ID)}
+                          handleOnclick={() => handleEdit(item.itemCategory_ID)}
                         />
                         <ButtonCircle
                           className={stylesTableList.marginButton}
@@ -210,7 +232,7 @@ const ProductsTable = () => {
                           sizeButton={"sm"}
                           titleButton="Delete"
                           handleOnclick={() =>
-                            handleDelete(item.ItemCategory_ID)
+                            handleDelete(item.itemCategory_ID)
                           }
                         />
                       </td>

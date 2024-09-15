@@ -1,11 +1,58 @@
 {
   "Version": 1,
-  "Hash": "EanOx6Drx4bo6I/4FsQLRTi8j0RL2i0GQKgZccYjZjs=",
+  "Hash": "zPdfZROvPfkKSI2MdOw98ByvozWgYoxw+j5OClHcFlg=",
   "Source": "MyBarBer",
   "BasePath": "_content/MyBarBer",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "MyBarBer\\wwwroot",
+      "Source": "MyBarBer",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png"
+    }
+  ]
 }

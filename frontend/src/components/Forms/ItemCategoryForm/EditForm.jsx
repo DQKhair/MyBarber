@@ -23,17 +23,24 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png"];
 
-const EditForm = ({ itemCategory, openEdit, handleClose }) => {
+const EditForm = ({
+  updateItemCategoryInformation,
+  updateItemCategoryImage,
+  itemCategory,
+  openEdit,
+  handleClose,
+}) => {
   const { categories } = useCategories();
   const [isUpdateImage, setIsUpdateImage] = useState(false);
 
   // initial values
   const initialValues = {
-    itemCategoryName: itemCategory.ItemCategoryName,
-    itemCategoryPrice: itemCategory.ItemCategoryPrice,
-    itemCategoryDescription: itemCategory.ItemCategoryDescription,
-    category_ID: itemCategory.Category_ID,
+    itemCategoryName: itemCategory.itemCategoryName,
+    itemCategoryPrice: itemCategory.itemCategoryPrice,
+    itemCategoryDescription: itemCategory.itemCategoryDescription,
+    category_ID: itemCategory.category_ID,
     itemCategoryImage: null,
+    isUpdateImage: false,
   };
 
   // schema
@@ -57,33 +64,79 @@ const EditForm = ({ itemCategory, openEdit, handleClose }) => {
       .max(100, "Item category description must be at most 100 characters"),
     category_ID: yup.string().required("Category is required"),
 
-    itemCategoryImage: yup
-      .mixed()
-      .required("Image is required")
-      .test(
-        "fileSize",
-        "File size is too large",
-        (value) => !value || value.size <= MAX_FILE_SIZE
-      )
-      .test(
-        "fileType",
-        "Unsupported file format",
-        (value) => !value || SUPPORTED_FORMATS.includes(value.type)
-      ),
+    isUpdateImage: yup.boolean(),
+
+    // itemCategoryImage: yup
+    //   .mixed()
+    //   .required("Image is required")
+    //   .test(
+    //     "fileSize",
+    //     "File size is too large",
+    //     (value) => !value || value.size <= MAX_FILE_SIZE
+    //   )
+    //   .test(
+    //     "fileType",
+    //     "Unsupported file format",
+    //     (value) => !value || SUPPORTED_FORMATS.includes(value.type)
+    //   ),
   });
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = async (values) => {
+    if (values.isUpdateImage) {
+      const formData = new FormData();
+      formData.append("itemCategoryName", values.itemCategoryName);
+      formData.append("itemCategoryPrice", values.itemCategoryPrice);
+      formData.append(
+        "itemCategoryDescription",
+        values.itemCategoryDescription
+      );
+      formData.append("itemCategoryImage", values.itemCategoryImage);
+      formData.append("category_ID", values.category_ID);
+
+      const result = await updateItemCategoryImage(
+        itemCategory.itemCategory_ID,
+        formData
+      );
+      if (result) {
+        alert("Update successful!");
+      }
+    } else {
+      const result = await updateItemCategoryInformation(
+        itemCategory.itemCategory_ID,
+        values
+      );
+      if (result) {
+        alert("Update successful!");
+      }
+    }
     handleClose();
   };
 
-  const handleUpdateImage = () => {
-    isUpdateImage === true ? setIsUpdateImage(false) : setIsUpdateImage(true);
+  //validate img
+  const validateImage = (file) => {
+    if (!file) return "Image is required";
+    if (file.size > MAX_FILE_SIZE) return "File size is too large";
+    if (!SUPPORTED_FORMATS.includes(file.type))
+      return "Unsupported file format";
+    return null;
+  };
+
+  const validateFileImage = (values) => {
+    const errors = {};
+
+    // Validate image if isUpdateImage is true
+    if (values.isUpdateImage) {
+      const imageError = validateImage(values.itemCategoryImage);
+      if (imageError) errors.itemCategoryImage = imageError;
+    }
+
+    return errors;
   };
 
   return (
     <>
       <Formik
+        validate={validateFileImage}
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={itemCategorySchema}
@@ -222,10 +275,10 @@ const EditForm = ({ itemCategory, openEdit, handleClose }) => {
                       >
                         {categories.map((category) => (
                           <MenuItem
-                            key={category.Category_ID}
-                            value={category.Category_ID}
+                            key={category.category_ID}
+                            value={category.category_ID}
                           >
-                            {category.CategoryName}
+                            {category.categoryName}
                           </MenuItem>
                         ))}
                       </Select>
@@ -237,22 +290,45 @@ const EditForm = ({ itemCategory, openEdit, handleClose }) => {
 
                   <Grid item xs={4} sm={8} md={12}>
                     <input
-                      type="file"
-                      accept="image/*"
+                      id="isUpdateImage"
+                      type="checkbox"
+                      name="isUpdateImage"
                       onChange={(e) => {
-                        setFieldValue(
-                          "itemCategoryImage",
-                          e.currentTarget.files[0]
-                        );
+                        handleChange(e);
+                        if (e.target.checked) {
+                          setIsUpdateImage(true);
+                        } else {
+                          setIsUpdateImage(false);
+                        }
                       }}
-                      style={{ width: "100%" }}
+                      onBlur={handleBlur}
+                      checked={values.isUpdateImage}
+                      style={{ margin: "0 10px 0 10px" }}
                     />
-                    {touched.itemCategoryImage && errors.itemCategoryImage && (
-                      <div style={{ color: "red" }}>
-                        {errors.itemCategoryImage}
-                      </div>
-                    )}
+                    Update Image
                   </Grid>
+
+                  {isUpdateImage && (
+                    <Grid item xs={4} sm={8} md={12}>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          setFieldValue(
+                            "itemCategoryImage",
+                            e.currentTarget.files[0]
+                          );
+                        }}
+                        style={{ width: "100%" }}
+                      />
+                      {touched.itemCategoryImage &&
+                        errors.itemCategoryImage && (
+                          <div style={{ color: "red" }}>
+                            {errors.itemCategoryImage}
+                          </div>
+                        )}
+                    </Grid>
+                  )}
                 </Grid>
               </Box>
             </DialogContent>

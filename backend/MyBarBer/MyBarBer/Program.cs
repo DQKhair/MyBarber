@@ -100,6 +100,8 @@ app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
 
+app.UseStaticFiles();
+
 app.UseAuthentication();
 
 app.UseAuthorization();

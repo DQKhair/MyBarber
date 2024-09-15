@@ -11,6 +11,7 @@ namespace MyBarBer.Repository
         IEmployeesRepository Employees { get; }
         ICustomersRepository Customers { get; }
         IFunctionsUserRepository FunctionsUser { get; }
+        IItemCategoriesRepository ItemCategories { get; }
 
         Task<bool> CompleteAsync();
     }

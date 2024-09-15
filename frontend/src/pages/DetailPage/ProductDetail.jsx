@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
@@ -9,34 +9,40 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
-
 const ProductDetail = ({ mainPage }) => {
-  const { loading, error, getItemCategoryById } = useItemCategories();
+  const { loading, error, getItemCategoryByIdHook } = useItemCategories();
   const { id } = useParams();
+  const [product, setProduct] = useState();
 
-  const product = getItemCategoryById(id);
+  useEffect(() => {
+    const getProduct = async () => {
+      const productData = await getItemCategoryByIdHook(id);
+      setProduct(productData);
+    };
+    getProduct();
+  }, [id]);
 
   const titleName = "Information about product";
   const breadcrumb = mainPage;
   const itemBreadcrumb = `Product details`;
 
- //load page
+  //load page
 
- if (loading)
-  return (
-    <div>
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress /> Loading...
-      </Box>
-    </div>
-  );
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
 
-if (error)
-  return (
-    <div>
-      <Alert severity="error">Error: {error.message}</Alert>
-    </div>
-  );
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
 
   return (
     <>

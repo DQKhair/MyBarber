@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg",
+      "PackagePath": "staticwebassets\\images\\6bb1ca74-fc50-48e2-801d-abd1762a204d_4-14.jpg"
+    },
+    {
+      "Id": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png",
+      "PackagePath": "staticwebassets\\images\\c8620a35-bc20-4016-9011-17d508269807_forest-wallpaper-af78609605b14f7c9b999d8b2f49c0d9.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MyBarBer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.MyBarBer.props",
+      "PackagePath": "build\\MyBarBer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.MyBarBer.props",
+      "PackagePath": "buildMultiTargeting\\MyBarBer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.MyBarBer.props",
+      "PackagePath": "buildTransitive\\MyBarBer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

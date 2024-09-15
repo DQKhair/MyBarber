@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
@@ -10,32 +10,39 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
 const ServiceDetail = ({ mainPage }) => {
-  const { loading, error, getItemCategoryById } = useItemCategories();
+  const { loading, error, getItemCategoryByIdHook } = useItemCategories();
   const { id } = useParams();
+  const [service, setService] = useState();
 
-  const service = getItemCategoryById(id);
-
+  useEffect(() => {
+    const getService = async () => {
+      const serviceData = await getItemCategoryByIdHook(id);
+      setService(serviceData);
+    };
+    getService();
+  }, [id]);
+  
   const titleName = "Information about service";
   const breadcrumb = mainPage;
   const itemBreadcrumb = `Service details`;
 
- //load page
+  //load page
 
- if (loading)
-  return (
-    <div>
-      <Box sx={{ display: "flex" }}>
-        <CircularProgress /> Loading...
-      </Box>
-    </div>
-  );
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
 
-if (error)
-  return (
-    <div>
-      <Alert severity="error">Error: {error.message}</Alert>
-    </div>
-  );
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
 
   return (
     <>
