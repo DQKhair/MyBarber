@@ -7,20 +7,24 @@
       "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\receiptscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\data\\employees.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\data\\employees.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\ireceiptsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\ireceiptsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\ireceiptdetailsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\ireceiptdetailsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\models\\receiptspostvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\models\\receiptspostvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\models\\receiptsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\models\\receiptsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\receiptdetailsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\receiptdetailsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,60 +33,45 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 235,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Employees.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Data\\Employees.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\Data\\Employees.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Data\\Employees.cs",
-              "RelativeToolTip": "MyBarBer\\Data\\Employees.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T16:20:23.368Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EmployeesController.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\EmployeesController.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\EmployeesController.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\EmployeesController.cs",
-              "RelativeToolTip": "MyBarBer\\Controllers\\EmployeesController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB4AAABaAAAA",
+              "Title": "ReceiptsPostVM.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\ReceiptsPostVM.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Models\\ReceiptsPostVM.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\ReceiptsPostVM.cs",
+              "RelativeToolTip": "MyBarBer\\Models\\ReceiptsPostVM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T15:51:43.249Z",
+              "WhenOpened": "2024-09-16T17:09:48.994Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "IReceiptDetailsRepository.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
-              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABTAAAA",
+              "Title": "ReceiptDetailsRepository.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\ReceiptDetailsRepository.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\ReceiptDetailsRepository.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\ReceiptDetailsRepository.cs",
+              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\ReceiptDetailsRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T14:05:45.472Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-16T09:10:49.855Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "IReceiptsRepository.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptsRepository.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptsRepository.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptsRepository.cs",
-              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptsRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAABIAAAA",
+              "Title": "ReceiptsVM.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\ReceiptsVM.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\Models\\ReceiptsVM.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\ReceiptsVM.cs",
+              "RelativeToolTip": "MyBarBer\\Models\\ReceiptsVM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-15T14:04:21.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-16T08:49:51.209Z"
             },
             {
               "$type": "Document",
@@ -92,10 +81,35 @@
               "RelativeDocumentMoniker": "MyBarBer\\Controllers\\ReceiptsController.cs",
               "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\ReceiptsController.cs",
               "RelativeToolTip": "MyBarBer\\Controllers\\ReceiptsController.cs",
-              "ViewState": "AQIAABEBAAAAAAAAAAAiwEMBAABUAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-15T13:58:04.84Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IReceiptDetailsRepository.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
+              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\IReceiptDetailsRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T09:10:54.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\GenericRepository.cs",
+              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\GenericRepository.cs",
+              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\GenericRepository.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAASwEYAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T09:25:47.262Z"
             }
           ]
         }

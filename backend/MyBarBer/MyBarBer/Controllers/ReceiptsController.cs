@@ -27,10 +27,46 @@ namespace MyBarBer.Controllers
         {
             try
             {
-                var _receipt = await _unitOfWork.Receipts.GetAllAsync();
-                if (_receipt != null)
+                var _receipts = await _unitOfWork.Receipts.GetAllAsync();
+                var _customers = await _unitOfWork.Customers.GetAllAsync();
+                var _methods = await _unitOfWork.Methods.GetAllAsync();
+                var _status = await _unitOfWork.Statuss.GetAllAsync();
+                var _employees = await _unitOfWork.Employees.GetAllAsync();
+                var _listReceiptDetails = await _unitOfWork.ReceiptDetails.GetAllAsync();
+
+                var _receiptResponseAPI = _receipts.Select(r => new ReceiptResponseAPIVM
                 {
-                    return StatusCode(StatusCodes.Status200OK, _receipt);
+                    Receipt_ID = r.Receipt_ID,
+                    TotalQuantity = r.TotalQuantity,
+                    TotalPrice = r.TotalPrice,
+                    ReceiptDate = r.ReceiptDate,
+                    Status_ID = r.Status_ID,
+                    StatusName = _status.Where(s => s.Status_ID == r.Status_ID).Select(s => s.StatusName).SingleOrDefault(),
+                    Method_ID = r.Method_ID,
+                    MethodName = _methods.Where(m => m.Method_ID == r.Method_ID).Select(m => m.MethodName).SingleOrDefault(),
+                    Employee_ID = r.Employee_ID,
+                    EmployeeName = _employees.Where(e => e.Employee_ID == r.Employee_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee2_ID = r.Employee2_ID,
+                    EmployeeName2 = _employees.Where(e => e.Employee_ID == r.Employee2_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee2_Time = r.Employee2_Time,
+                    Employee3_ID = r.Employee3_ID,
+                    EmployeeName3 = _employees.Where(e => e.Employee_ID == r.Employee3_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee3_Time = r.Employee3_Time,
+                    Customer_ID = r.Customer_ID,
+                    CustomerName = _customers.Where(c => c.Customer_ID == r.Customer_ID).Select(c => c.CustomerName).SingleOrDefault(),
+                    listReceiptDetailsVM = _listReceiptDetails.Where(rd => rd.Receipt_ID == r.Receipt_ID).Select(rd => new ReceiptDetailsVM
+                    {
+                        ReceiptDetail_ID = rd.ReceiptDetail_ID,
+                        ProductName = rd.ReceiptDetailName,
+                        ProductQuantity = rd.ReceiptDetailQuantity,
+                        ProductPrice = rd.ReceiptDetailPrice,
+                        ItemCategory_ID = rd.ItemCategory_ID,
+                        Receipt_ID = rd.Receipt_ID,
+                    }).ToList()
+                });
+                if (_receiptResponseAPI != null && _listReceiptDetails != null && _receipts != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, _receiptResponseAPI);
                 }
                 _logger.LogWarning("Get list receipts is fail!");
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -48,10 +84,48 @@ namespace MyBarBer.Controllers
             try
             {
                 var _receipt = await _unitOfWork.Receipts.GetByIdAsync(id);
-                if (_receipt != null)
+                var _customers = await _unitOfWork.Customers.GetAllAsync();
+                var _methods = await _unitOfWork.Methods.GetAllAsync();
+                var _status = await _unitOfWork.Statuss.GetAllAsync();
+                var _employees = await _unitOfWork.Employees.GetAllAsync();
+                var _listReceiptDetails = await _unitOfWork.ReceiptDetails.GetAllAsync();
+
+
+
+                var _receiptResponseAPI = new ReceiptResponseAPIVM
+                {
+                    Receipt_ID = _receipt.Receipt_ID,
+                    TotalQuantity = _receipt.TotalQuantity,
+                    TotalPrice = _receipt.TotalPrice,
+                    ReceiptDate = _receipt.ReceiptDate,
+                    Status_ID = _receipt.Status_ID,
+                    StatusName = _status.Where(s => s.Status_ID == _receipt.Status_ID).Select(s => s.StatusName).SingleOrDefault(),
+                    Method_ID = _receipt.Method_ID,
+                    MethodName = _methods.Where(m => m.Method_ID == _receipt.Method_ID).Select(m => m.MethodName).SingleOrDefault(),
+                    Employee_ID = _receipt.Employee_ID,
+                    EmployeeName = _employees.Where(e => e.Employee_ID == _receipt.Employee_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee2_ID = _receipt.Employee2_ID,
+                    EmployeeName2 = _employees.Where(e => e.Employee_ID == _receipt.Employee2_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee2_Time = _receipt.Employee2_Time,
+                    Employee3_ID = _receipt.Employee3_ID,
+                    EmployeeName3 = _employees.Where(e => e.Employee_ID == _receipt.Employee3_ID).Select(e => e.EmployeeName).SingleOrDefault(),
+                    Employee3_Time = _receipt.Employee3_Time,
+                    Customer_ID = _receipt.Customer_ID,
+                    CustomerName = _customers.Where(c => c.Customer_ID == _receipt.Customer_ID).Select(c => c.CustomerName).SingleOrDefault(),
+                    listReceiptDetailsVM = _listReceiptDetails.Where(rd => rd.Receipt_ID == _receipt.Receipt_ID).Select(rd => new ReceiptDetailsVM
+                    {
+                        ReceiptDetail_ID = rd.ReceiptDetail_ID,
+                        ProductName = rd.ReceiptDetailName,
+                        ProductQuantity = rd.ReceiptDetailQuantity,
+                        ProductPrice = rd.ReceiptDetailPrice,
+                        ItemCategory_ID = rd.ItemCategory_ID,
+                        Receipt_ID = rd.Receipt_ID,
+                    }).ToList()
+                };
+                if (_receiptResponseAPI != null)
                 {
                     _logger.LogInformation($"Get receipt by id {id} is success1");
-                    return StatusCode(StatusCodes.Status200OK, _receipt);
+                    return StatusCode(StatusCodes.Status200OK, _receiptResponseAPI);
                 }
                 _logger.LogWarning("Get list receipts is fail!");
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -99,8 +173,8 @@ namespace MyBarBer.Controllers
 
                                     for (int i = 0; i < receiptsPostVM.ProductsInput.Count; i++)
                                     {
-                                        _totalQuantity +=  receiptsPostVM.ProductQuantityInput[i];
-                                        _totalPriceProducts = _totalPriceProducts + (receiptsPostVM.ProductsInput[i].ItemCategoryPrice * receiptsPostVM.ProductQuantityInput[i]);
+                                        _totalQuantity +=  receiptsPostVM.ProductsQuantityInput[i];
+                                        _totalPriceProducts = _totalPriceProducts + (receiptsPostVM.ProductsInput[i].ItemCategoryPrice * receiptsPostVM.ProductsQuantityInput[i]);
                                     }
                                     for(int j = 0; j < receiptsPostVM.ServicesInput.Count; j++)
                                     {
@@ -153,8 +227,8 @@ namespace MyBarBer.Controllers
                                                     var _receiptDetailProducts = new ReceiptDetails
                                                     {
                                                         ReceiptDetail_ID = Guid.NewGuid(),
-                                                        ReceiptDetailQuantity = receiptsPostVM.ProductQuantityInput[h],
-                                                        ReceiptDetailPrice = receiptsPostVM.ProductsInput[h].ItemCategoryPrice,
+                                                        ReceiptDetailQuantity = receiptsPostVM.ProductsQuantityInput[h],
+                                                        ReceiptDetailPrice = receiptsPostVM.ProductsInput[h].ItemCategoryPrice * receiptsPostVM.ProductsQuantityInput[h],
                                                         ReceiptDetailName = receiptsPostVM.ProductsInput[h].ItemCategoryName,
                                                         ItemCategory_ID = receiptsPostVM.ProductsInput[h].ItemCategory_ID,
                                                         Receipt_ID = _receipt.Receipt_ID,
@@ -192,8 +266,8 @@ namespace MyBarBer.Controllers
 
                             for (int i = 0; i < receiptsPostVM.ProductsInput.Count; i++)
                             {
-                                _totalQuantity += receiptsPostVM.ProductQuantityInput[i];
-                                _totalPriceProducts = _totalPriceProducts + (receiptsPostVM.ProductsInput[i].ItemCategoryPrice * receiptsPostVM.ProductQuantityInput[i]);
+                                _totalQuantity += receiptsPostVM.ProductsQuantityInput[i];
+                                _totalPriceProducts = _totalPriceProducts + (receiptsPostVM.ProductsInput[i].ItemCategoryPrice * receiptsPostVM.ProductsQuantityInput[i]);
                             }
                             for (int j = 0; j < receiptsPostVM.ServicesInput.Count; j++)
                             {
@@ -246,8 +320,8 @@ namespace MyBarBer.Controllers
                                             var _receiptDetailProducts = new ReceiptDetails
                                             {
                                                 ReceiptDetail_ID = Guid.NewGuid(),
-                                                ReceiptDetailQuantity = receiptsPostVM.ProductQuantityInput[h],
-                                                ReceiptDetailPrice = receiptsPostVM.ProductsInput[h].ItemCategoryPrice,
+                                                ReceiptDetailQuantity = receiptsPostVM.ProductsQuantityInput[h],
+                                                ReceiptDetailPrice = receiptsPostVM.ProductsInput[h].ItemCategoryPrice * receiptsPostVM.ProductsQuantityInput[h],
                                                 ReceiptDetailName = receiptsPostVM.ProductsInput[h].ItemCategoryName,
                                                 ItemCategory_ID = receiptsPostVM.ProductsInput[h].ItemCategory_ID,
                                                 Receipt_ID = _receipt.Receipt_ID,
@@ -284,7 +358,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        [HttpPut("confirm_haircut/receiptId={id}&&EmployeeId={employeeId}")]
+        [HttpPut("confirm_haircut/receiptId={id}&&employeeId={employeeId}")]
         public async Task<IActionResult> ConfirmHairCut(Guid id, Guid employeeId)
         {
             try
@@ -314,7 +388,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        [HttpPut("confirm_hair_wash/receiptId={id}&&EmployeeId={employeeId}")]
+        [HttpPut("confirm_hair_wash/receiptId={id}&&employeeId={employeeId}")]
         public async Task<IActionResult> ConfirmHairWash(Guid id, Guid employeeId)
         {
             try

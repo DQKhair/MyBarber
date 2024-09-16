@@ -11,7 +11,7 @@ namespace MyBarBer.Models
         [Required]
         public string CustomerAddress { get; set; } = string.Empty;
         public List<ItemCategoriesVM> ProductsInput { get; set; } = new List<ItemCategoriesVM>();
-        public List<int> ProductQuantityInput { get; set;} = new List<int>();
+        public List<int> ProductsQuantityInput { get; set;} = new List<int>();
         public List<ItemCategoriesVM> ServicesInput { get; set ; } = new List<ItemCategoriesVM>();
     }
 }
