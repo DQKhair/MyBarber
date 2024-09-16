@@ -15,6 +15,9 @@ import FormControl from "@mui/material/FormControl";
 import Container from "@mui/material/Container";
 import Autocomplete from "@mui/material/Autocomplete";
 import useCustomers from "../../../hook/useCustomers";
+import useReceipts from "../../../hook/useReceipts";
+import { useSelector } from "react-redux";
+import DecodeToken from "../../../utils/DecodeToken";
 
 const initialValues = {
   customerName: "",
@@ -64,15 +67,18 @@ const receiptSchema = yup.object({
 });
 
 const AddForm = () => {
+  const { addReceiptHook } = useReceipts();
   const [productQuantity, setProductQuantity] = useState(0);
   const [serviceQuantity, setServiceQuantity] = useState(0);
   const { itemCategories } = useItemCategories();
   const { customers } = useCustomers();
   const services = itemCategories.filter((i) => i.category_ID === 1);
   const products = itemCategories.filter((i) => i.category_ID !== 1);
+  
+
 
   const listAddress = [...new Set(customers.map((c) => c.customerAddress))];
-  console.log(services);
+  const listCustomerName = [...new Set(customers.map((c) => c.customerName))];
 
   const handleChangeNumSer = (event, setFieldValue, values) => {
     const newQuantity = event.target.value;
@@ -110,8 +116,13 @@ const AddForm = () => {
     setFieldValue("productsQuantityInput", updatedProductsQuantityInput);
     setFieldValue("productsInput", updatedProductInput);
   };
-  const handleFormSubmit = (values, { resetForm }) => {
-    console.log(values);
+  const handleFormSubmit = async (values, { resetForm }) => {
+    const userInfo = DecodeToken(localStorage.getItem("accessToken"));
+    const response = await addReceiptHook(userInfo.User_ID,values);
+    if(response)
+    {
+      alert("Create new receipt successful!");
+    }
     //reset form
     resetForm();
   };
@@ -136,7 +147,7 @@ const AddForm = () => {
           <form onSubmit={handleSubmit}>
             <Container maxWidth="md">
               <h3 style={{ textAlign: "center", marginBottom: "30px" }}>
-                Customer Detail
+                Create new receipt
               </h3>
               <Box sx={{ flexGrow: 1 }}>
                 <Grid
@@ -148,7 +159,7 @@ const AddForm = () => {
                     <Autocomplete
                       id="customerName_auto"
                       freeSolo
-                      options={customers.map((option) => option.customerName)}
+                      options={listCustomerName}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -217,7 +228,7 @@ const AddForm = () => {
                       options={listAddress}
                       renderInput={(params) => (
                         <TextField
-                        {...params}
+                          {...params}
                           variant="outlined"
                           type="text"
                           label="Customer address"

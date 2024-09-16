@@ -73,7 +73,7 @@ const EmployeesTable = () => {
 
   //alert
   useEffect(() => {
-    if (error != null) {
+    if (error !== null) {
       alert(error.response.data.message);
       setError(null);
     }

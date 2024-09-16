@@ -191,8 +191,10 @@ const ProductsTable = () => {
                         />
                       </td>
                       <td style={{ color: "red" }}>
-                        {`${item.itemCategoryPrice} `}
-                        <u>đ</u>
+                        {`${new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(item.itemCategoryPrice)} `}
                       </td>
                       <td>
                         <ButtonCircle

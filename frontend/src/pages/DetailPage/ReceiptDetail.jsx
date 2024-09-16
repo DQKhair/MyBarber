@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
@@ -10,15 +10,21 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
 const ReceiptDetail = ({ mainPage }) => {
-  const { loading, error, getReceiptById } = useReceipts();
+  const { loading, error, getReceiptByIdHook } = useReceipts();
   const { id } = useParams();
-
-  const receipt = getReceiptById(id);
+  const [receipt,setReceipt] = useState();
 
   const titleName = "Information about receipt";
   const breadcrumb = mainPage;
   const itemBreadcrumb = `Receipt details`;
 
+  useEffect(() => {
+    const getReceipt = async () => {
+      const receiptData = await getReceiptByIdHook(id);
+      setReceipt(receiptData);
+    }
+    getReceipt();
+  },[id]);
  //load page
 
  if (loading)

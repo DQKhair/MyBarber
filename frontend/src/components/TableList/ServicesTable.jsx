@@ -195,9 +195,11 @@ const ServicesTable = () => {
                         alt="img"
                       />
                     </td>
-                    <td style={{color:"red"}}>
-                      {`${item.itemCategoryPrice} `}
-                      <u>đ</u>
+                    <td style={{ color: "red" }}>
+                      {`${new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(item.itemCategoryPrice)} `}
                     </td>
                     <td>
                       <ButtonCircle

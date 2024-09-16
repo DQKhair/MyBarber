@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -9,24 +9,38 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
+import EditForm from "../Forms/ReceiptsForm/EditForm";
 
 const ReceiptsTable = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [receipt, setReceipt] = useState(null);
 
-  const { loading, error, receipts, getReceiptById } = useReceipts();
+  const {
+    loading,
+    errorLoad,
+    error,
+    receipts,
+    setError,
+    getReceiptByIdLocal,
+    confirmHaircutHook,
+    confirmHairWashHook,
+    confirmFinishedHook,
+    confirmPaymentCompletedHook,
+  } = useReceipts();
   const navigate = useNavigate();
 
   const handleClickDetail = (receiptID) => {
     navigate(`/receipts/receipt_detail/${receiptID}`);
   };
-  const handleEdit = async (receiptID) => {
-    const receiptById = await getReceiptById(receiptID);
-    
-    console.log(receiptById);
+  const handleEdit = (receiptID) => {
+    const receiptById = getReceiptByIdLocal(receiptID);
 
     setReceipt(receiptById);
     setIsEdit(true);
+  };
+
+  const handleCloseEdit = (receiptID) => {
+    setIsEdit(false);
   };
 
   // pagination
@@ -42,6 +56,14 @@ const ReceiptsTable = () => {
     setPage(0);
   };
 
+  // alert
+  useEffect(() => {
+    if (error !== null) {
+      alert(error.response.data.message);
+      setError(null);
+    }
+  }, [error]);
+
   //load page
 
   if (loading)
@@ -53,7 +75,7 @@ const ReceiptsTable = () => {
       </div>
     );
 
-  if (error)
+  if (errorLoad)
     return (
       <div>
         <Alert severity="error">Error: {error.message}</Alert>
@@ -66,15 +88,15 @@ const ReceiptsTable = () => {
 
       {/* Edit form */}
 
-      {/* {isEdit === true ? (
+      {isEdit === true ? (
         <EditForm
-          employee={employee}
+          receipt={receipt}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
         />
       ) : (
         <></>
-      )} */}
+      )}
 
       {/* End Form */}
       <div className="col-lg-12 grid-margin stretch-card">
@@ -86,9 +108,10 @@ const ReceiptsTable = () => {
             <table className={`table text-center `}>
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>#</th>
                   <th>Customer</th>
                   <th>Total price</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -98,31 +121,44 @@ const ReceiptsTable = () => {
                   .map((item, index) => (
                     <tr
                       className={`${stylesTableList.table_cursor}`}
-                      key={`${item.Receipt_ID}`}
+                      key={`${item.receipt_ID}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{`${item.Customer_ID}`}</td>
-                      <td>
-                        {`${item.TotalPrice} `}
-                        <u>đ</u>
+                      <td>{`${item.customerName}`}</td>
+                      <td style={{ color: "red" }}>
+                        {`${new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(item.totalPrice)}`}
                       </td>
+                      <td>{`${item.statusName}`}</td>
                       <td>
                         <ButtonCircle
                           className={stylesTableList.marginButton}
-                          nameButton={<><IconDetail /></>}
+                          nameButton={
+                            <>
+                              <IconDetail />
+                            </>
+                          }
                           colorButton={""}
                           sizeButton={"sm"}
                           titleButton="Info"
-                          handleOnclick={() => handleClickDetail(item.Receipt_ID)}
+                          handleOnclick={() =>
+                            handleClickDetail(item.receipt_ID)
+                          }
                         />
 
                         <ButtonCircle
                           className={stylesTableList.marginButton}
-                          nameButton={<><IconEdit /></>}
+                          nameButton={
+                            <>
+                              <IconEdit />
+                            </>
+                          }
                           colorButton={"yellow"}
                           sizeButton={"sm"}
                           titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.Receipt_ID)}
+                          handleOnclick={() => handleEdit(item.receipt_ID)}
                         />
                       </td>
                     </tr>

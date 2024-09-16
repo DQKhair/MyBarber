@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { ColorTextPage } from "../../../constants/constants";
+import { ColorButtonForm, ColorTextPage } from "../../../constants/constants";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,7 +12,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
   // initial values
@@ -22,7 +28,7 @@ const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
     employeeAddress: employee.employeeAddress,
     employeeEmail: employee.employeeEmail,
     employeePassword: employee.employeePassword,
-    employeeIsActive: employee.employeeIsActive
+    employeeIsActive: employee.employeeIsActive,
   };
 
   // schema
@@ -51,9 +57,7 @@ const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
       .email("Email is invalid")
       .min(3, "Employee email must be at least 3 characters")
       .max(50, "Employee email must be at most 50 characters"),
-      employeeIsActive: yup
-        .boolean()
-        .required(`Employee is active is required`)
+    employeeIsActive: yup.boolean().required(`Employee is active is required`),
   });
 
   const handleFormSubmit = async (values) => {
@@ -227,8 +231,16 @@ const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
               </Box>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button type="submit">Save</Button>
+              <Button variant="outlined" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ bgcolor: ColorButtonForm }}
+                type="submit"
+              >
+                Save
+              </Button>
             </DialogActions>
           </Dialog>
         )}
