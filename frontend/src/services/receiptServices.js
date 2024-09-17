@@ -38,7 +38,7 @@ const confirmFinished = async (receiptId) => {
 
 const confirmPaymentCompleted = async (receiptId, methodName) => {
   const response = await axiosRoot.put(
-    `/api/confirm_payment_completed/receiptId=${receiptId}&&method=${methodName}`
+    `/api/Receipts/confirm_payment_completed/receiptId=${receiptId}&&method=${methodName}`
   );
   return response.data;
 };

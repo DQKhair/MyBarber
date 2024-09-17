@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorButtonForm, ColorTextPage } from "../../../constants/constants";
@@ -12,8 +12,31 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import DecodeToken from "../../../utils/DecodeToken";
 
-const EditForm = ({ receipt, openEdit, handleClose }) => {
+const EditForm = ({
+  confirmHaircut,
+  confirmHairWash,
+  confirmFinished,
+  confirmPaymentCompleted,
+  receipt,
+  openEdit,
+  handleClose,
+}) => {
+  const [disabledInput, setDisabledInput] = useState(true);
+  const statusesData = [
+    { statusId: 1, statusName: "Waiting for a haircut" },
+    { statusId: 2, statusName: "Waiting for a hair wash" },
+    { statusId: 3, statusName: "Finished" },
+    { statusId: 4, statusName: "Payment completed" },
+  ];
   console.log(receipt);
   // initial values
   const initialValues = {
@@ -25,6 +48,8 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
     customerName: receipt.customerName,
     statusName: receipt.statusName,
     methodName: receipt.methodName,
+    statusUpdate: "",
+    paymentMethod: "Cash payment",
   };
 
   // schema
@@ -41,13 +66,55 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
     customerName: yup.string().required(`Receipt is active is required`),
     statusName: yup.string().required("Status is required"),
     methodName: yup.string().required("Method is required"),
+    statusUpdate: yup.string().required("Status is required"),
+    paymentMethod: yup.string().required("Method is required"),
   });
 
+  const handleChangeStatus = (event, setFieldValue) => {
+    const { name, value } = event.target;
+    setFieldValue(name, value);
+    if (value === 4) {
+      setDisabledInput(false);
+    } else {
+      setDisabledInput(true);
+    }
+  };
+
+  const statuses = statusesData.filter(
+    (s) => s.statusName !== receipt.statusName
+  );
+  console.log(statuses);
+
   const handleFormSubmit = async (values) => {
-    // const result = await updateEmployee(receipt.receipt_ID, values);
-    // if (result) {
-    //   alert("Update successful");
-    // }
+    const userInfo = DecodeToken(localStorage.getItem("accessToken"));
+    const employeeId = userInfo.User_ID;
+
+    if (values.statusUpdate === 1) {
+      const updated = await confirmHaircut(values.receipt_ID, employeeId);
+      if (updated) {
+        alert("Update successful");
+      }
+    } else if (values.statusUpdate === 2) {
+      const updated = await confirmHairWash(values.receipt_ID, employeeId);
+      if (updated) {
+        alert("Update successful");
+      }
+    } else if (values.statusUpdate === 3) {
+      const updated = await confirmFinished(values.receipt_ID);
+      if (updated) {
+        alert("Update successful");
+      }
+    } else if (values.statusUpdate === 4) {
+      console.log(values.receipt_ID, values.paymentMethod);
+      const updated = await confirmPaymentCompleted(
+        values.receipt_ID,
+        values.paymentMethod
+      );
+      if (updated) {
+        alert("Update successful");
+      }
+    }
+
     handleClose();
   };
 
@@ -278,9 +345,9 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
               <Box sx={{ flexGrow: 1 }}>
                 {receipt.listReceiptDetailsVM.map((rd) => (
                   <Grid
-                  key={rd.receiptDetail_ID}
+                    key={rd.receiptDetail_ID}
                     container
-                    sx={{margin: "20px 0 20px 0"}}
+                    sx={{ margin: "20px 0 20px 0" }}
                     spacing={{ xs: 2, md: 3 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                   >
@@ -312,14 +379,21 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
                         type="text"
                         label="Quantity"
                         onBlur={(e) => {
-                          setFieldValue("productQuantity", e.target.value.trim());
+                          setFieldValue(
+                            "productQuantity",
+                            e.target.value.trim()
+                          );
                           handleBlur(e);
                         }}
                         onChange={handleChange}
                         value={rd.productQuantity}
                         id="productQuantity"
-                        error={!!touched.productQuantity && !!errors.productQuantity}
-                        helperText={touched.productQuantity && errors.productQuantity}
+                        error={
+                          !!touched.productQuantity && !!errors.productQuantity
+                        }
+                        helperText={
+                          touched.productQuantity && errors.productQuantity
+                        }
                         sx={{ gridColumn: "span 2" }}
                       />
                     </Grid>
@@ -336,7 +410,10 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
                           handleBlur(e);
                         }}
                         onChange={handleChange}
-                        value={new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(rd.productPrice)}
+                        value={new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(rd.productPrice)}
                         id="productPrice"
                         error={!!touched.productPrice && !!errors.productPrice}
                         helperText={touched.productPrice && errors.productPrice}
@@ -345,6 +422,91 @@ const EditForm = ({ receipt, openEdit, handleClose }) => {
                     </Grid>
                   </Grid>
                 ))}
+              </Box>
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "#000",
+                  height: "2px",
+                  margin: "2% 0 2% 0",
+                }}
+              ></div>
+              <h3 style={{ color: ColorTextPage }} className="text-center">
+                Update status
+              </h3>
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "#000",
+                  height: "2px",
+                  margin: "2% 0 2% 0",
+                }}
+              ></div>
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid
+                  container
+                  sx={{ margin: "20px 0 20px 0" }}
+                  spacing={{ xs: 2, md: 3 }}
+                  columns={{ xs: 4, sm: 8, md: 12 }}
+                >
+                  <Grid item xs={4} sm={4} md={6}>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel id="statusUpdate-label">Status</InputLabel>
+                      <Select
+                        labelId="statusUpdate-label"
+                        id="statusUpdate"
+                        name="statusUpdate"
+                        value={values.statusUpdate}
+                        onChange={(e) => handleChangeStatus(e, setFieldValue)}
+                        onBlur={handleBlur}
+                        label="Status Name"
+                        error={!!touched.statusUpdate && !!errors.statusUpdate}
+                      >
+                        {statuses.map((status) => (
+                          <MenuItem
+                            key={status.statusId}
+                            value={status.statusId}
+                          >
+                            {status.statusName}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <FormHelperText sx={{ color: "red" }}>
+                        {errors.statusUpdate}
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={4} sm={4} md={6}>
+                    <FormControl
+                      fullWidth
+                      variant="outlined"
+                      disabled={disabledInput}
+                    >
+                      <InputLabel id="paymentMethod-label">Method</InputLabel>
+                      <Select
+                        labelId="paymentMethod-label"
+                        id="paymentMethod"
+                        name="paymentMethod"
+                        value={values.paymentMethod}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        label="Method Name"
+                        error={
+                          !!touched.paymentMethod && !!errors.paymentMethod
+                        }
+                      >
+                        <MenuItem value={"Cash payment"}>Cash payment</MenuItem>
+                        <MenuItem value={"Online payment"}>
+                          Online Payment
+                        </MenuItem>
+                      </Select>
+                      <FormHelperText sx={{ color: "red" }}>
+                        {errors.paymentMethod}
+                      </FormHelperText>
+                    </FormControl>
+                  </Grid>
+                </Grid>
               </Box>
             </DialogContent>
             <DialogActions>

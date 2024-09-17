@@ -90,6 +90,10 @@ const ReceiptsTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          confirmHaircut={confirmHaircutHook}
+          confirmHairWash={confirmHairWashHook}
+          confirmFinished={confirmFinishedHook}
+          confirmPaymentCompleted={confirmPaymentCompletedHook}
           receipt={receipt}
           openEdit={isEdit}
           handleClose={handleCloseEdit}
@@ -148,18 +152,20 @@ const ReceiptsTable = () => {
                           }
                         />
 
-                        <ButtonCircle
-                          className={stylesTableList.marginButton}
-                          nameButton={
-                            <>
-                              <IconEdit />
-                            </>
-                          }
-                          colorButton={"yellow"}
-                          sizeButton={"sm"}
-                          titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.receipt_ID)}
-                        />
+                        {item.statusName !== "Payment completed" && (
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconEdit />
+                              </>
+                            }
+                            colorButton={"yellow"}
+                            sizeButton={"sm"}
+                            titleButton="Modify"
+                            handleOnclick={() => handleEdit(item.receipt_ID)}
+                          />
+                        )}
                       </td>
                     </tr>
                   ))}
