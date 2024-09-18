@@ -53,7 +53,7 @@ const categorySchema = yup.object({
   employeeRepassword: yup
     .string()
     .oneOf([yup.ref("employeePassword"), null], "Passwords must match")
-    .required("Confirm text is required"),
+    .required("Confirm Repassword is required"),
 });
 
 const AddFrom = ({ addEmployee, openAdd, handleClose }) => {
@@ -230,7 +230,7 @@ const AddFrom = ({ addEmployee, openAdd, handleClose }) => {
                         handleBlur(e);
                       }}
                       onChange={handleChange}
-                      value={values.CustomerRepassword}
+                      value={values.EmployeeRepassword}
                       name="employeeRepassword"
                       error={
                         !!touched.employeeRepassword &&

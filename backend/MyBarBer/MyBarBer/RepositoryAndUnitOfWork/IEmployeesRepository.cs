@@ -10,5 +10,6 @@ namespace MyBarBer.RepositoryAndUnitOfWork
         Task<bool> ModifyEmployee(Guid id, EmployeesVM employeesVM);
         Task<EmployeesVM> GetEmployeeByEmail(string email);
         Task<EmployeesVM> GetEmployeeByPhone(string phone);
+        Task<EmployeesVM> ModifyEmployeeInfomation(Guid id, UserVM userVM);
     }
 }

@@ -44,8 +44,8 @@ const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
       .string()
       .required("Phone number is required")
       .matches(regexPhone, "Phone number is not valid")
-      .min(6, "Phone number must be at least 6 characters")
-      .max(50, "Phone number must be at most 50 characters"),
+      .min(10, "Phone number must be at least 10 characters")
+      .max(12, "Phone number must be at most 12 characters"),
     employeeAddress: yup
       .string()
       .required("Employee address is required")

@@ -4,11 +4,11 @@ import { ColorTextPage } from "../../constants/constants";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers/userReducer";
 import DecodeToken from "../../utils/DecodeToken";
+import StyleCss from"./style.module.css";
 
 import Avatar from "@mui/material/Avatar";
 
 const Navbar = () => {
-
   const dataUser = DecodeToken();
   const userName = dataUser.unique_name;
   const charAvata = userName[0].toUpperCase();
@@ -16,7 +16,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
-    console.log("logout")
+    console.log("logout");
   };
 
   return (
@@ -73,13 +73,13 @@ const Navbar = () => {
                 className="dropdown-menu navbar-dropdown"
                 aria-labelledby="profileDropdown"
               >
-                <Link className="dropdown-item" to="/info">
-                  <i className="mdi mdi-cached me-2 text-success"></i> Activity
-                  Log{" "}
+                <Link className={`${StyleCss.optionUser} dropdown-item `} to="/information">
+                  <i className="mdi mdi-cached me-2 text-success"></i>{" "}
+                  Setting profile{" "}
                 </Link>
                 <div className="dropdown-divider"></div>
-                <Link  to="/login" style={{textDecoration:"none"}}>
-                  <div className="dropdown-item" onClick={handleLogout}>
+                <Link to="/login" className={StyleCss.optionUser}>
+                  <div className={`${StyleCss.optionUser} dropdown-item`} onClick={handleLogout}>
                     <i className="mdi mdi-logout me-2 text-primary"></i> Signout{" "}
                   </div>
                 </Link>

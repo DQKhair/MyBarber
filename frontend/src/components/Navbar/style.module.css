@@ -1,0 +1,8 @@
+.optionUser{
+    text-decoration: none;
+}
+
+.optionUser:hover {
+    background-color: #f8f9fa;
+    color: #000 !important;
+}

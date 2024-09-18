@@ -21,52 +21,62 @@ namespace MyBarBer.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> LoginUser(string email, string password)
+        public async Task<ActionResult> LoginUser(LoginVM loginVM)
         {
             AuthJWT authJWT = new AuthJWT(_configuration);
             try
             {
-
-                var resultAdmin = await _unitOfWork.Administrator.IsAuthenticatedAdmin(email,password);
-                if(resultAdmin != null)
+                if(loginVM.email != null && loginVM.password != null)
                 {
-                    var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultAdmin.Role_ID.ToString()??""));
-                    if(_roleUser != null)
-                    {
-                        _logger.LogInformation("Login admin is success!");
-                        return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
-                        {
-                            Success = true,
-                            Message = "Authentication success",
-                            AccessToken = authJWT.GenerateToken(resultAdmin, _roleUser)
-                        });
-                    }    
-                }
-                else
-                {
-                    var resultEmployee = await _unitOfWork.AuthenticationRepository.IsAuthenticatedEmployee(email,password);
-                    if (resultEmployee != null)
-                    {
-                        var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultEmployee.Role_ID.ToString() ?? ""));
 
+                    var resultAdmin = await _unitOfWork.Administrator.IsAuthenticatedAdmin(loginVM.email, loginVM.password);
+                    if(resultAdmin != null)
+                    {
+                        var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultAdmin.Role_ID.ToString()??""));
                         if(_roleUser != null)
                         {
-                            _logger.LogInformation("Login employee is success!");
+                            _logger.LogInformation("Login admin is success!");
                             return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
                             {
                                 Success = true,
                                 Message = "Authentication success",
-                                AccessToken = authJWT.GenerateToken(resultEmployee, _roleUser)
+                                AccessToken = authJWT.GenerateToken(resultAdmin, _roleUser)
                             });
                         }    
                     }
+                    else
+                    {
+                        var resultEmployee = await _unitOfWork.AuthenticationRepository.IsAuthenticatedEmployee(loginVM.email, loginVM.password);
+                        if (resultEmployee != null)
+                        {
+                            var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultEmployee.Role_ID.ToString() ?? ""));
+
+                            if(_roleUser != null)
+                            {
+                                _logger.LogInformation("Login employee is success!");
+                                return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
+                                {
+                                    Success = true,
+                                    Message = "Authentication success",
+                                    AccessToken = authJWT.GenerateToken(resultEmployee, _roleUser)
+                                });
+                            }    
+                        }
+                    }
+                    _logger.LogWarning("Authentication user is fail");
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIAuthenticationResVM 
+                    { Success = false,
+                        Message = "Email or password is incorrect" 
+                    });
                 }
                 _logger.LogWarning("Authentication user is fail");
-                return StatusCode(StatusCodes.Status400BadRequest, new APIAuthenticationResVM 
-                { Success = false,
-                    Message = "Email or password is incorrect" 
+                return StatusCode(StatusCodes.Status400BadRequest, new APIAuthenticationResVM
+                {
+                    Success = false,
+                    Message = "Email or password is incorrect"
                 });
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Error login user");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);

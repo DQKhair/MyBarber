@@ -15,7 +15,6 @@ namespace MyBarBer.DTO
                     administrator.AdminName = administratorVM.AdminName;
                     administrator.AdminPhone = administratorVM.AdminPhone;
                     administrator.AdminAddress = administratorVM.AdminAddress;
-                    administrator.AdminEmail = administratorVM.AdminEmail;
                     administrator.AdminPassword = HashPassword.ConvertPasswordToHash(administratorVM.AdminPassword);
 
                     return administrator;

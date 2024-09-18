@@ -8,7 +8,7 @@ namespace MyBarBer.Models
         public Guid Admin_ID { get; set; }
         [Required]
         public required string AdminName { get; set; }
-        public string? AdminAddress { get; set; }
+        public string AdminAddress { get; set; } = string.Empty;
         [Required]
         public required string AdminPhone { get; set; }
         [Required]

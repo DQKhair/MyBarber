@@ -35,27 +35,27 @@ namespace MyBarBer.RepositoryAndUnitOfWork
             }
         }
 
-        public async Task<Administrator> ModifyAdminInfomation(Guid id,AdministratorVM administratorVM)
+        public async Task<Administrator> ModifyAdminInfomation(Guid id,UserVM userVM)
         {
            try
             {
-                if(administratorVM != null)
+                if(userVM != null)
                 {
                     var _admin = await _context.Administrators.FindAsync(id);
                     if(_admin != null)
                     {
-                        var _adminUpdate = AdministratorDTO.AdministratorVMToAdministrator(administratorVM,_admin);
+                        var _adminUpdate = UsersDTO.UserVMToAdministrator(userVM, _admin);
                         if (_adminUpdate != null)
                         {
                             return _adminUpdate;
                         }    
                     }    
                 }    
-                _logger.LogWarning("Modify admin infomation is fail");
+                _logger.LogWarning("Modify admin information is fail");
                 return null!;
             }catch(Exception ex)
             {
-                _logger.LogError(ex,"Error modify admin infomation!");
+                _logger.LogError(ex,"Error modify admin information!");
                 return null!;
             }
         }

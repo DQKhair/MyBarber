@@ -21,20 +21,43 @@ namespace MyBarBer.Controllers
             _logger = logger;
         }
 
-        [HttpGet("admin/{id}")]
-        public async Task<IActionResult> GetAdminInfomation(Guid id)
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<UserVM>> GetAdminInfomation(Guid id)
         {
             try
             {
                 var _admin = await _unitOfWork.Administrator.GetByIdAsync(id);
-                var _adminVM = AdministratorDTO.AdministratorToAdministratorVM(_admin);
-                if (_admin != null && _adminVM != null)
+                if (_admin != null)
                 {
-                    _logger.LogInformation("Get admin infomation is success!");
-                    return StatusCode(StatusCodes.Status200OK, _adminVM);
+                    var _adminVM = AdministratorDTO.AdministratorToAdministratorVM(_admin);
+                    if (_admin != null && _adminVM != null)
+                    {
+                        var _userVM = UsersDTO.ConvertToUserVM(_adminVM);
+                        if( _userVM != null )
+                        {
+                            _logger.LogInformation("Get admin infomation is success!");
+                            return StatusCode(StatusCodes.Status200OK, _userVM);
+                        }
+                    }
+                    _logger.LogWarning($"Get infomation user by Id: {id} is fail!");
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Fail to get infomation" });
+                }else
+                {
+                    var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
+                    var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employee);
+                    if (_employee != null && _employeeVM != null)
+                    {
+                        var _userVM = UsersDTO.ConvertToUserVM(_employeeVM);
+                        if ( _userVM != null )
+                        {
+                            _logger.LogInformation("Get employee infomation is success!");
+                            return StatusCode(StatusCodes.Status200OK, _userVM);
+                        }
+                    }
+                    _logger.LogWarning($"Get infomation user by Id: {id} is fail!");
+                    return StatusCode(StatusCodes.Status400BadRequest,new APIResVM { Success = false, Message = "Fail to get infomation"});
                 }
-                _logger.LogWarning($"Get infomation user by Id: {id} is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+               
             }catch (Exception ex)
             {
                 _logger.LogError(ex,$"Error get infomation user by Id: {id}");
@@ -42,50 +65,55 @@ namespace MyBarBer.Controllers
             }
         }
 
-        [HttpGet("employee/{id}")]
-        public async Task<IActionResult> GetEmployeeInfomation(Guid id)
-        {
-            try
-            {
-                var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
-                var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employee);
-                if (_employee != null && _employeeVM != null)
-                {
-                    _logger.LogInformation("Get employee infomation is success!");
-                    return StatusCode(StatusCodes.Status200OK, _employeeVM);
-                }
-
-                _logger.LogWarning($"Get infomation user by Id: {id} is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error get infomation user by Id: {id}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
         [HttpPut("updateAdmin/{id}")]
-        public async Task<ActionResult<AdministratorVM>> UpdateAdminInfomation(Guid id, AdministratorVM administratorVM)
+        public async Task<ActionResult<AdministratorVM>> UpdateAdminInformation(Guid id, UserVM userVM)
         {
             try
             {
                 var _admin = await _unitOfWork.Administrator.GetByIdAsync(id);
                 if(_admin != null)
                 {
-                    var result = await _unitOfWork.Administrator.ModifyAdminInfomation(id, administratorVM);
+                    var result = await _unitOfWork.Administrator.ModifyAdminInfomation(id, userVM);
                     if (result != null)
                     {
                         await _unitOfWork.CompleteAsync();
                         var _adminUpdatedVM = AdministratorDTO.AdministratorToAdministratorVM(result);
-                        return StatusCode(StatusCodes.Status200OK, _adminUpdatedVM);
+                        if (_adminUpdatedVM != null)
+                        {
+                            return StatusCode(StatusCodes.Status200OK, _adminUpdatedVM);
+                        }
                     }    
                 }
-                _logger.LogWarning("Update admin infomation is fail");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                _logger.LogWarning("Update admin information is fail");
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Fail to update information" });
             }catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error update admin infomation");
+                _logger.LogError(ex, $"Error update admin information");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut("updateEmployee/{id}")]
+        public async Task<ActionResult<AdministratorVM>> UpdateEmployeeInformation(Guid id, UserVM userVM)
+        {
+            try
+            {
+                var _employee = await _unitOfWork.Employees.GetByIdAsync(id);
+                if (_employee != null)
+                {
+                    var _employeeVMUpdated = await _unitOfWork.Employees.ModifyEmployeeInfomation(id, userVM);
+                    if (_employeeVMUpdated != null)
+                    {
+                        await _unitOfWork.CompleteAsync();
+                        return StatusCode(StatusCodes.Status200OK, _employeeVMUpdated);
+                    }
+                }
+                _logger.LogWarning("Update employee information is fail");
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Fail to update information" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error update employee information");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

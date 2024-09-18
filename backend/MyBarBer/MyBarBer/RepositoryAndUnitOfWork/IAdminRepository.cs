@@ -7,6 +7,6 @@ namespace MyBarBer.RepositoryAndUnitOfWork
     public interface IAdminRepository : IGenericRepository<Administrator>
     {
         Task<Administrator> IsAuthenticatedAdmin(string email, string password);
-        Task<Administrator> ModifyAdminInfomation(Guid id, AdministratorVM administratorVM);
+        Task<Administrator> ModifyAdminInfomation(Guid id, UserVM userVM);
     }
 }

@@ -10,7 +10,7 @@ namespace MyBarBer.Models
         [MinLength(1,ErrorMessage ="Name must be more than 1 character")]
         public required string EmployeeName { get; set; }
         [MaxLength(200,ErrorMessage = "Address must be less than 100 characters")]
-        public string? EmployeeAddress { get; set; } = string.Empty;
+        public string EmployeeAddress { get; set; } = string.Empty;
         [Required,MaxLength(11),MinLength(10)]
         public required string EmployeePhone { get; set; }
         [Required,MaxLength(100),MinLength(5)]

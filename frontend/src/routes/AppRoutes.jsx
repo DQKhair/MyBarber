@@ -10,6 +10,7 @@ import ProductsPage from "../pages/ProductsPage";
 import ServicesPage from "../pages/ServicesPage";
 import ReceiptsPage from "../pages/ReceiptsPage";
 import AddReceiptPage from "../pages/AddReceiptPage";
+import InformationPage from "../pages/InformationPage";
 import {
   CustomerDetail,
   EmployeeDetail,
@@ -75,6 +76,7 @@ const AppRouter = () => {
           <Route path="/statisticDaily" element={<StatisticDaily />} />
           <Route path="/statisticMonthly" element={<StatisticMonthly />} />
           <Route path="/statisticYearly" element={<StatisticYearly />} />
+          <Route path="/information" element={<InformationPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

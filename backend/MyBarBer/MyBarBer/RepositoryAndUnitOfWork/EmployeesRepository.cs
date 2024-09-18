@@ -124,5 +124,34 @@ namespace MyBarBer.RepositoryAndUnitOfWork
             }
         }
 
+        public async Task<EmployeesVM> ModifyEmployeeInfomation(Guid id, UserVM userVM)
+        {
+            try
+            {
+                if (userVM != null)
+                {
+                    var _employee = await _context.Employees.FindAsync(id);
+                    if (_employee != null)
+                    {
+                        var _employeeUpdate = UsersDTO.UserVMToEmployee(userVM, _employee);
+                        if (_employeeUpdate != null)
+                        {
+                            var _employeeVM = EmployeesDTO.EmployeeToEmployeesVM(_employeeUpdate);
+                            if(_employeeVM != null)
+                            {
+                                return _employeeVM; 
+                            }
+                        }
+                    }
+                }
+                _logger.LogWarning("Modify employee information is fail");
+                return null!;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error modify employee information!");
+                return null!;
+            }
+        }
     }
 }
