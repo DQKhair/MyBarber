@@ -33,8 +33,8 @@ const QuantityCustomer = () => {
 
   return (
     <>
-      <h2 className="mb-5">{quantityCustomer}</h2>
-      <h6 className="card-text">Increased by 12%</h6>
+      <h2 className="mb-5">{quantityCustomer} person</h2>
+      <h6 className="card-text text-uppercase">My Barber</h6>
     </>
   );
 };

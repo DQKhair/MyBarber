@@ -1,13 +1,13 @@
-import QuantityEmployee from "./QuantityEmployee";
+import QuantityReceipt from "./QuantityReceipt";
 import QuantityCustomer from "./QuantityCustomer";
-import EmployeesOnline from "./EmployeesOnline";
+import TotalMoney from "./TotalMoney";
 import HeaderDashBoard from "./HeaderDashBoard";
 import DashboardImage from "./DashboardImage";
 
 export {
-  QuantityEmployee,
+  QuantityReceipt,
   QuantityCustomer,
-  EmployeesOnline,
+  TotalMoney,
   HeaderDashBoard,
   DashboardImage,
 };

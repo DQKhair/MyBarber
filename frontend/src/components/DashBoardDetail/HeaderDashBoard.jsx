@@ -1,5 +1,5 @@
 import React from "react";
-import { QuantityEmployee,QuantityCustomer,EmployeesOnline} from "./index"
+import { QuantityReceipt, QuantityCustomer, TotalMoney } from "./index";
 
 const HeaderDashBoard = () => {
   return (
@@ -14,10 +14,10 @@ const HeaderDashBoard = () => {
                 alt="circle-image"
               />
               <h4 className="font-weight-normal mb-3">
-                Quantity employee{" "}
+                Quantity receipt{" "}
                 <i className="mdi mdi-chart-line mdi-24px float-right"></i>
               </h4>
-              <QuantityEmployee />
+              <QuantityReceipt />
             </div>
           </div>
         </div>
@@ -46,10 +46,10 @@ const HeaderDashBoard = () => {
                 alt="circle-image"
               />
               <h4 className="font-weight-normal mb-3">
-                Employees Online{" "}
+                Total money{" "}
                 <i className="mdi mdi-diamond mdi-24px float-right"></i>
               </h4>
-              <EmployeesOnline />
+              <TotalMoney />
             </div>
           </div>
         </div>
