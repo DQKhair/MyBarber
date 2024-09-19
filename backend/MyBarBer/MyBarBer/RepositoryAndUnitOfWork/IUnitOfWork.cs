@@ -16,6 +16,7 @@ namespace MyBarBer.Repository
         IReceiptDetailsRepository ReceiptDetails { get; }
         IMethodsRepository Methods { get; }
         IStatusesRepository Statuss { get; }
+        IStatisticsRepository Statistics { get; }
 
         Task<bool> CompleteAsync();
     }

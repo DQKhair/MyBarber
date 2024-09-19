@@ -22,6 +22,7 @@ namespace MyBarBer.Repository
         public IReceiptDetailsRepository ReceiptDetails { get; private set; }
         public IMethodsRepository Methods { get; private set; }
         public IStatusesRepository Statuss { get; private set; }
+        public IStatisticsRepository Statistics { get; private set; }
 
         public UnitOfWork(MyDBContext context, ILoggerFactory loggerFactory)
         {
@@ -40,6 +41,7 @@ namespace MyBarBer.Repository
             ReceiptDetails = new ReceiptDetailsRepository(_context,_logger);
             Methods = new MethodsRepository(_context,_logger);
             Statuss = new StatusesRepository(_context,_logger);
+            Statistics = new StatisticsRepository(_context,_logger);
         }
 
         public async Task<bool> CompleteAsync()
