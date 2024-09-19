@@ -1,58 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BarChart } from "@mui/x-charts/BarChart";
-
-const dataset = [
-  {
-    london: 59,
-    paris: 57,
-    newYork: 86,
-    seoul: 21,
-    day: "Mo",
-  },
-  {
-    london: 50,
-    paris: 52,
-    newYork: 78,
-    seoul: 28,
-    day: "Tu",
-  },
-  {
-    london: 47,
-    paris: 53,
-    newYork: 106,
-    seoul: 41,
-    day: "We",
-  },
-  {
-    london: 54,
-    paris: 56,
-    newYork: 92,
-    seoul: 73,
-    day: "Th",
-  },
-  {
-    london: 57,
-    paris: 69,
-    newYork: 92,
-    seoul: 99,
-    day: "Fr",
-  },
-  {
-    london: 60,
-    paris: 63,
-    newYork: 103,
-    seoul: 144,
-    day: "Sa",
-  },
-  {
-    london: 59,
-    paris: 60,
-    newYork: 105,
-    seoul: 319,
-    day: "Su",
-  },
-];
+import { Alert, Box, CircularProgress } from "@mui/material";
 
 const chartSetting = {
   xAxis: [
@@ -64,16 +13,49 @@ const chartSetting = {
   height: 400,
 };
 
-const valueFormatter = (value) => `${value} VNĐ`;
+const valueFormatter = (value) =>
+  `${new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(value)} `;
 
-const StatisticReceipt = () => {
+const StatisticReceipt = ({
+  loading,
+  error,
+  receiptMoney,
+  getStatisticsReceiptMoney,
+}) => {
+  useEffect(() => {
+    const loadChart = async (dateTime) => {
+       await getStatisticsReceiptMoney(dateTime);
+    };
+    loadChart("daily");
+  }, []);
+
+  //load page
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
+
   return (
     <>
       <BarChart
-        dataset={dataset}
-        yAxis={[{ scaleType: "band", dataKey: "day" }]}
+        dataset={receiptMoney}
+        yAxis={[{ scaleType: "band", dataKey: "dateTime" }]}
         series={[
-          { dataKey: "seoul", label: "Statistic Receipt", valueFormatter },
+          { dataKey: "data", label: "Statistic Receipt", valueFormatter },
         ]}
         layout="horizontal"
         {...chartSetting}

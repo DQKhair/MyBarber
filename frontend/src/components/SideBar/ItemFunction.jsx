@@ -60,7 +60,7 @@ const ItemFunction = () =>{
                       {" "}
                       <Link className="nav-link" to="/statisticDaily">
                         {" "}
-                        Dayly{" "}
+                        Daily{" "}
                       </Link>
                     </li>
                     <li className="nav-item">

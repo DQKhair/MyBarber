@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { PieChart } from "@mui/x-charts/PieChart";
+import { Alert, Box, CircularProgress } from "@mui/material";
 
-const StatisticServicesAndProducts = () => {
+const StatisticServicesAndProducts = ({
+  loading,
+  error,
+  quantityProAndSer,
+  getStatisticsQuantityProductsAndServices,
+}) => {
+  useEffect(() => {
+    const loadChart = async (dateTime) => {
+      await getStatisticsQuantityProductsAndServices(dateTime);
+    };
+    loadChart("monthly");
+  }, []);
+
+  //load page
+  if (loading)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
   return (
     <>
       <PieChart
         series={[
           {
-            data: [
-              { id: 0, value: 10, label: "Services" },
-              { id: 1, value: 15, label: "Products" },
-            ],
+            data:quantityProAndSer,
           },
         ]}
         width={400}

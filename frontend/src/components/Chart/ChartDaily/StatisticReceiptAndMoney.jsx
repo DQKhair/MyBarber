@@ -1,26 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { LineChart } from "@mui/x-charts/LineChart";
+import { Alert, Box, CircularProgress } from "@mui/material";
 
-const receiptData = [40, 30, 20, 27, 18, 23, 34];
-const totalMoneyData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = ["Mon", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+const StatisticReceiptAndMoney = ({
+  loading,
+  error,
+  quantityReceiptAndTotalMoney,
+  getStatisticsQuantityReceiptAndTotalMoney,
+}) => {
+  const [receiptData, setReceiptData] = useState([]);
+  const [totalMoneyData, setTotalMoneyData] = useState([]);
+  const [xLabels, setXLabels] = useState([]);
+  const [loadChart, setLoadChart] = useState(true);
 
-const StatisticReceiptAndMoney = () => {
+  useEffect(() => {
+    const loadChart = async (dateTime) => {
+      const result = await getStatisticsQuantityReceiptAndTotalMoney(dateTime);
+      if (result) {
+        setReceiptData(result.receiptData);
+        setTotalMoneyData(result.totalMoneyData);
+        setXLabels(result.labels);
+        setLoadChart(false);
+      }
+    };
+    loadChart("daily");
+  }, []);
+
+  //load page
+  if (loading === true || loadChart === true)
+    return (
+      <div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress /> Loading...
+        </Box>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div>
+        <Alert severity="error">Error: {error.message}</Alert>
+      </div>
+    );
   return (
     <>
       <LineChart
         width={500}
         height={300}
         series={[
-          { data: receiptData, label: "Receipt", yAxisId: "leftAxisId" },
+          {
+            data: receiptData,
+            label: "Receipt",
+            yAxisId: "leftAxisId",
+          },
           {
             data: totalMoneyData,
             label: "Total money",
             yAxisId: "rightAxisId",
           },
         ]}
-        xAxis={[{ scaleType: "point", data: xLabels }]}
+        xAxis={[
+          { scaleType: "point", data: xLabels },
+        ]}
         yAxis={[{ id: "leftAxisId" }, { id: "rightAxisId" }]}
         rightAxis="rightAxisId"
       />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
 import {
@@ -6,11 +6,30 @@ import {
   StatisticReceiptAndMoney,
   StatisticServicesAndProducts,
 } from "../../components/Chart/MonthLy";
+import useStatistics from "../../hook/useStatistics";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 const StatisticMonthly = () => {
+  const {
+    loading,
+    error,
+    receiptMoney,
+    quantityProAndSer,
+    quantityReceiptAndTotalMoney,
+    getStatisticsReceiptMoneyHook,
+    getStatisticsQuantityProductsAndServicesHook,
+    getStatisticsQuantityReceiptAndTotalMoneyHook,
+  } = useStatistics();
+
+  // alert
+  useEffect(() => {
+    if (error != null) {
+      alert(error.response.data.message);
+    }
+  }, [error]);
+
   return (
     <>
       <PageHeader
@@ -26,13 +45,32 @@ const StatisticMonthly = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             <Grid item xs={4} sm={4} md={4}>
-              <StatisticReceipt />
+              <StatisticReceipt
+                loading={loading}
+                error={error}
+                receiptMoney={receiptMoney}
+                getStatisticsReceiptMoney={getStatisticsReceiptMoneyHook}
+              />
             </Grid>
             <Grid item xs={4} sm={4} md={4}>
-              <StatisticReceiptAndMoney />
+              <StatisticReceiptAndMoney
+                loading={loading}
+                error={error}
+                quantityReceiptAndTotalMoney={quantityReceiptAndTotalMoney}
+                getStatisticsQuantityReceiptAndTotalMoney={
+                  getStatisticsQuantityReceiptAndTotalMoneyHook
+                }
+              />
             </Grid>
             <Grid item xs={4} sm={4} md={4}>
-              <StatisticServicesAndProducts />
+              <StatisticServicesAndProducts
+                loading={loading}
+                error={error}
+                quantityProAndSer={quantityProAndSer}
+                getStatisticsQuantityProductsAndServices={
+                  getStatisticsQuantityProductsAndServicesHook
+                }
+              />
             </Grid>
           </Grid>
         </Box>

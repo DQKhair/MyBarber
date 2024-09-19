@@ -8,12 +8,21 @@ import {
   StatisticServicesAndProducts,
 } from "../../components/Chart/MonthLy";
 import { useNavigate } from "react-router-dom";
+import useStatistics from "../../hook/useStatistics";
 
 const Dashboard = () => {
-  const accessToken = localStorage.getItem("accessToken")
-  const navigate = useNavigate()
-  if (accessToken === null || accessToken === "null")
-  {
+  const {
+    loading,
+    error,
+    receiptMoney,
+    quantityProAndSer,
+    getStatisticsReceiptMoneyHook,
+    getStatisticsQuantityProductsAndServicesHook,
+  } = useStatistics();
+
+  const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+  if (accessToken === null || accessToken === "null") {
     navigate("/login");
   }
   return (
@@ -47,7 +56,12 @@ const Dashboard = () => {
                   Total amount per month
                 </h4>
               </div>
-              <StatisticReceipt />
+              <StatisticReceipt
+                loading={loading}
+                error={error}
+                receiptMoney={receiptMoney}
+                getStatisticsReceiptMoney={getStatisticsReceiptMoneyHook}
+              />
             </div>
           </div>
         </div>
@@ -57,7 +71,14 @@ const Dashboard = () => {
               <h4 className="card-title my-5">
                 Number of products and services this month
               </h4>
-              <StatisticServicesAndProducts />
+              <StatisticServicesAndProducts
+                loading={loading}
+                error={error}
+                quantityProAndSer={quantityProAndSer}
+                getStatisticsQuantityProductsAndServices={
+                  getStatisticsQuantityProductsAndServicesHook
+                }
+              />
             </div>
           </div>
         </div>
