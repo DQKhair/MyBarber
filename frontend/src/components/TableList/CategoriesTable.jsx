@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
 
-const CategoriesTable = () => {
+const CategoriesTable = ({ userInfo }) => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -139,24 +139,28 @@ const CategoriesTable = () => {
             <h4 className="card-title">{"Categories"}</h4>
             <p className="card-description">{"List of categories"}</p>
 
-            <ButtonCircle
-              className={stylesTableList.marginButton}
-              nameButton={
-                <>
-                  <IconAdd /> Add new
-                </>
-              }
-              colorButton={"blue"}
-              sizeButton={"sm"}
-              handleOnclick={handleAdd}
-            />
+            {userInfo.role === "Administrator" ? (
+              <ButtonCircle
+                className={stylesTableList.marginButton}
+                nameButton={
+                  <>
+                    <IconAdd /> Add new
+                  </>
+                }
+                colorButton={"blue"}
+                sizeButton={"sm"}
+                handleOnclick={handleAdd}
+              />
+            ) : (
+              <></>
+            )}
 
             <table className={`table text-center `}>
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Category</th>
-                  <th>Action</th>
+                  {userInfo.role === "Administrator" ? <th>Action</th> : <></>}
                 </tr>
               </thead>
               <tbody>
@@ -169,32 +173,36 @@ const CategoriesTable = () => {
                     >
                       <td>{index + 1}</td>
                       <td>{`${item.categoryName}`}</td>
-                      <td>
-                        <ButtonCircle
-                          className={stylesTableList.marginButton}
-                          nameButton={
-                            <>
-                              <IconEdit />
-                            </>
-                          }
-                          colorButton={"yellow"}
-                          sizeButton={"sm"}
-                          titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.category_ID)}
-                        />
-                        <ButtonCircle
-                          className={stylesTableList.marginButton}
-                          nameButton={
-                            <>
-                              <IconDelete />
-                            </>
-                          }
-                          colorButton={"red"}
-                          sizeButton={"sm"}
-                          titleButton="Delete"
-                          handleOnclick={() => handleDelete(item.category_ID)}
-                        />
-                      </td>
+                      {userInfo.role === "Administrator" ? (
+                        <td>
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconEdit />
+                              </>
+                            }
+                            colorButton={"yellow"}
+                            sizeButton={"sm"}
+                            titleButton="Modify"
+                            handleOnclick={() => handleEdit(item.category_ID)}
+                          />
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconDelete />
+                              </>
+                            }
+                            colorButton={"red"}
+                            sizeButton={"sm"}
+                            titleButton="Delete"
+                            handleOnclick={() => handleDelete(item.category_ID)}
+                          />
+                        </td>
+                      ) : (
+                        <></>
+                      )}
                     </tr>
                   ))}
               </tbody>

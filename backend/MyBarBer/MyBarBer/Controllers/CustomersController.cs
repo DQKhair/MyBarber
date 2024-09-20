@@ -7,7 +7,7 @@ using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -21,6 +21,7 @@ namespace MyBarBer.Controllers
             this._logger = logger;
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomersVM>>> GetCustomers()
         {
@@ -41,6 +42,8 @@ namespace MyBarBer.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet("{id}")]        
         public async Task<ActionResult<CustomersVM>> GetCustomerById(Guid id)
         {
@@ -62,6 +65,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpPost]
         public async Task<IActionResult> AddCustomer(CustomersVM customersVM)
         {
@@ -115,6 +119,7 @@ namespace MyBarBer.Controllers
         //    }
         //}
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public async Task<ActionResult<CustomersVM>> UpdateCustomer(Guid id,CustomersVM customersVM)
         {

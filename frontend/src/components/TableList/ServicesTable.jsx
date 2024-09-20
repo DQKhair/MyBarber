@@ -12,7 +12,7 @@ import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
 import { API_URL } from "../../constants/constants";
 
-const ServicesTable = () => {
+const ServicesTable = ({ userInfo }) => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -155,17 +155,21 @@ const ServicesTable = () => {
             <h4 className="card-title">{"Services"}</h4>
             <p className="card-description">{"List of services"}</p>
 
-            <ButtonCircle
-              className={stylesTableList.marginButton}
-              nameButton={
-                <>
-                  <IconAdd /> Add new
-                </>
-              }
-              colorButton={"blue"}
-              sizeButton={"sm"}
-              handleOnclick={handleAdd}
-            />
+            {userInfo.role === "Administrator" ? (
+              <ButtonCircle
+                className={stylesTableList.marginButton}
+                nameButton={
+                  <>
+                    <IconAdd /> Add new
+                  </>
+                }
+                colorButton={"blue"}
+                sizeButton={"sm"}
+                handleOnclick={handleAdd}
+              />
+            ) : (
+              <></>
+            )}
 
             <table className={`table text-center `}>
               <thead>
@@ -216,30 +220,40 @@ const ServicesTable = () => {
                           handleClickDetail(item.itemCategory_ID)
                         }
                       />
-                      <ButtonCircle
-                        className={stylesTableList.marginButton}
-                        nameButton={
-                          <>
-                            <IconEdit />
-                          </>
-                        }
-                        colorButton={"yellow"}
-                        sizeButton={"sm"}
-                        titleButton="Modify"
-                        handleOnclick={() => handleEdit(item.itemCategory_ID)}
-                      />
-                      <ButtonCircle
-                        className={stylesTableList.marginButton}
-                        nameButton={
-                          <>
-                            <IconDelete />
-                          </>
-                        }
-                        colorButton={"red"}
-                        sizeButton={"sm"}
-                        titleButton="Delete"
-                        handleOnclick={() => handleDelete(item.itemCategory_ID)}
-                      />
+                      {userInfo.role === "Administrator" ? (
+                        <>
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconEdit />
+                              </>
+                            }
+                            colorButton={"yellow"}
+                            sizeButton={"sm"}
+                            titleButton="Modify"
+                            handleOnclick={() =>
+                              handleEdit(item.itemCategory_ID)
+                            }
+                          />
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconDelete />
+                              </>
+                            }
+                            colorButton={"red"}
+                            sizeButton={"sm"}
+                            titleButton="Delete"
+                            handleOnclick={() =>
+                              handleDelete(item.itemCategory_ID)
+                            }
+                          />
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </td>
                   </tr>
                 ))}

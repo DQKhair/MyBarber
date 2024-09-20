@@ -7,7 +7,7 @@ using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ItemCategoriesController : ControllerBase
@@ -21,6 +21,7 @@ namespace MyBarBer.Controllers
             _logger = logger;
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ItemCategoriesVM>>> GetItemCategories()
         {
@@ -43,6 +44,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ItemCategoriesVM>> GetItemCategoryById(Guid id)
         {
@@ -68,6 +70,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<ItemCategoriesVM>> AddCategory([FromForm] ItemCategoryPostVM itemCategoryPostVM)
         {
@@ -91,6 +94,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItemCategoryById(Guid id)
         {
@@ -125,6 +129,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("update_information/{id}")]
         public async Task<ActionResult<ItemCategoriesVM>> UpdateItemCategoryInformation(Guid id, ItemCategoryInformationVM itemCategoryInformationVM)
         {
@@ -156,6 +161,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("update_Image/{id}")]
         public async Task<ActionResult<ItemCategoriesVM>> UpdateItemCategoryImage(Guid id,[FromForm] ItemCategoryPostVM itemCategoryPostVM)
         {

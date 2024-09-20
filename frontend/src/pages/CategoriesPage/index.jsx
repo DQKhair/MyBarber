@@ -2,11 +2,14 @@ import React from "react";
 import stylesPage from "../Pages.module.css";
 import PageHeader from "../../components/PageHeader";
 import { CategoriesTable } from "../../components/TableList";
+import DecodeToken from "../../utils/DecodeToken";
 
 const CategoriesPage = () => {
   const titleName = "Categories management";
   const breadcrumb = "Categories";
   const itemBreadcrumb = "list categories";
+
+  const userInfo = DecodeToken(localStorage.getItem("accessToken"));
 
   return (
     <>
@@ -16,7 +19,7 @@ const CategoriesPage = () => {
         itemBreadcrumb={itemBreadcrumb}
       />
       <div className={`${stylesPage.main_body} row`}>
-        <CategoriesTable />
+        <CategoriesTable userInfo={userInfo} />
       </div>
     </>
   );

@@ -91,11 +91,21 @@ const EmployeesTable = () => {
     );
 
   if (errorLoad)
-    return (
-      <div>
-        <Alert severity="error">Error: {errorLoad.message}</Alert>
-      </div>
-    );
+    if(errorLoad.status === 403)
+    {
+      return (
+        <div>
+          <Alert severity="error">Error: You don't have permission to do this</Alert>
+        </div>
+      );
+    }else
+    { 
+      return (
+        <div>
+          <Alert severity="error">Error: {errorLoad.message}</Alert>
+        </div>
+      );
+    }
 
   return (
     <>

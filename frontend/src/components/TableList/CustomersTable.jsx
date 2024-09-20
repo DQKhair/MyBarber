@@ -5,16 +5,18 @@ import stylesTableList from "./TableList.module.css";
 import useCustomers from "../../hook/useCustomers";
 import { IconAdd, IconDetail, IconEdit } from "../Icons";
 import { AddFrom, EditForm } from "../Forms/CustomerForm";
+import DecodeToken from "../../utils/DecodeToken";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
 
-const CustomersTable = () => {
+const CustomersTable = ({userInfo}) => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [customer, setCustomer] = useState(null);
+
 
   const navigation = useNavigate();
   const {
@@ -67,8 +69,7 @@ const CustomersTable = () => {
       alert(error.response.data.message);
       setError(null);
     }
-  },[error]);
-  
+  }, [error]);
 
   //load page
 
@@ -168,18 +169,22 @@ const CustomersTable = () => {
                             handleClickDetail(item.customer_ID)
                           }
                         />
-                        <ButtonCircle
-                          className={stylesTableList.marginButton}
-                          nameButton={
-                            <>
-                              <IconEdit />
-                            </>
-                          }
-                          colorButton={"yellow"}
-                          sizeButton={"sm"}
-                          titleButton="Modify"
-                          handleOnclick={() => handleEdit(item.customer_ID)}
-                        />
+                        {userInfo.role === "Administrator" ? (
+                          <ButtonCircle
+                            className={stylesTableList.marginButton}
+                            nameButton={
+                              <>
+                                <IconEdit />
+                              </>
+                            }
+                            colorButton={"yellow"}
+                            sizeButton={"sm"}
+                            titleButton="Modify"
+                            handleOnclick={() => handleEdit(item.customer_ID)}
+                          />
+                        ) : (
+                          <></>
+                        )}
                       </td>
                     </tr>
                   ))}

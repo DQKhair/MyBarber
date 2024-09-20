@@ -18,6 +18,7 @@ import useCustomers from "../../../hook/useCustomers";
 import useReceipts from "../../../hook/useReceipts";
 import { useSelector } from "react-redux";
 import DecodeToken from "../../../utils/DecodeToken";
+import { Alert } from "@mui/material";
 
 const initialValues = {
   customerName: "",
@@ -67,15 +68,13 @@ const receiptSchema = yup.object({
 });
 
 const AddForm = () => {
-  const { addReceiptHook } = useReceipts();
+  const { error, addReceiptHook } = useReceipts();
   const [productQuantity, setProductQuantity] = useState(0);
   const [serviceQuantity, setServiceQuantity] = useState(0);
   const { itemCategories } = useItemCategories();
   const { customers } = useCustomers();
   const services = itemCategories.filter((i) => i.category_ID === 1);
   const products = itemCategories.filter((i) => i.category_ID !== 1);
-  
-
 
   const listAddress = [...new Set(customers.map((c) => c.customerAddress))];
   const listCustomerName = [...new Set(customers.map((c) => c.customerName))];
@@ -118,14 +117,30 @@ const AddForm = () => {
   };
   const handleFormSubmit = async (values, { resetForm }) => {
     const userInfo = DecodeToken(localStorage.getItem("accessToken"));
-    const response = await addReceiptHook(userInfo.User_ID,values);
-    if(response)
-    {
+    const response = await addReceiptHook(userInfo.User_ID, values);
+    if (response) {
       alert("Create new receipt successful!");
     }
     //reset form
     resetForm();
   };
+
+  if (error)
+    if (error.status === 403) {
+      return (
+        <div>
+          <Alert severity="error">
+            Error: You don't have permission to do this
+          </Alert>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Alert severity="error">Error: {error.message}</Alert>
+        </div>
+      );
+    }
 
   return (
     <>

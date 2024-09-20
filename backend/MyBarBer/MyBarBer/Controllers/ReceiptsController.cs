@@ -8,7 +8,7 @@ using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ReceiptsController : ControllerBase
@@ -22,6 +22,7 @@ namespace MyBarBer.Controllers
             _logger = logger;
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReceiptResponseAPIVM>>> GetAllReceipts()
         {
@@ -42,6 +43,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ReceiptResponseAPIVM>> GetReceiptById(Guid id)
         {
@@ -63,6 +65,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(Roles = "Employee")]
         [HttpPost("{employeeId}")]
         public async Task<IActionResult> AddNewReceipt(Guid employeeId,ReceiptsPostVM receiptsPostVM)
         {
@@ -107,6 +110,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpPut("confirm_haircut/receiptId={id}&&employeeId={employeeId}")]
         public async Task<IActionResult> ConfirmHairCut(Guid id, Guid employeeId)
         {
@@ -128,6 +132,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpPut("confirm_hair_wash/receiptId={id}&&employeeId={employeeId}")]
         public async Task<IActionResult> ConfirmHairWash(Guid id, Guid employeeId)
         {
@@ -150,6 +155,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpPut("confirm_finished/receiptId={id}")]
         public async Task<IActionResult> ConfirmFinished(Guid id)
         {
@@ -173,6 +179,7 @@ namespace MyBarBer.Controllers
             }
         }
 
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpPut("confirm_payment_completed/receiptId={id}&&method={methodName}")]
         public async Task<IActionResult> ConfirmPaymentCompleted(Guid id,string methodName)
         {

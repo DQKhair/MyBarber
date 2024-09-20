@@ -13,7 +13,7 @@ using MyBarBer.Repository;
 
 namespace MyBarBer.Controllers
 {
-    [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -28,7 +28,7 @@ namespace MyBarBer.Controllers
         }
 
         // GET: api/Categories
-        [Authorize]
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoriesVM>>> GetCategories()
         {
@@ -55,6 +55,7 @@ namespace MyBarBer.Controllers
         }
 
         // GET: api/Categories/5
+        [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoriesVM>> GetCategoryById(int id)
         {
@@ -78,6 +79,7 @@ namespace MyBarBer.Controllers
         }
 
         // POST: api/Categories
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<CategoriesVM>> AddCategories(CategoriesVM categoriesVM)
         {
@@ -120,6 +122,7 @@ namespace MyBarBer.Controllers
         }
 
         // DELETE: api/Categories/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategories(int id)
         {
@@ -143,6 +146,7 @@ namespace MyBarBer.Controllers
             
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCategory(int id, CategoriesVM categoriesVM)
         {
