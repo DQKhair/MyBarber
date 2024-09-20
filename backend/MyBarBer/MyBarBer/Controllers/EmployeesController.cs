@@ -36,7 +36,7 @@ namespace MyBarBer.Controllers
                 }else
                 {
                     _logger.LogWarning("Get list employees is fail");
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get list employees is fail" });
                 }
             }catch (Exception ex)
             {
@@ -60,7 +60,7 @@ namespace MyBarBer.Controllers
                 else
                 {
                     _logger.LogWarning($"Employees were found: {id}");
-                    return StatusCode(StatusCodes.Status404NotFound);
+                    return StatusCode(StatusCodes.Status404NotFound, new APIResVM { Success = false, Message = "Get employee is fail" });
                 }
             }catch (Exception ex)
             {
@@ -94,12 +94,12 @@ namespace MyBarBer.Controllers
                             }else
                             {
                                 _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
-                                return StatusCode(StatusCodes.Status400BadRequest);
+                                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Add new employee is fail" });
                             }    
                         }else
                         {
                             _logger.LogWarning($"Add new employee {employeeVM.EmployeeName} is fail");
-                            return StatusCode(StatusCodes.Status400BadRequest);
+                            return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Add new employee is fail" });
                         }
                     }else
                     {
@@ -132,7 +132,7 @@ namespace MyBarBer.Controllers
                 }else
                 {
                     _logger.LogWarning($"Delete employee by Id: {id} is fail");
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Delete employee is fail" });
                 }
             }catch (Exception ex)
             {
@@ -165,7 +165,7 @@ namespace MyBarBer.Controllers
                         }else
                         {
                             _logger.LogWarning($"Modify category by Id: {id} fail!");
-                            return StatusCode(StatusCodes.Status400BadRequest);
+                            return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update employee is fail" });
                         }    
                     }else
                     {
@@ -185,7 +185,7 @@ namespace MyBarBer.Controllers
                                 }else
                                 {
                                     _logger.LogWarning($"Modify employee {id} is fail!");
-                                    return StatusCode(StatusCodes.Status400BadRequest);
+                                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update employee is fail" });
                                 }    
                             }
                             else
@@ -210,7 +210,7 @@ namespace MyBarBer.Controllers
                                 else
                                 {
                                     _logger.LogWarning($"Update employee {id} is fail!");
-                                    return StatusCode(StatusCodes.Status400BadRequest);
+                                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update employee is fail" });
                                 }    
                             }
                             else
@@ -238,7 +238,7 @@ namespace MyBarBer.Controllers
                                     }else
                                     {
                                         _logger.LogWarning($"Modify employee {id} is fail!");
-                                        return StatusCode(StatusCodes.Status400BadRequest);
+                                        return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update employee is fail" });
                                     }    
                                 }
                                 else
@@ -257,7 +257,7 @@ namespace MyBarBer.Controllers
                 }else
                 {
                     _logger.LogWarning($"Modify category by Id: {id} fail!");
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update employee is fail" });
                 }
             }catch (Exception ex)
             {

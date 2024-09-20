@@ -28,6 +28,7 @@ namespace MyBarBer.Controllers
         }
 
         // GET: api/Categories
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoriesVM>>> GetCategories()
         {
@@ -42,14 +43,9 @@ namespace MyBarBer.Controllers
                         _logger.LogInformation("Get list categories successful!");
                         return StatusCode(StatusCodes.Status200OK, _listCategoriesVM);
                     }
-                    _logger.LogWarning("Get list categories is fail!");
-                    return StatusCode(StatusCodes.Status400BadRequest);
                 }
-                else
-                {
-                    _logger.LogWarning("Get list categories is fail!");
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
+                _logger.LogWarning("Get list categories is fail!");
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get list categories is fail" });
             }
             catch (Exception ex)
             {
@@ -69,12 +65,10 @@ namespace MyBarBer.Controllers
                 if (_categories == null && _categoryVM == null)
                 {
                     _logger.LogWarning("Could not find this category by Id: {id} ", id);
-                    return StatusCode(StatusCodes.Status404NotFound);
-                }else
-                {
-                    _logger.LogInformation("Get category by Id: {id} successful!", id);
-                    return StatusCode(StatusCodes.Status200OK, _categoryVM);
-                }    
+                    return StatusCode(StatusCodes.Status404NotFound, new APIResVM { Success = false, Message = "Could not find this category" });
+                }
+                _logger.LogInformation("Get category by Id: {id} successful!", id);
+                return StatusCode(StatusCodes.Status200OK, _categoryVM);
             }
             catch (Exception ex)
             {
@@ -102,7 +96,6 @@ namespace MyBarBer.Controllers
                         if (_categoryByName != null && _categoryByNameVM != null)
                         {
                             _logger.LogInformation("Add new category successful! Id: {id}", categoriesVM.Category_ID);
-                            //return StatusCode(StatusCodes.Status201Created, new { id = categoriesVM.Category_ID });
                             return CreatedAtAction("GetCategoryById", new { id = _categoryByNameVM.Category_ID }, _categoryByNameVM);
                         }
                         _logger.LogWarning($"Add new category {categoriesVM.CategoryName} is fail!");
@@ -111,7 +104,7 @@ namespace MyBarBer.Controllers
                     else
                     {
                         _logger.LogWarning($"Add new category {categoriesVM.CategoryName} is fail!");
-                        return StatusCode(StatusCodes.Status400BadRequest);
+                        return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Add new category is fail" });
                     }
                 }else
                 {
@@ -140,7 +133,7 @@ namespace MyBarBer.Controllers
                         return StatusCode(StatusCodes.Status200OK);
                     }
                     _logger.LogWarning("Delete category is fail by Id: {id}", id);
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Delete category is fail" });
             }
             catch (Exception ex)
             {
@@ -169,7 +162,7 @@ namespace MyBarBer.Controllers
                         return StatusCode(StatusCodes.Status200OK, _categoryVM);
                     }
                     _logger.LogWarning("Modify category by Id: {Id} fail!", id);
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                    return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update category is fail" });
                 }
                 else
                 {

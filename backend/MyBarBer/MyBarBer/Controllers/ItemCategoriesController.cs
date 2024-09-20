@@ -34,7 +34,7 @@ namespace MyBarBer.Controllers
                     return StatusCode(StatusCodes.Status200OK, _itemCategoriesVM);
                 }
                 _logger.LogWarning("Get list item categories is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get list item categories is fail" });
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace MyBarBer.Controllers
                     }
                 }
                 _logger.LogWarning($"Get item category by Id: {id} is fail!");
-                return StatusCode(StatusCodes.Status404NotFound);
+                return StatusCode(StatusCodes.Status404NotFound, new APIResVM { Success = false, Message = "Get item category is fail" });
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace MyBarBer.Controllers
                     }
                 }
                 _logger.LogWarning($"Add new item category is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Add new item category is fail" });
             }catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error add new item categories by name {itemCategoryPostVM.ItemCategoryName}");
@@ -116,7 +116,7 @@ namespace MyBarBer.Controllers
                     }
                 }
                 _logger.LogWarning($"Delete item category by id {id} is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Delete item category is fail" });
             }
             catch (Exception ex)
             {
@@ -148,7 +148,7 @@ namespace MyBarBer.Controllers
                     }
                 }
                 _logger.LogError($"Update item category information by id {id} is fail");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update item category is fail" });
             }catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error update item category infomation by id {id}");
@@ -179,7 +179,7 @@ namespace MyBarBer.Controllers
                     }
                 }
                 _logger.LogError($"Update item category image by id {id} is fail");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update item category is fail" });
             }
             catch (Exception ex)
             {

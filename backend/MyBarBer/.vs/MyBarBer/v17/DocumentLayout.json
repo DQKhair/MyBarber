@@ -1,88 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\statisticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\statisticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\models\\statisticsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\models\\statisticsvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|d:\\du_an_website\\react_node\\mybarber\\backend\\mybarber\\mybarber\\repositoryandunitofwork\\istatisticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1D3877F-2568-4670-9405-39B28AE68BF0}|MyBarBer\\MyBarBer.csproj|solutionrelative:mybarber\\repositoryandunitofwork\\istatisticsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 244,
-          "SelectedChildIndex": 3,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StatisticsVM.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\StatisticsVM.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\Models\\StatisticsVM.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Models\\StatisticsVM.cs",
-              "RelativeToolTip": "MyBarBer\\Models\\StatisticsVM.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T04:25:51.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StatisticsRepository.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\StatisticsRepository.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\StatisticsRepository.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\StatisticsRepository.cs",
-              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\StatisticsRepository.cs",
-              "ViewState": "AQIAACoBAAAAAAAAAADwv10BAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T04:21:42.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IStatisticsRepository.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IStatisticsRepository.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\RepositoryAndUnitOfWork\\IStatisticsRepository.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\RepositoryAndUnitOfWork\\IStatisticsRepository.cs",
-              "RelativeToolTip": "MyBarBer\\RepositoryAndUnitOfWork\\IStatisticsRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T04:20:06.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StatisticsController.cs",
-              "DocumentMoniker": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\StatisticsController.cs",
-              "RelativeDocumentMoniker": "MyBarBer\\Controllers\\StatisticsController.cs",
-              "ToolTip": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\Controllers\\StatisticsController.cs",
-              "RelativeToolTip": "MyBarBer\\Controllers\\StatisticsController.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAiwD4AAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-19T03:28:21.46Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

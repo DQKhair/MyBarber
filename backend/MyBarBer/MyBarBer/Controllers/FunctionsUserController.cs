@@ -32,7 +32,7 @@ namespace MyBarBer.Controllers
                     return StatusCode(StatusCodes.Status200OK, _functions);
                 }
                 _logger.LogWarning("Get list functions is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get list functions is fail" });
             }catch(Exception ex)
             {
                 _logger.LogError(ex,"Error get list functions");

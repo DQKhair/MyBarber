@@ -34,7 +34,7 @@ namespace MyBarBer.Controllers
                     return StatusCode(StatusCodes.Status200OK, _customersVM);
                 }
                 _logger.LogWarning("Get list customer is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get list customers is fail" });
             } catch (Exception ex)
             {
                 _logger.LogError(ex, "Error get list customers");
@@ -54,7 +54,7 @@ namespace MyBarBer.Controllers
                     return StatusCode(StatusCodes.Status200OK, _customerVM);
                 }
                 _logger.LogWarning($"Get customer by id: {id} is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Get customer is fail" });
             }catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error get customer by id: {id}");
@@ -87,7 +87,7 @@ namespace MyBarBer.Controllers
                     }    
                 }
                 _logger.LogWarning($"Create new cusmer {customersVM.CustomerName} is fail!");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Add new customer is fail" });
             }catch(Exception ex)
             {
                 _logger.LogError(ex,$"Error Create new customer: {customersVM.CustomerName}");
@@ -154,7 +154,7 @@ namespace MyBarBer.Controllers
                        
                 }
                 _logger.LogWarning($"Update customer bu id: {id} is fail");
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status400BadRequest, new APIResVM { Success = false, Message = "Update customer is fail" });
             }catch (Exception ex)
             {
                 _logger.LogError(ex,$"Error modify customer by id: {id}");
