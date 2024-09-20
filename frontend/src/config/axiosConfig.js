@@ -4,7 +4,7 @@ import { API_URL } from "../constants/constants";
 // config axios JWT req http(s) method with token
 const axiosRoot = axios.create({
   baseURL: API_URL,
-  timeout: 10000,
+  timeout: 20000,
 });
 
 axiosRoot.interceptors.request.use(

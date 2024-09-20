@@ -20,6 +20,28 @@ namespace MyBarBer.Controllers
             _configuration = configuration;
         }
 
+        [HttpPost("Forgot_Password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPasswordVM)
+        {
+            try
+            {
+                if (forgotPasswordVM.Email != null)
+                {
+                    var result = await _unitOfWork.AuthenticationRepository.ForgotPassword(_configuration, forgotPasswordVM.Email);
+                    if(result)
+                    {
+                        _logger.LogInformation($"Sen mail to email {forgotPasswordVM.Email} is success");
+                        return StatusCode(StatusCodes.Status200OK, new APIResVM { Success = true, Message = "Reset password is success. Please! check your mail." });
+                    }    
+                }_logger.LogWarning($"Send mail to email {forgotPasswordVM.Email} is fail!");
+                return StatusCode(StatusCodes.Status400BadRequest,new APIResVM { Success = false, Message = "Email is not exists!"});
+            }catch (Exception ex)
+            {
+                _logger.LogError(ex,"Error reset password");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpPost("Login")]
         public async Task<ActionResult> LoginUser(LoginVM loginVM)
         {

@@ -26,6 +26,7 @@ import {
 import LoginLayout from "../layouts/LoginLayout";
 import Login from "../pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
+import ResetPassword from "../pages/ResetPassword";
 
 const AppRouter = () => {
   return (
@@ -33,6 +34,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<LoginLayout />}>
           <Route index element={<Login />} />
+          <Route path="/login/reset_password" element={<ResetPassword />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

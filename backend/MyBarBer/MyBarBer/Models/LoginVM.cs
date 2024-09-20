@@ -12,4 +12,11 @@ namespace MyBarBer.Models
         [MinLength(6,ErrorMessage ="Password must be more than 6 characters")]
         public string password { get; set; } = string.Empty;
     }
+
+    public class ForgotPasswordVM
+    {
+        [Required]
+        [MaxLength(100)]
+        public string Email { get; set; } = string.Empty;
+    }
 }

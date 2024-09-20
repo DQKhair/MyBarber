@@ -10,7 +10,7 @@ const Login = () => {
           <div className="brand-logo">
             <h1>My Barber</h1>
           </div>
-          <h4>Hello guy!</h4>
+          <h4>Hello!</h4>
           <h6 className="font-weight-light">Sign in to continue.</h6>
           <LoginForm />
         </div>

@@ -6,5 +6,6 @@ namespace MyBarBer.RepositoryAndUnitOfWork
     public interface IAuthenticationRepository : IGenericRepository<Employees>
     {
         Task<Employees> IsAuthenticatedEmployee(string email, string password);
+        Task<bool> ForgotPassword(IConfiguration configuration, string email);
     }
 }

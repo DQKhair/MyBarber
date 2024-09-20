@@ -127,7 +127,7 @@ const LoginForm = () => {
                   Keep me signed in
                 </label>
               </div>
-              <Link to="/login/forgotpassword" className="auth-link text-black">
+              <Link to="/login/reset_password" className="auth-link text-black">
                 Forgot password?
               </Link>
             </div>

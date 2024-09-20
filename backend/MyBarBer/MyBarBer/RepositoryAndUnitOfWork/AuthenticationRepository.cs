@@ -11,6 +11,43 @@ namespace MyBarBer.RepositoryAndUnitOfWork
         {
         }
 
+        public async Task<bool> ForgotPassword(IConfiguration configuration, string email)
+        {
+            try
+            {
+                if (email != null)
+                {
+                    var _user = await _context.Employees.SingleOrDefaultAsync(e => e.EmployeeEmail == email);
+                    if (_user != null)
+                    {
+                        Random random = new Random();
+                        int numRD = random.Next(1000, 9999);
+                        string _newPassword = $"Mybarber_{numRD}";
+                        string subject = "Reset password";
+                        string message = $"Password: {_newPassword}";
+
+                        _user.EmployeePassword = HashPassword.ConvertPasswordToHash(_newPassword);
+                        var updated = await _context.SaveChangesAsync();
+                        if(updated > 0)
+                        {
+                            var sendMail = await MailServices.SenEmailAsync(email, subject, message, _logger, configuration);
+                            if(sendMail)
+                            {
+                                return true;
+                            }    
+                        }    
+                    }
+                }
+                _logger.LogWarning($"Send Mail to email {email} is fail");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error send mail to email {email}");
+                return false;
+            }
+        }
+
         public async Task<Employees> IsAuthenticatedEmployee(string email, string password)
         { 
             try
