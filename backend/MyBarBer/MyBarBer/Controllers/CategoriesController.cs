@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +21,16 @@ namespace MyBarBer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CategoriesController> _logger;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(IUnitOfWork unitOfWork, ILogger<CategoriesController> logger)
+        public CategoriesController(IUnitOfWork unitOfWork, ILogger<CategoriesController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        // GET: api/Categories
+        // Host/api/Categories
         [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoriesVM>>> GetCategories()
@@ -37,7 +40,8 @@ namespace MyBarBer.Controllers
                 var _categories = await _unitOfWork.Categories.GetAllAsync();
                 if (_categories != null)
                 {
-                   var _listCategoriesVM = CategoriesDTO.ListCategoriesToListCategoriesVM(_categories);
+                   //var _listCategoriesVM = CategoriesDTO.ListCategoriesToListCategoriesVM(_categories);
+                   var _listCategoriesVM = _mapper.Map<IEnumerable<CategoriesVM>>(_categories);
                     if(_listCategoriesVM != null)
                     {
                         _logger.LogInformation("Get list categories successful!");
@@ -54,7 +58,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        // GET: api/Categories/5
+        // Host/api/Categories/{id}
         [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoriesVM>> GetCategoryById(int id)
@@ -62,7 +66,8 @@ namespace MyBarBer.Controllers
             try
             {
                 var _categories = await _unitOfWork.Categories.GetCategoryById(id);
-                var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_categories);
+                //var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_categories);
+                var _categoryVM = _mapper.Map<CategoriesVM>(_categories);
                 if (_categories == null && _categoryVM == null)
                 {
                     _logger.LogWarning("Could not find this category by Id: {id} ", id);
@@ -78,7 +83,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        // POST: api/Categories
+        // Host/api/Categories
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<CategoriesVM>> AddCategories(CategoriesVM categoriesVM)
@@ -94,7 +99,8 @@ namespace MyBarBer.Controllers
                     {
                         await _unitOfWork.CompleteAsync();
                         var _categoryByName = await _unitOfWork.Categories.GetCategoryByName(categoriesVM.CategoryName);
-                        var _categoryByNameVM = CategoriesDTO.CategoriesToCategoriesVM(_categoryByName);
+                        //var _categoryByNameVM = CategoriesDTO.CategoriesToCategoriesVM(_categoryByName);
+                        var _categoryByNameVM = _mapper.Map<CategoriesVM>(_categoryByName);
                         if (_categoryByName != null && _categoryByNameVM != null)
                         {
                             _logger.LogInformation("Add new category successful! Id: {id}", categoriesVM.Category_ID);
@@ -121,7 +127,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        // DELETE: api/Categories/5
+        // Host/api/Categories/5
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategories(int id)
@@ -157,7 +163,8 @@ namespace MyBarBer.Controllers
                 {
                     var result = await _unitOfWork.Categories.ModifyCategory(id, categoriesVM);
                     var _category = await _unitOfWork.Categories.GetCategoryById(id);
-                    var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_category);
+                    //var _categoryVM = CategoriesDTO.CategoriesToCategoriesVM(_category);
+                    var _categoryVM = _mapper.Map<CategoriesVM>(_category);
 
                     if (result == true && _categoryVM != null)
                     {

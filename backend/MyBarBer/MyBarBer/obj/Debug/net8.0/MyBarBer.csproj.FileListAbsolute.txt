@@ -255,3 +255,5 @@ D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\MyBarBer.staticwebassets.runtime.json
+D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\AutoMapper.dll
+D:\Du_an_Website\React_node\MyBarber\backend\MyBarBer\MyBarBer\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

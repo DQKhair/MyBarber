@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBarBer.DTO;
@@ -14,11 +15,13 @@ namespace MyBarBer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<CustomersController> _logger;
+        private readonly IMapper _mapper;
 
-        public CustomersController(IUnitOfWork unitOfWork, ILogger<CustomersController> logger)
+        public CustomersController(IUnitOfWork unitOfWork, ILogger<CustomersController> logger, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
             this._logger = logger;
+            this._mapper = mapper;
         }
 
         [Authorize(policy: "RequireAdminRoleAndEmployeeRole")]
@@ -28,7 +31,8 @@ namespace MyBarBer.Controllers
             try
             {
                 var _customers = await _unitOfWork.Customers.GetAllAsync();
-                var _customersVM = CustomersDTO.ListCustomersToListCustomersVM(_customers);
+                //var _customersVM = CustomersDTO.ListCustomersToListCustomersVM(_customers);
+                var _customersVM = _mapper.Map<IEnumerable<CustomersVM>>(_customers);
                 if (_customers != null && _customersVM != null)
                 {
                     _logger.LogInformation("Get list customer is success!");
@@ -50,7 +54,8 @@ namespace MyBarBer.Controllers
             try
             {
                 var _customer = await _unitOfWork.Customers.GetByIdAsync(id);
-                var _customerVM = CustomersDTO.CustomersToCustomersVM(_customer);
+                //var _customerVM = CustomersDTO.CustomersToCustomersVM(_customer);
+                var _customerVM = _mapper.Map<CustomersVM>(_customer);
                 if (_customer != null && _customerVM != null)
                 {
                     _logger.LogInformation($"Get customer by Id: {id} is success!");
@@ -132,7 +137,8 @@ namespace MyBarBer.Controllers
              
                 if(result)
                 {
-                    var _customerVMRes = CustomersDTO.CustomersToCustomersVM(_customerByphone);
+                    //var _customerVMRes = CustomersDTO.CustomersToCustomersVM(_customerByphone);
+                    var _customerVMRes = _mapper.Map<CustomersVM>(_customerByphone);
 
                     if (oldPhone != customersVM.CustomerPhone)
                     {

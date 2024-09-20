@@ -47,6 +47,9 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+//add automapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 // Add MyDB 
 builder.Services.AddDbContext<MyDBContext>(option =>
 {
@@ -86,6 +89,7 @@ builder.Services.AddAuthorization(option =>
 {
     option.AddPolicy("RequireAdminRoleAndEmployeeRole", policy => policy.RequireRole("Administrator","Employee"));
 });
+
 
 
 var app = builder.Build();
