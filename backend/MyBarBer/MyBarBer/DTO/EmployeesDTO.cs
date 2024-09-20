@@ -16,8 +16,7 @@ namespace MyBarBer.DTO
                     employees.EmployeePhone = employeesVM.EmployeePhone;
                     employees.EmployeeAddress = employeesVM.EmployeeAddress;
                     employees.EmployeeEmail = employeesVM.EmployeeEmail;
-                    //employees.EmployeePassword = HashPassword.ConvertPasswordToHash(employeesVM.EmployeePassword);
-                    //employees.EmployeeIsActive = employeesVM.EmployeeIsActive;
+                    employees.EmployeeIsActive = employeesVM.EmployeeIsActive;
 
                     return employees;
                 }

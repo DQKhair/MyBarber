@@ -170,6 +170,7 @@ const EmployeesTable = () => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <tr
+                    style={item.employeeIsActive? {color: "#000"} : {color: "#ccc",textDecorationLine: "line-through"} }
                       className={`${stylesTableList.table_cursor}`}
                       key={`${item.employee_ID}`}
                     >

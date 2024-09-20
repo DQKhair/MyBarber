@@ -49,16 +49,29 @@ namespace MyBarBer.Controllers
                         var resultEmployee = await _unitOfWork.AuthenticationRepository.IsAuthenticatedEmployee(loginVM.email, loginVM.password);
                         if (resultEmployee != null)
                         {
-                            var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultEmployee.Role_ID.ToString() ?? ""));
-
-                            if(_roleUser != null)
+                            if (resultEmployee.EmployeeIsActive == true)
                             {
-                                _logger.LogInformation("Login employee is success!");
-                                return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
+                                var _roleUser = await _unitOfWork.RolesUser.GetByIdAsync(Guid.Parse(resultEmployee.Role_ID.ToString() ?? ""));
+
+                                if(_roleUser != null)
                                 {
-                                    Success = true,
-                                    Message = "Authentication success",
-                                    AccessToken = authJWT.GenerateToken(resultEmployee, _roleUser)
+                                    _logger.LogInformation("Login employee is success!");
+                                    return StatusCode(StatusCodes.Status200OK, new APIAuthenticationResVM
+                                    {
+                                        Success = true,
+                                        Message = "Authentication success",
+                                        AccessToken = authJWT.GenerateToken(resultEmployee, _roleUser)
+                                    });
+                                }  
+                                
+                            }
+                            else
+                            {
+                                _logger.LogWarning("Authentication user is fail");
+                                return StatusCode(StatusCodes.Status400BadRequest, new APIAuthenticationResVM
+                                {
+                                    Success = false,
+                                    Message = "Your account has been locked."
                                 });
                             }    
                         }
