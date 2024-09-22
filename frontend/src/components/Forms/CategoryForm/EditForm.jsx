@@ -2,7 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
-// import useCategories from "../../../hook/useCategories";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -26,10 +27,19 @@ const EditForm = ({ updateCategory, category, openEdit, handleClose }) => {
 
   // submit form
   const handleFormSubmit = async (values, { resetForm }) => {
-    const result = await updateCategory(category.category_ID,values);
-    if(result)
-    {
-      alert("Update category successful!");
+    const result = await updateCategory(category.category_ID, values);
+    if (result) {
+      toast.success("Update successful!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     handleClose();
     //reset form

@@ -1,4 +1,6 @@
 import React from "react";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -7,14 +9,27 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteForm = ({ deleteItemCategory, itemCategory, openDelete, handleClose }) => {
-
+const DeleteForm = ({
+  deleteItemCategory,
+  itemCategory,
+  openDelete,
+  handleClose,
+}) => {
   // submit form
   const handleAcceptDelete = async (itemCategoryID) => {
     const result = await deleteItemCategory(itemCategoryID);
-    if(result)
-    {
-      alert("Delete Successful!")
+    if (result) {
+      toast.success("Delete successful!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     handleClose();
   };

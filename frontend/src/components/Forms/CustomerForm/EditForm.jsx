@@ -2,6 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorTextPage } from "../../../constants/constants";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -37,7 +39,17 @@ const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
     const result = await updateCustomer(customer.customer_ID,values)
     if(result)
     {
-      alert('Update successful !')
+      toast.success("Update successful!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     handleClose();
   };

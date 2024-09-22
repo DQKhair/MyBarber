@@ -2,11 +2,12 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import React, { useEffect, useState } from "react";
 import { ColorButtonForm, ColorTextPage } from "../../constants/constants";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Avatar, Box, Button, Grid, Stack, TextField } from "@mui/material";
 
 const Profile = ({ updateInfoAdmin, updateInfoEmployee, user, role }) => {
-
   const initialValues = {
     user_ID: user.user_ID,
     userName: user.userName,
@@ -58,12 +59,32 @@ const Profile = ({ updateInfoAdmin, updateInfoEmployee, user, role }) => {
     if (role.roleName === "Administrator") {
       const result = await updateInfoAdmin(values.user_ID, values);
       if (result) {
-        alert("Update is success!");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } else {
       const result = await updateInfoEmployee(values.user_ID, values);
       if (result) {
-        alert("Update is success!");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
   };
@@ -101,8 +122,7 @@ const Profile = ({ updateInfoAdmin, updateInfoEmployee, user, role }) => {
                   fontSize: "2.5rem",
                   bgcolor: ColorTextPage,
                 }}
-              >
-              </Avatar>
+              ></Avatar>
             </Stack>
             <h4 className="text-center" style={{ margin: "20px 0 20px 0" }}>
               {role.roleName}

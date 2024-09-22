@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorButtonForm } from "../../../constants/constants";
 import useItemCategories from "../../../hook/useItemCategories";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -119,7 +121,17 @@ const AddForm = () => {
     const userInfo = DecodeToken(localStorage.getItem("accessToken"));
     const response = await addReceiptHook(userInfo.User_ID, values);
     if (response) {
-      alert("Create new receipt successful!");
+      toast.success("Successfully created new receipt!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     //reset form
     resetForm();

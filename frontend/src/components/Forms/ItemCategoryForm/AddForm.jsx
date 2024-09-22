@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
 import useCategories from "../../../hook/useCategories";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -67,17 +69,26 @@ const categorySchema = yup.object({
 const AddForm = ({ addItemCategory, openAdd, handleClose }) => {
   const { categories } = useCategories();
   const handleFormSubmit = async (values, { resetForm }) => {
-
     const formData = new FormData();
-    formData.append('itemCategoryName',values.itemCategoryName);
-    formData.append('itemCategoryPrice',values.itemCategoryPrice);
-    formData.append('itemCategoryDescription',values.itemCategoryDescription);
-    formData.append('itemCategoryImage',values.itemCategoryImage);
-    formData.append('category_ID',values.category_ID);
+    formData.append("itemCategoryName", values.itemCategoryName);
+    formData.append("itemCategoryPrice", values.itemCategoryPrice);
+    formData.append("itemCategoryDescription", values.itemCategoryDescription);
+    formData.append("itemCategoryImage", values.itemCategoryImage);
+    formData.append("category_ID", values.category_ID);
 
     const result = await addItemCategory(formData);
     if (result) {
-      alert("Add new product successful!");
+      toast.success("Successfully added new item!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     handleClose();
     //reset form

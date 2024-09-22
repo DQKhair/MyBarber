@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../redux/reducers/userReducer";
 import DecodeToken from "../../utils/DecodeToken";
 import StyleCss from"./style.module.css";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Avatar from "@mui/material/Avatar";
 
@@ -16,7 +18,17 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
-    console.log("logout");
+    toast.success("Logout successful!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   return (

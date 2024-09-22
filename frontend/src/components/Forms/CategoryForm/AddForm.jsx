@@ -2,6 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -24,9 +26,18 @@ const categorySchema = yup.object({
 const AddFrom = ({ addCategory, openAdd, handleClose }) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     const result = await addCategory(values);
-    if(result)
-    {
-      alert("Add new category successful!");
+    if (result) {
+      toast.success("Successfully added new category!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
     handleClose();
     //reset form

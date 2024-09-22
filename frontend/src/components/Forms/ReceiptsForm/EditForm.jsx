@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorButtonForm, ColorTextPage } from "../../../constants/constants";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -83,7 +85,6 @@ const EditForm = ({
   const statuses = statusesData.filter(
     (s) => s.statusName !== receipt.statusName
   );
-  console.log(statuses);
 
   const handleFormSubmit = async (values) => {
     const userInfo = DecodeToken(localStorage.getItem("accessToken"));
@@ -92,17 +93,47 @@ const EditForm = ({
     if (values.statusUpdate === 1) {
       const updated = await confirmHaircut(values.receipt_ID, employeeId);
       if (updated) {
-        alert("Update successful");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } else if (values.statusUpdate === 2) {
       const updated = await confirmHairWash(values.receipt_ID, employeeId);
       if (updated) {
-        alert("Update successful");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } else if (values.statusUpdate === 3) {
       const updated = await confirmFinished(values.receipt_ID);
       if (updated) {
-        alert("Update successful");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } else if (values.statusUpdate === 4) {
       console.log(values.receipt_ID, values.paymentMethod);
@@ -111,7 +142,17 @@ const EditForm = ({
         values.paymentMethod
       );
       if (updated) {
-        alert("Update successful");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
 

@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import Button from "../../../components/ButtonPage/Button";
 import StyleLogin from "../../../pages/Login/Login.module.css";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,18 +39,30 @@ const LoginForm = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
-    if(userInfo)
-    {
-      if(userInfo.success)
-      {
+    if (userInfo) {
+      if (userInfo.success) {
         navigation("/");
+
+        toast.success("Login successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
-  },[userInfo,navigation]);
+  }, [userInfo, navigation]);
 
   const handleLogin = (values) => {
     console.log(values);
-    dispatch(loginUser({emailUser: values.email, passwordUser: values.password}))
+    dispatch(
+      loginUser({ emailUser: values.email, passwordUser: values.password })
+    );
   };
 
   return (
@@ -69,7 +83,7 @@ const LoginForm = () => {
           resetForm,
         }) => (
           <form onSubmit={handleSubmit} className="pt-3">
-            <p style={{textAlign:"center", color:"red"}}>{error}</p>
+            <p style={{ textAlign: "center", color: "red" }}>{error}</p>
             <div className="form-group">
               <TextField
                 variant="outlined"

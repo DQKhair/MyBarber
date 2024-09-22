@@ -42,7 +42,7 @@ namespace MyBarBer.Controllers
             }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("Login")] 
         public async Task<ActionResult> LoginUser(LoginVM loginVM)
         {
             AuthJWT authJWT = new AuthJWT(_configuration);

@@ -4,6 +4,8 @@ import * as yup from "yup";
 import Button from "../../../components/ButtonPage/Button";
 import { Box, CircularProgress, TextField } from "@mui/material";
 import useAuthen from "../../../hook/useAuthen";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
   email: "",
@@ -18,9 +20,19 @@ const ResetPasswordForm = ({ resetForm }) => {
 
   const handleSubmitReset = async (values) => {
     const result = await resetPasswordHook(values);
-    console.log(result);
     if (result) {
-      alert("Reset password successful");
+      alert("");
+      toast.success('Reset password successful!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
     }
     resetForm();
   };

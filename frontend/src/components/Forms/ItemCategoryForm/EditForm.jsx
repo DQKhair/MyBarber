@@ -3,6 +3,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorTextPage, ColorButtonForm } from "../../../constants/constants";
 import useCategories from "../../../hook/useCategories";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -65,20 +67,6 @@ const EditForm = ({
     category_ID: yup.string().required("Category is required"),
 
     isUpdateImage: yup.boolean(),
-
-    // itemCategoryImage: yup
-    //   .mixed()
-    //   .required("Image is required")
-    //   .test(
-    //     "fileSize",
-    //     "File size is too large",
-    //     (value) => !value || value.size <= MAX_FILE_SIZE
-    //   )
-    //   .test(
-    //     "fileType",
-    //     "Unsupported file format",
-    //     (value) => !value || SUPPORTED_FORMATS.includes(value.type)
-    //   ),
   });
 
   const handleFormSubmit = async (values) => {
@@ -98,7 +86,17 @@ const EditForm = ({
         formData
       );
       if (result) {
-        alert("Update successful!");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     } else {
       const result = await updateItemCategoryInformation(
@@ -106,7 +104,17 @@ const EditForm = ({
         values
       );
       if (result) {
-        alert("Update successful!");
+        toast.success("Update successful!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       }
     }
     handleClose();

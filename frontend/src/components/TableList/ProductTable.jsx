@@ -148,8 +148,8 @@ const ProductsTable = ({ userInfo }) => {
       <div className="col-lg-12 grid-margin stretch-card">
         <div className="card">
           <div className={`card-body ${stylesTableList.tableResponsive}`}>
-            <h4 className="card-title">{"Customers"}</h4>
-            <p className="card-description">{"List of customers"}</p>
+            <h4 className="card-title">{"Products"}</h4>
+            <p className="card-description">{"List of products"}</p>
 
             {userInfo.role === "Administrator" ? (
               <ButtonCircle
