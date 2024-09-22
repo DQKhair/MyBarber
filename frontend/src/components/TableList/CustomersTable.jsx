@@ -5,18 +5,18 @@ import stylesTableList from "./TableList.module.css";
 import useCustomers from "../../hook/useCustomers";
 import { IconAdd, IconDetail, IconEdit } from "../Icons";
 import { AddFrom, EditForm } from "../Forms/CustomerForm";
-import DecodeToken from "../../utils/DecodeToken";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import { TablePagination } from "@mui/material";
 
-const CustomersTable = ({userInfo}) => {
+const CustomersTable = ({ userInfo }) => {
   const [isAdd, setIsAdd] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [customer, setCustomer] = useState(null);
-
 
   const navigation = useNavigate();
   const {
@@ -24,7 +24,6 @@ const CustomersTable = ({userInfo}) => {
     errorLoad,
     error,
     customers,
-    setError,
     getCustomerByIdLocal,
     addCustomerHook,
     updateCustomerHook,
@@ -66,8 +65,17 @@ const CustomersTable = ({userInfo}) => {
   // alert
   useEffect(() => {
     if (error != null) {
-      alert(error.response.data.message);
-      setError(null);
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }, [error]);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorButtonForm } from "../../../constants/constants";
@@ -18,7 +18,6 @@ import Container from "@mui/material/Container";
 import Autocomplete from "@mui/material/Autocomplete";
 import useCustomers from "../../../hook/useCustomers";
 import useReceipts from "../../../hook/useReceipts";
-import { useSelector } from "react-redux";
 import DecodeToken from "../../../utils/DecodeToken";
 import { Alert } from "@mui/material";
 
@@ -137,6 +136,23 @@ const AddForm = () => {
     resetForm();
   };
 
+   // alert
+   useEffect(() => {
+    if (error != null) {
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  }, [error]);
+
   if (error)
     if (error.status === 403) {
       return (
@@ -146,7 +162,7 @@ const AddForm = () => {
           </Alert>
         </div>
       );
-    } else {
+    } else if (error.status === 400) {
       return (
         <div>
           <Alert severity="error">Error: {error.message}</Alert>

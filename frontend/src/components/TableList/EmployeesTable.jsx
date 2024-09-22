@@ -5,6 +5,8 @@ import stylesTableList from "./TableList.module.css";
 import useEmployees from "../../hook/useEmployees";
 import { IconAdd, IconDetail, IconEdit, IconDelete } from "../Icons";
 import { AddFrom, EditForm, DeleteForm } from "../Forms/EmployeeForm";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -23,7 +25,6 @@ const EmployeesTable = () => {
     errorLoad,
     error,
     employees,
-    setError,
     getEmployeeByIdLocal,
     addEmployeeHook,
     deleteEmployeeHook,
@@ -71,11 +72,20 @@ const EmployeesTable = () => {
     setPage(0);
   };
 
-  //alert
+  // alert
   useEffect(() => {
-    if (error !== null) {
-      alert(error.response.data.message);
-      setError(null);
+    if (error != null) {
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }, [error]);
 
@@ -91,15 +101,15 @@ const EmployeesTable = () => {
     );
 
   if (errorLoad)
-    if(errorLoad.status === 403)
-    {
+    if (errorLoad.status === 403) {
       return (
         <div>
-          <Alert severity="error">Error: You don't have permission to do this</Alert>
+          <Alert severity="error">
+            Error: You don't have permission to do this
+          </Alert>
         </div>
       );
-    }else
-    { 
+    } else {
       return (
         <div>
           <Alert severity="error">Error: {errorLoad.message}</Alert>
@@ -180,7 +190,14 @@ const EmployeesTable = () => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <tr
-                    style={item.employeeIsActive? {color: "#000"} : {color: "#ccc",textDecorationLine: "line-through"} }
+                      style={
+                        item.employeeIsActive
+                          ? { color: "#000" }
+                          : {
+                              color: "#ccc",
+                              textDecorationLine: "line-through",
+                            }
+                      }
                       className={`${stylesTableList.table_cursor}`}
                       key={`${item.employee_ID}`}
                     >

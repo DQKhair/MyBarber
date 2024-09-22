@@ -5,6 +5,8 @@ import stylesTableList from "./TableList.module.css";
 import useItemCategories from "../../hook/useItemCategories";
 import { IconDetail, IconEdit, IconAdd, IconDelete } from "../Icons";
 import { AddForm, EditForm, DeleteForm } from "../Forms/ItemCategoryForm";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -24,7 +26,6 @@ const ServicesTable = ({ userInfo }) => {
     errorLoad,
     error,
     itemCategories,
-    setError,
     getItemCategoryByIdLocal,
     addItemCategoryHook,
     deleteItemCategoryHook,
@@ -81,11 +82,20 @@ const ServicesTable = ({ userInfo }) => {
     setPage(0);
   };
 
-  //alert
+  // alert
   useEffect(() => {
     if (error != null) {
-      alert(error.response.data.message);
-      setError(null);
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }, [error]);
 

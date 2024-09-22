@@ -4,6 +4,8 @@ import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
 import useReceipts from "../../hook/useReceipts";
 import { IconDetail, IconEdit } from "../Icons";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -20,7 +22,6 @@ const ReceiptsTable = () => {
     errorLoad,
     error,
     receipts,
-    setError,
     getReceiptByIdLocal,
     confirmHaircutHook,
     confirmHairWashHook,
@@ -58,9 +59,18 @@ const ReceiptsTable = () => {
 
   // alert
   useEffect(() => {
-    if (error !== null) {
-      alert(error.response.data.message);
-      setError(null);
+    if (error != null) {
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }, [error]);
 

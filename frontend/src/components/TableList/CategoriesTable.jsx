@@ -4,6 +4,8 @@ import stylesTableList from "./TableList.module.css";
 import useCategories from "../../hook/useCategories";
 import { IconAdd, IconEdit, IconDelete } from "../Icons";
 import { AddFrom, EditForm, DeleteForm } from "../Forms/CategoryForm";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -21,7 +23,6 @@ const CategoriesTable = ({ userInfo }) => {
     errorLoad,
     error,
     categories,
-    setError,
     getCategoryById,
     addCategoryHook,
     deleteCategoryHook,
@@ -68,8 +69,17 @@ const CategoriesTable = ({ userInfo }) => {
   // alert
   useEffect(() => {
     if (error != null) {
-      alert(error.response.data.message);
-      setError(null);
+      toast.error(`${error.response.data.message}!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   }, [error]);
 

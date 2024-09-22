@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KGyr9pvR3fNNrotArbWIJaszLTTB06vhAxWeHsd7514=",
+  "Hash": "hA32lt48HxARCYEI6UA8sGD+RtjZRsFRBz9T+y/WJxU=",
   "Source": "MyBarBer",
   "BasePath": "_content/MyBarBer",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\0cc0557f-443f-4b5a-9b80-d2a5f1cba4b9_grapefruit-1.jpg",
       "SourceId": "MyBarBer",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
       "BasePath": "_content/MyBarBer",
-      "RelativePath": "images/83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg",
+      "RelativePath": "images/0cc0557f-443f-4b5a-9b80-d2a5f1cba4b9_grapefruit-1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,7 +33,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\83143b00-125b-43da-9ca5-03bbd2c16a1f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\0cc0557f-443f-4b5a-9b80-d2a5f1cba4b9_grapefruit-1.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\2576a271-2475-47b8-925c-b6faba15272c_BadMan._SL1500_.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/2576a271-2475-47b8-925c-b6faba15272c_BadMan._SL1500_.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\2576a271-2475-47b8-925c-b6faba15272c_BadMan._SL1500_.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\709fa9cb-6d9a-4e99-be99-e7772d8e13bc_SAP-VUOT-TOC-RUSTYLAB-CLAYWAX-scaled-1.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/709fa9cb-6d9a-4e99-be99-e7772d8e13bc_SAP-VUOT-TOC-RUSTYLAB-CLAYWAX-scaled-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\709fa9cb-6d9a-4e99-be99-e7772d8e13bc_SAP-VUOT-TOC-RUSTYLAB-CLAYWAX-scaled-1.jpg"
     },
     {
       "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg",
@@ -53,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\9738d883-5f6e-4cc6-82b6-650730243c4d_0-Featured-Haircuts-For-Men.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\9a01d677-32f3-483e-9566-78704c842eea_HairSpray.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/9a01d677-32f3-483e-9566-78704c842eea_HairSpray.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\9a01d677-32f3-483e-9566-78704c842eea_HairSpray.jpg"
     },
     {
       "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\a526eb9d-d632-4c0f-ac38-0450efb5af0a_Hair-Washing-Rules-from-The-Salon-Experts.jpg",
@@ -91,6 +148,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\c74f86e7-f6c6-4c65-9230-66ce5d59ca7f_Gom-xit-toc-Davines-Perfecting-Hairspray-300ml.jpg"
+    },
+    {
+      "Identity": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\images\\f11a1b55-3d51-4a59-bb75-e0e8e6983909_Mens-Hair-Color-Manukau.jpg",
+      "SourceId": "MyBarBer",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Du_an_Website\\React_node\\MyBarber\\backend\\MyBarBer\\MyBarBer\\wwwroot\\",
+      "BasePath": "_content/MyBarBer",
+      "RelativePath": "images/f11a1b55-3d51-4a59-bb75-e0e8e6983909_Mens-Hair-Color-Manukau.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\f11a1b55-3d51-4a59-bb75-e0e8e6983909_Mens-Hair-Color-Manukau.jpg"
     }
   ]
 }
