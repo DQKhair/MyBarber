@@ -26,6 +26,7 @@ const categorySchema = yup.object({
 const AddFrom = ({ addCategory, openAdd, handleClose }) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     const result = await addCategory(values);
+    console.log(result)
     if (result) {
       toast.success("Successfully added new category!", {
         position: "top-center",

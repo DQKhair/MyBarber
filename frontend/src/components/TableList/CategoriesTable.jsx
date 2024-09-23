@@ -19,10 +19,10 @@ const CategoriesTable = ({ userInfo }) => {
   const [category, setCategory] = useState(null);
 
   const {
-    loading,
-    errorLoad,
-    error,
-    categories,
+    loadingRD,
+    errorLoadRD,
+    errorRD,
+    categoriesRD,
     getCategoryById,
     addCategoryHook,
     deleteCategoryHook,
@@ -68,8 +68,8 @@ const CategoriesTable = ({ userInfo }) => {
 
   // alert
   useEffect(() => {
-    if (error != null) {
-      toast.error(`${error.response.data.message}!`, {
+    if (errorRD != null) {
+      toast.error(`${errorRD}!`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -81,11 +81,11 @@ const CategoriesTable = ({ userInfo }) => {
         transition: Bounce,
       });
     }
-  }, [error]);
+  }, [errorRD]);
 
   //load page
 
-  if (loading)
+  if (loadingRD)
     return (
       <div>
         <Box sx={{ display: "flex" }}>
@@ -94,10 +94,10 @@ const CategoriesTable = ({ userInfo }) => {
       </div>
     );
 
-  if (errorLoad)
+  if (errorLoadRD)
     return (
       <div>
-        <Alert severity="error">Error: {errorLoad.message}</Alert>
+        <Alert severity="errorRD">Error: {errorLoadRD.message}</Alert>
       </div>
     );
 
@@ -147,7 +147,7 @@ const CategoriesTable = ({ userInfo }) => {
         <div className="card">
           <div className={`card-body ${stylesTableList.tableResponsive}`}>
             <h4 className="card-title">{"Categories"}</h4>
-            <p className="card-description">{"List of categories"}</p>
+            <p className="card-description">{"List of categoriesRD"}</p>
 
             {userInfo.role === "Administrator" ? (
               <ButtonCircle
@@ -174,7 +174,7 @@ const CategoriesTable = ({ userInfo }) => {
                 </tr>
               </thead>
               <tbody>
-                {categories
+                {categoriesRD
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
                     <tr
@@ -222,7 +222,7 @@ const CategoriesTable = ({ userInfo }) => {
               className="paginationTable"
               rowsPerPageOptions={[10, 25, 50]}
               component="div"
-              count={categories.length}
+              count={categoriesRD.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
