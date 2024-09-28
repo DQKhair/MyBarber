@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/customers/providers/customer_provider.dart';
+import 'package:mybarber/src/customers/screens/AddNewCustomer.dart';
 import 'package:mybarber/src/customers/widgets/customer_widget.dart';
 import 'package:mybarber/src/utils/env.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +51,12 @@ class _CustomerListState extends State<CustomerList> {
             }
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        tooltip: "Add new customer",
+        onPressed: () {
+          _navigateAddNewCustomer(context);
+        },
         shape: const CircleBorder(),
-        backgroundColor: mainColor,
+        backgroundColor: Colors.green[400],
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -60,4 +64,9 @@ class _CustomerListState extends State<CustomerList> {
       ),
     );
   }
+}
+
+void _navigateAddNewCustomer(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => AddNewCustomer()));
 }

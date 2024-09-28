@@ -39,6 +39,7 @@ dependencies:
   http: ^1.2.2
   provider: ^6.1.2
   elegant_notification: ^2.3.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

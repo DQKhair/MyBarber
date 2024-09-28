@@ -6,7 +6,7 @@ import 'package:mybarber/src/login/widgets/login_widget.dart';
 import 'package:mybarber/src/notFoundWidget.dart';
 import 'package:mybarber/src/products/screens/product_list.dart';
 import 'package:mybarber/src/profile/widgets/profile_widget.dart';
-import 'package:mybarber/src/receipts/widgets/receipts_widget.dart';
+import 'package:mybarber/src/receipts/screens/receipt_list.dart';
 import 'package:mybarber/src/servicesItem/screens/serviceItem_list.dart';
 import 'package:mybarber/src/utils/env.dart';
 
@@ -53,7 +53,7 @@ class _MainPageState extends State<MainPage> {
         }
       case 5:
         {
-          return const ReceiptsWidget();
+          return const ReceiptList();
         }
       case 6:
         {

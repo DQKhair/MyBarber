@@ -52,15 +52,6 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               );
             }
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        shape: const CircleBorder(),
-        backgroundColor: mainColor,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 }

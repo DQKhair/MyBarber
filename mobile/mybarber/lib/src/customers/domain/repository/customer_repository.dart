@@ -1,3 +1,4 @@
+import 'package:mybarber/src/customers/domain/models/customerVM_model.dart';
 import 'package:mybarber/src/customers/domain/models/customer_model.dart';
 import 'package:mybarber/src/customers/domain/services/customer_services.dart';
 
@@ -9,12 +10,8 @@ class CustomerRepository {
     return data.map((customer) => Customer.fromJson(customer)).toList();
   }
 
-  Future<Customer> getCustomerByIdRepository(String customerId) async {
-    return await customerServices.getCustomerById(customerId);
-  }
-
-  Future<void> addCustomerRepository(Customer customer) async {
-    await customerServices.addCustomer(customer);
+  Future<void> addCustomerRepository(CustomerVM customerVM) async {
+    await customerServices.addCustomer(customerVM);
   }
 
 }

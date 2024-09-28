@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mybarber/src/customers/domain/models/customerVM_model.dart';
 import 'package:mybarber/src/customers/domain/models/customer_model.dart';
 import 'package:mybarber/src/customers/domain/repository/customer_repository.dart';
 
@@ -18,12 +19,14 @@ class CustomerProvider with ChangeNotifier {
     }
   }
 
-  Future<Customer> getCustomerByIdProvider(String customerId) async {
-    return await _customerRepository.getCustomerByIdRepository(customerId);
-  }
-
-  Future<void> addCustomerProvider(Customer customer) async {
-    await _customerRepository.addCustomerRepository(customer);
-    await loadCustomers();
+  Future<bool> addCustomerProvider(CustomerVM customerVM) async {
+    try {
+      await _customerRepository.addCustomerRepository(customerVM);
+      await loadCustomers();
+      return true;
+    } catch (error) {
+      print('Error adding new customer: $error');
+      return false;
+    }
   }
 }

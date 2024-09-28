@@ -3,6 +3,7 @@ import 'package:mybarber/src/categories/providers/category_provider.dart';
 import 'package:mybarber/src/customers/providers/customer_provider.dart';
 import 'package:mybarber/src/mainPage.dart';
 import 'package:mybarber/src/products/providers/product_provider.dart';
+import 'package:mybarber/src/receipts/providers/receipt_provider.dart';
 import 'package:mybarber/src/servicesItem/providers/serviceItem_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => CustomerProvider()),
       ChangeNotifierProvider(create: (_) => ServiceItemProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ChangeNotifierProvider(create: (_) => ReceiptProvider())
     ],
     child: const MyApp(),
   ));
