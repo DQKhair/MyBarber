@@ -5,7 +5,7 @@ import 'package:mybarber/src/utils/env.dart';
 import 'package:provider/provider.dart';
 
 class ReceiptList extends StatefulWidget {
-  const ReceiptList({ Key? key }) : super(key: key);
+  const ReceiptList({Key? key}) : super(key: key);
 
   @override
   _ReceiptListState createState() => _ReceiptListState();
@@ -23,10 +23,13 @@ class _ReceiptListState extends State<ReceiptList> {
 
   @override
   Widget build(BuildContext context) {
-     final receiptsProvider = Provider.of<ReceiptProvider>(context);
+    final receiptsProvider = Provider.of<ReceiptProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Receipts'),
+        title: const Text(
+          'Receipts',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: FutureBuilder(
           future: _loadReceiptFuture,
@@ -41,12 +44,11 @@ class _ReceiptListState extends State<ReceiptList> {
               );
             } else {
               return ListView.builder(
-                itemCount: receiptsProvider.receipts.length,
-                itemBuilder: (context, index) {
-                  return receiptWidget(
-                      receiptsProvider.receipts[index], context);
-                }
-              );
+                  itemCount: receiptsProvider.receipts.length,
+                  itemBuilder: (context, index) {
+                    return receiptWidget(
+                        receiptsProvider.receipts[index], context);
+                  });
             }
           }),
       floatingActionButton: FloatingActionButton(

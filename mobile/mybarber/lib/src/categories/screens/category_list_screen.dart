@@ -26,7 +26,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
     final categoriesProvider = Provider.of<CategoryProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Categories'),
+        title: const Text(
+          'Categories',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: FutureBuilder(
           future: _loadCategoriesFuture,

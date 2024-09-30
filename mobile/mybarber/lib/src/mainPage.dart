@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:mybarber/main.dart';
 import 'package:mybarber/src/categories/screens/category_list_screen.dart';
 import 'package:mybarber/src/customers/screens/customer_list.dart';
 import 'package:mybarber/src/dashboard/widgets/dashboard_widget.dart';
-import 'package:mybarber/src/login/widgets/login_widget.dart';
+import 'package:mybarber/src/login/screens/login.dart';
 import 'package:mybarber/src/notFoundWidget.dart';
 import 'package:mybarber/src/products/screens/product_list.dart';
-import 'package:mybarber/src/profile/widgets/profile_widget.dart';
+import 'package:mybarber/src/profile/screens/profile.dart';
 import 'package:mybarber/src/receipts/screens/receipt_list.dart';
 import 'package:mybarber/src/servicesItem/screens/serviceItem_list.dart';
 import 'package:mybarber/src/utils/env.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -19,6 +22,35 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  String userName = '';
+  String userID = '';
+  String userRole = '';
+
+  Future<void> _loadUser() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (pref.getString('accessToken') != null &&
+        pref.getString('accessToken') != '') {
+      String token = pref.getString('accessToken')!;
+      pref.getString('accessToken')!;
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+
+      setState(() {
+        userName = decodedToken['unique_name'] ?? 'No Name';
+        userID = decodedToken['User_ID'] ?? '';
+        userRole = decodedToken['role'] ?? '';
+      });
+    } else {
+      navigatorKey.currentState
+          ?.pushReplacement(MaterialPageRoute(builder: (context) => Login()));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -34,7 +66,9 @@ class _MainPageState extends State<MainPage> {
     var nameWidget = "Dashboard";
     switch (index) {
       case 0:
-        return const DashboardWidget();
+        {
+          return const DashboardWidget();
+        }
       case 1:
         {
           return const CustomerList();
@@ -57,7 +91,7 @@ class _MainPageState extends State<MainPage> {
         }
       case 6:
         {
-          return const ProfileWidget();
+          return Profile(userId: userID, role: userRole);
         }
       default:
         nameWidget = "None";
@@ -80,8 +114,8 @@ class _MainPageState extends State<MainPage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                   gradient: LinearGradient(
                       colors: [Colors.white, mainColor],
                       begin: AlignmentDirectional.topStart,
@@ -94,14 +128,18 @@ class _MainPageState extends State<MainPage> {
                     radius: 50,
                     backgroundColor: mainColor,
                     foregroundColor: Colors.white,
-                    child: Text("K", style: TextStyle(fontSize: 40)),
+                    child: Text(userName.isNotEmpty ? userName[0] : 'N',
+                        style: const TextStyle(fontSize: 40)),
                   )),
-                  SizedBox(
+                  const SizedBox(
                     height: 6,
                   ),
-                  Text(
-                    "Name",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      userName,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   )
                 ],
               ),
@@ -197,9 +235,12 @@ class _MainPageState extends State<MainPage> {
                 color: mainColor,
               ),
               title: const Text("Logout"),
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginWidget()));
+              onTap: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                pref.remove('accessToken');
+
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => Login()));
               },
             ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mybarber/src/receipts/domain/model/receiptDetails_model.dart';
+import 'package:intl/intl.dart';
 import 'package:mybarber/src/receipts/domain/model/receipt_model.dart';
 import 'package:mybarber/src/receipts/widgets/listReceiptDetail_widget.dart';
 import 'package:mybarber/src/utils/env.dart';
@@ -10,9 +10,14 @@ class ReceiptDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NumberFormat numberFormat =
+        NumberFormat.currency(locale: 'vi_VN', symbol: 'đ');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Receipt details'),
+        title: const Text(
+          'Receipt details',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -26,10 +31,13 @@ class ReceiptDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 300,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('assets/images/avataCustomer.jpg'),
+                          child: Image.asset(
+                            'assets/images/avataCustomer.jpg',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       )
                     ],
@@ -46,7 +54,8 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Receipt ID: ${receipt.receipt_ID}'),
+                      Expanded(
+                          child: Text('Receipt ID: ${receipt.receipt_ID}')),
                     ],
                   ),
                   const SizedBox(
@@ -61,7 +70,7 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Customer: ${receipt.customerName}")
+                      Expanded(child: Text("Customer: ${receipt.customerName}"))
                     ],
                   )
                 ],
@@ -78,7 +87,7 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Date: ${receipt.receiptDate}'),
+                      Expanded(child: Text('Date: ${receipt.receiptDate}')),
                     ],
                   ),
                   const SizedBox(
@@ -93,7 +102,9 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Total quantity: ${receipt.totalQuantity}")
+                      Expanded(
+                          child:
+                              Text("Total quantity: ${receipt.totalQuantity}"))
                     ],
                   )
                 ],
@@ -110,7 +121,9 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Total price: ${receipt.totalPrice}'),
+                      Expanded(
+                          child: Text(
+                              'Total price: ${numberFormat.format(receipt.totalPrice)}',style: const TextStyle(color: Colors.red),)),
                     ],
                   ),
                   const SizedBox(
@@ -125,7 +138,7 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Status: ${receipt.statusName}")
+                      Expanded(child: Text("Status: ${receipt.statusName}"))
                     ],
                   ),
                 ],
@@ -142,7 +155,7 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Payment: ${receipt.methodName}'),
+                      Expanded(child: Text('Payment: ${receipt.methodName}')),
                     ],
                   ),
                   const SizedBox(
@@ -157,7 +170,9 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Employee create receipt: ${receipt.employeeName}")
+                      Expanded(
+                          child: Text(
+                              "Employee create receipt: ${receipt.employeeName}"))
                     ],
                   )
                 ],
@@ -174,7 +189,9 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Employee 02: ${receipt.employeeName2 ?? ''}'),
+                      Expanded(
+                          child: Text(
+                              'Employee 02: ${receipt.employeeName2 ?? ''}')),
                     ],
                   ),
                   const SizedBox(
@@ -189,7 +206,8 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Time: ${receipt.employee2_Time ?? ''}")
+                      Expanded(
+                          child: Text("Time: ${receipt.employee2_Time ?? ''}"))
                     ],
                   )
                 ],
@@ -206,7 +224,9 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Employee 03: ${receipt.employeeName3 ?? ''}'),
+                      Expanded(
+                          child: Text(
+                              'Employee 03: ${receipt.employeeName3 ?? ''}')),
                     ],
                   ),
                   const SizedBox(
@@ -221,7 +241,8 @@ class ReceiptDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Time: ${receipt.employee3_ID ?? ''}")
+                      Expanded(
+                          child: Text("Time: ${receipt.employee3_ID ?? ''}"))
                     ],
                   ),
                   const Divider(),

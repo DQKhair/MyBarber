@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/products/providers/product_provider.dart';
 import 'package:mybarber/src/products/widgets/product_widget.dart';
+import 'package:mybarber/src/utils/env.dart';
 import 'package:provider/provider.dart';
 
 class ProductList extends StatefulWidget {
@@ -25,7 +26,10 @@ class _ProductListState extends State<ProductList> {
     final productsProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: const Text(
+          'Products',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: FutureBuilder(
           future: _loadProductFuture,

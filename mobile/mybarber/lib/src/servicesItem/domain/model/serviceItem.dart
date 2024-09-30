@@ -1,7 +1,7 @@
 class ServiceItem {
   final String service_ID;
   final String serviceName;
-  final double servicePrice;
+  final int servicePrice;
   final String serviceImage;
   final String serviceDescription;
   final int category_ID;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/servicesItem/providers/serviceItem_provider.dart';
 import 'package:mybarber/src/servicesItem/widgets/serviceItem_widget.dart';
+import 'package:mybarber/src/utils/env.dart';
 import 'package:provider/provider.dart';
 
 class ServiceItemList extends StatefulWidget {
@@ -26,7 +27,7 @@ class _ServiceItemListState extends State<ServiceItemList> {
     final servicesItemProvider = Provider.of<ServiceItemProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Services'),
+        title: const Text('Services',style: TextStyle(color: mainColor),),
       ),
       body: FutureBuilder(
           future: _loadServicesFuture,

@@ -1,19 +1,15 @@
 import 'dart:convert';
 
 import 'package:mybarber/src/utils/env.dart';
-import 'package:http/http.dart' as http;
+import 'package:mybarber/src/utils/httpConf.dart';
 
 class ReceiptServices {
-  final String apiURL = '${HOST_API}/api/Receipts';
+  final String endpoint = 'api/Receipts';
+
+  HttpMethod httpMethod = HttpMethod(baseUrl: HOST_API);
 
   Future<List<dynamic>> fetchReceipts() async {
-    final response = await http.get(
-      Uri.parse(apiURL),
-      headers: <String, String>{
-        'Authorization': 'Bearer $TOKEN',
-        'Content-Type': 'application/json',
-      },
-    );
+    final response = await httpMethod.get(endpoint);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {

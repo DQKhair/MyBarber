@@ -27,7 +27,7 @@ class _CustomerListState extends State<CustomerList> {
     final customersProvider = Provider.of<CustomerProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Customers'),
+        title: const Text('Customers',style: TextStyle(color: mainColor),),
       ),
       body: FutureBuilder(
           future: _loadCustomerFuture,

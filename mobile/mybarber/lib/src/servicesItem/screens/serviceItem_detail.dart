@@ -10,7 +10,10 @@ class ServiceItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Service details'),
+        title: const Text(
+          'Service details',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -24,10 +27,13 @@ class ServiceItemDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 300,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network('${HOST_API}/${serviceItem.serviceImage}'),
+                          child: Image.network(
+                            '${HOST_API}/${serviceItem.serviceImage}',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       )
                     ],
@@ -44,7 +50,7 @@ class ServiceItemDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('ID: ${serviceItem.service_ID}'),
+                      Expanded(child: Text('ID: ${serviceItem.service_ID}')),
                     ],
                   ),
                   const SizedBox(
@@ -59,7 +65,7 @@ class ServiceItemDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Name: ${serviceItem.serviceName}")
+                      Expanded(child: Text("Name: ${serviceItem.serviceName}"))
                     ],
                   )
                 ],
@@ -76,7 +82,8 @@ class ServiceItemDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Price: ${serviceItem.servicePrice}'),
+                      Expanded(
+                          child: Text('Price: ${serviceItem.servicePrice}')),
                     ],
                   ),
                   const SizedBox(
@@ -91,10 +98,12 @@ class ServiceItemDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Description: ${serviceItem.serviceDescription}")
+                      Expanded(
+                          child: Text(
+                              "Description: ${serviceItem.serviceDescription}"))
                     ],
                   ),
-                   const SizedBox(
+                  const SizedBox(
                     height: 26,
                   ),
                   Row(
@@ -106,7 +115,9 @@ class ServiceItemDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Category ID: ${serviceItem.category_ID}")
+                      Expanded(
+                          child:
+                              Text("Category ID: ${serviceItem.category_ID}"))
                     ],
                   )
                 ],

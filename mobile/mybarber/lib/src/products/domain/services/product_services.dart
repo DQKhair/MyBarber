@@ -1,19 +1,15 @@
 import 'dart:convert';
 
 import 'package:mybarber/src/utils/env.dart';
-import 'package:http/http.dart' as http;
+import 'package:mybarber/src/utils/httpConf.dart';
 
 class ProductServices {
-  final String apiURL = '${HOST_API}/api/itemcategories';
+  final String endpoint = 'api/itemcategories';
 
-   Future<List<dynamic>> fetchItemCategory() async {
-    final response = await http.get(
-      Uri.parse(apiURL),
-      headers: <String, String>{
-        'Authorization': 'Bearer $TOKEN',
-        'Content-Type': 'application/json',
-      },
-    );
+  HttpMethod httpMethod = HttpMethod(baseUrl: HOST_API);
+
+  Future<List<dynamic>> fetchItemCategory() async {
+    final response = await httpMethod.get(endpoint);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {

@@ -10,7 +10,10 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product details'),
+        title: const Text(
+          'Product details',
+          style: TextStyle(color: mainColor),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -24,11 +27,13 @@ class ProductDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 300,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                              '${HOST_API}/${product.productImage}'),
+                            '${HOST_API}/${product.productImage}',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       )
                     ],
@@ -45,7 +50,7 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('ID: ${product.product_ID}'),
+                      Expanded(child: Text('ID: ${product.product_ID}')),
                     ],
                   ),
                   const SizedBox(
@@ -60,7 +65,7 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Name: ${product.productName}")
+                      Expanded(child: Text("Name: ${product.productName}"))
                     ],
                   )
                 ],
@@ -77,7 +82,7 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text('Price: ${product.productPrice}'),
+                      Expanded(child: Text('Price: ${product.productPrice}')),
                     ],
                   ),
                   const SizedBox(
@@ -92,7 +97,9 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Description: ${product.productDescription}")
+                      Expanded(
+                          child: Text(
+                              "Description: ${product.productDescription}"))
                     ],
                   ),
                   const SizedBox(
@@ -107,7 +114,8 @@ class ProductDetail extends StatelessWidget {
                       const SizedBox(
                         width: 16,
                       ),
-                      Text("Category ID: ${product.category_ID}")
+                      Expanded(
+                          child: Text("Category ID: ${product.category_ID}"))
                     ],
                   )
                 ],

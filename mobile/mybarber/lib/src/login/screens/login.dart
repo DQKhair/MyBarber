@@ -2,23 +2,30 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:mybarber/src/login/domain/model/APIRes_model.dart';
+import 'package:mybarber/src/login/domain/model/login_model.dart';
+import 'package:mybarber/src/login/provider/login_provider.dart';
 import 'package:mybarber/src/mainPage.dart';
 import 'package:mybarber/src/utils/env.dart';
 import 'package:mybarber/src/login/widgets/formTitle_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   bool _isVisibled = false;
+  String errorDisplay = '';
 
   bool setVisible() {
     setState(() {
@@ -30,17 +37,29 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   void login() async {
     if (_formKey.currentState!.validate()) {
+      final loginProvider = Provider.of<LoginProvider>(context, listen: false);
+
       String email = emailController.text;
       String password = passwordController.text;
-      print('$email, $password');
-      if (password != '123') {
+      LoginUser loginUser = LoginUser(email: email, password: password);
+      ApiRes result = await loginProvider.loginUserProvider(loginUser);
+
+      print('login result: ${result.message}');
+      if (result.success == true && result.accessToken.toString().isNotEmpty) {
+        //save data user
+        Map<String, dynamic> decodedToken =
+            JwtDecoder.decode(result.accessToken!);
+
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        await pref.setString('accessToken', result.accessToken!);
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MainPage()),
         );
 
         ElegantNotification.success(
-          width: 360,
+          width: 260,
           isDismissable: false,
           stackedOptions: StackedOptions(
             key: 'top',
@@ -59,8 +78,11 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ).show(context);
       } else {
+        setState(() {
+          errorDisplay = result.message;
+        });
         ElegantNotification.error(
-          width: 360,
+          width: 260,
           stackedOptions: StackedOptions(
             key: 'topRight',
             type: StackedType.below,
@@ -102,6 +124,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      if (errorDisplay.isNotEmpty) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
+                          child: Text(
+                            errorDisplay,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -184,7 +218,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                         child: ElevatedButton(
                           onPressed: login,
                           style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
                               backgroundColor: mainColor,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(

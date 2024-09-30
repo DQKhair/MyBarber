@@ -33,9 +33,15 @@ Widget categoryWidget(Category category, BuildContext context) {
                 ),
                 const SizedBox(width: 20.0),
                 Expanded(
-                    child: Column(
+                    child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "${category.category_ID} - ",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(height: 4.0),
                     Text(
                       "${category.categoryName} ",
                       style: const TextStyle(

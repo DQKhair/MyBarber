@@ -1,7 +1,7 @@
 class Product {
   final String product_ID;
   final String productName;
-  final double productPrice;
+  final int productPrice;
   final String productImage;
   final String productDescription;
   final int category_ID;

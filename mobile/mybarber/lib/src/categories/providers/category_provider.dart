@@ -17,23 +17,4 @@ class CategoryProvider with ChangeNotifier {
       throw Exception(e);
     }
   }
-
-  Future<Category> getCategoryByIdProvider(int categoryId) async {
-    return await _categoryRepository.getCategoryByIdRepository(categoryId);
-  }
-
-  Future<void> addCategoryProvider(Category category) async {
-    await _categoryRepository.addCategoryRepository(category);
-    await loadCategories();
-  }
-
-  Future<void> deleteCategoryProvider(int categoryId) async {
-    await _categoryRepository.deleteCategoryRepository(categoryId);
-    await loadCategories();
-  }
-
-  Future<void> updateCategoryProvider(int categoryId, Category category) async {
-    await _categoryRepository.updateCategoryRepository(categoryId, category);
-    await loadCategories();
-  }
 }
