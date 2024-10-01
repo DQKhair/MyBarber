@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/profile/provider/profile_provider.dart';
+import 'package:mybarber/src/profile/screens/profile_edit.dart';
 import 'package:mybarber/src/profile/widgets/profileDetail_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -52,8 +53,8 @@ class _ProfileState extends State<Profile> {
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //   Navigator.push(context,
-          //       MaterialPageRoute(builder: (context) => Editprofile(selectedProfile: widget.profileModel,)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileEdit(userModel: profileProvider.userModel,userId: widget.userId,)));
         },
         backgroundColor: Colors.yellow[600],
         shape: const CircleBorder(),

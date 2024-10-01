@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/profile/domain/model/user_model.dart';
+import 'package:mybarber/src/profile/domain/model/user_update_model.dart';
 import 'package:mybarber/src/profile/domain/repository/profile_repository.dart';
 
 class ProfileProvider with ChangeNotifier {
@@ -18,9 +19,10 @@ class ProfileProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> updateProfileProvider(String userId, UserModel userModel) async {
+  Future<bool> updateProfileProvider(
+      String userId, UserUpdateModel userUpdateModel) async {
     try {
-      await profileRepository.updateProfileRepository(userId, userModel);
+      await profileRepository.updateProfileRepository(userId, userUpdateModel);
       await loadProfile(userId);
       return true;
     } catch (err) {

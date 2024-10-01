@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:mybarber/src/profile/domain/model/user_model.dart';
+import 'package:mybarber/src/profile/domain/model/user_update_model.dart';
 import 'package:mybarber/src/utils/env.dart';
 import 'package:mybarber/src/utils/httpConf.dart';
 
@@ -18,9 +18,10 @@ class ProfileServices {
     }
   }
 
-  Future<void> updateUser(String userId, UserModel userModel) async {
+  Future<void> updateUser(
+      String userId, UserUpdateModel userUpdateModel) async {
     final response = await httpMethod.put(
-        '$endpoint/updateEmployee/$userId', userModel.toJson());
+        '$endpoint/updateEmployee/$userId', userUpdateModel.toJson());
     if (response.statusCode != 200) {
       throw Exception('Fail to update profile');
     }

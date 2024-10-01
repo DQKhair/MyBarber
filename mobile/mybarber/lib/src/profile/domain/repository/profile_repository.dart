@@ -1,4 +1,5 @@
 import 'package:mybarber/src/profile/domain/model/user_model.dart';
+import 'package:mybarber/src/profile/domain/model/user_update_model.dart';
 import 'package:mybarber/src/profile/domain/services/profile_services.dart';
 
 class ProfileRepository {
@@ -10,7 +11,7 @@ class ProfileRepository {
   }
 
   Future<void> updateProfileRepository(
-      String userId, UserModel userModel) async {
-    await profileServices.updateUser(userId, userModel);
+      String userId, UserUpdateModel userUpdateModel) async {
+    await profileServices.updateUser(userId, userUpdateModel);
   }
 }

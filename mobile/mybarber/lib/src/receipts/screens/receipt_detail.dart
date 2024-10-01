@@ -242,7 +242,7 @@ class ReceiptDetail extends StatelessWidget {
                         width: 16,
                       ),
                       Expanded(
-                          child: Text("Time: ${receipt.employee3_ID ?? ''}"))
+                          child: Text("Time: ${receipt.employee3_Time ?? ''}"))
                     ],
                   ),
                   const Divider(),

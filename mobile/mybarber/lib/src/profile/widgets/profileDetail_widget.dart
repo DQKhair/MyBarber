@@ -23,7 +23,8 @@ Widget profileDetail(UserModel? userModel, String role, BuildContext context) {
                       alignment: const Alignment(0.2, 1.5),
                       children: [
                         const CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/avataUser.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/avataUser.png'),
                           radius: 100,
                         ),
                         Positioned(
@@ -94,10 +95,9 @@ Widget profileDetail(UserModel? userModel, String role, BuildContext context) {
                   Icons.location_on,
                   color: mainColor,
                 ),
-
                 const SizedBox(width: 10),
-
-                Expanded(child: Text('Address: ${userModel?.userAddress ?? ""}')),
+                Expanded(
+                    child: Text('Address: ${userModel?.userAddress ?? ""}')),
               ],
             ),
             const SizedBox(height: 20),
@@ -112,27 +112,22 @@ Widget profileDetail(UserModel? userModel, String role, BuildContext context) {
               ],
             ),
             const SizedBox(height: 20),
+            Row(
+              children: [
+                const Icon(
+                  Icons.key,
+                  color: mainColor,
+                ),
+                const SizedBox(width: 10),
+                Expanded(child: Text('ID: ${userModel?.user_ID ?? ""}')),
+              ],
+            ),
+            const SizedBox(height: 20),
           ],
         ),
-
         const SizedBox(
           height: 16,
         ),
-
-        OutlinedButton(
-          onPressed: () {
-          //    Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => Changepassword(selectedProfile: userModel,)));
-          },
-          style: OutlinedButton.styleFrom(
-            side: const BorderSide(
-                width: 1, color: mainColor), // Thiết lập màu border
-          ),
-          child: const Text(
-            "Change password",
-            style: TextStyle(color: mainColor,fontSize: 14),
-          ),
-        )
       ],
     ),
   );

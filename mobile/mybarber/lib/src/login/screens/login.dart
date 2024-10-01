@@ -44,7 +44,6 @@ class _LoginState extends State<Login> {
       LoginUser loginUser = LoginUser(email: email, password: password);
       ApiRes result = await loginProvider.loginUserProvider(loginUser);
 
-      print('login result: ${result.message}');
       if (result.success == true && result.accessToken.toString().isNotEmpty) {
         //save data user
         Map<String, dynamic> decodedToken =
