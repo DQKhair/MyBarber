@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class ProfileEdit extends StatefulWidget {
   final UserModel? userModel;
   final String userId;
-  const ProfileEdit({super.key, required this.userModel,required this.userId});
+  const ProfileEdit({super.key, required this.userModel, required this.userId});
 
   @override
   _ProfileEditState createState() => _ProfileEditState();
@@ -21,6 +21,7 @@ class ProfileEdit extends StatefulWidget {
 
 class _ProfileEditState extends State<ProfileEdit> {
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController userAddressController = TextEditingController();
@@ -44,6 +45,10 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   void handleSubmit() async {
     if (_formKey.currentState!.validate()) {
+      // start loading
+      setState(() {
+        loading = true;
+      });
       final provider = Provider.of<ProfileProvider>(context, listen: false);
       String userName = userNameController.text;
       String userAddress = userAddressController.text;
@@ -58,12 +63,12 @@ class _ProfileEditState extends State<ProfileEdit> {
           userEmail: userEmail,
           userPassword: userPassword);
 
-      bool result = await provider.updateProfileProvider(widget.userId,userUpdateModel);
-      if(result)
-      {
+      bool result =
+          await provider.updateProfileProvider(widget.userId, userUpdateModel);
+      if (result) {
         navigatorKey.currentState?.pop();
-        
-         ElegantNotification.success(
+
+        ElegantNotification.success(
           width: 260,
           isDismissable: false,
           stackedOptions: StackedOptions(
@@ -82,8 +87,7 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
         ).show(context);
-      }else
-      {
+      } else {
         ElegantNotification.error(
           width: 260,
           stackedOptions: StackedOptions(
@@ -98,8 +102,10 @@ class _ProfileEditState extends State<ProfileEdit> {
           onDismiss: () {},
         ).show(context);
       }
-
-      print(userEmail);
+      // endloading
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -172,11 +178,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -201,11 +205,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -236,11 +238,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -266,11 +266,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -298,11 +296,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
@@ -330,17 +326,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                           },
                         ),
                       ),
-
                       const SizedBox(
                         height: 20,
                       ),
-
-                      // login button
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 10),
                         child: ElevatedButton(
-                          onPressed: handleSubmit,
+                          onPressed: loading ? null : handleSubmit,
                           style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
@@ -348,13 +341,14 @@ class _ProfileEditState extends State<ProfileEdit> {
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
-                          child: const Text(
-                            'Update',
-                            style: TextStyle(fontSize: 18),
-                          ),
+                          child: loading
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                  'Update',
+                                  style: TextStyle(fontSize: 18),
+                                ),
                         ),
                       ),
-                      // other login title
                       const SizedBox(
                         height: 20,
                       ),

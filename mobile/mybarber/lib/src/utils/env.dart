@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const String HOST_API = 'http://192.168.0.102:2602';
 
+
 const String TOKEN =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IsSQaW5oIFF1YW5nIEto4bqjaSIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFkbWluaXN0cmF0b3IiLCJVc2VyX0lEIjoiNzczYTAzZjAtMTRjOC00MGIwLWIyOTItYzdkZmIyYTkwMDc4IiwiUm9sZV9JRCI6ImRiMDBmMGY2LTIzN2UtNDIxYy1iZjg2LTU3ZTdkZTBiMjVlZSIsIlRva2VuX0lEIjoiMTRjOGNjZGMtMjc5ZS00MDg4LWE1YzUtYzRhNDYyZjZkMjVjIiwibmJmIjoxNzI3NjYzNTcxLCJleHAiOjE3Mjc2ODUxNzEsImlhdCI6MTcyNzY2MzU3MX0.g1YCa52SGas546wS4LQuuKXDh-QQe9Q7jAru6mB0hNI';
 const Color mainColor = Color.fromARGB(214, 21, 34, 153);

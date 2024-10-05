@@ -42,10 +42,10 @@ class _ServiceItemListState extends State<ServiceItemList> {
               );
             } else {
               return ListView.builder(
-                itemCount: servicesItemProvider.products.length,
+                itemCount: servicesItemProvider.servicesItem.length,
                 itemBuilder: (context, index) {
                   return ServiceItemWidget(
-                      servicesItemProvider.products[index], context);
+                      servicesItemProvider.servicesItem[index], context);
                 },
               );
             }

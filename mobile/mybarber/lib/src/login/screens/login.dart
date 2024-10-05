@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
 
   bool _isVisibled = false;
   String errorDisplay = '';
+  bool loading = false;
 
   bool setVisible() {
     setState(() {
@@ -37,6 +38,10 @@ class _LoginState extends State<Login> {
 
   void login() async {
     if (_formKey.currentState!.validate()) {
+      // start loading
+      setState(() {
+        loading = true;
+      });
       final loginProvider = Provider.of<LoginProvider>(context, listen: false);
 
       String email = emailController.text;
@@ -94,6 +99,10 @@ class _LoginState extends State<Login> {
           onDismiss: () {},
         ).show(context);
       }
+      // end loading
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -215,7 +224,7 @@ class _LoginState extends State<Login> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 50, vertical: 10),
                         child: ElevatedButton(
-                          onPressed: login,
+                          onPressed: loading ? null : login,
                           style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
@@ -223,10 +232,12 @@ class _LoginState extends State<Login> {
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10))),
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(fontSize: 18),
-                          ),
+                          child: loading
+                              ? const CircularProgressIndicator()
+                              : const Text(
+                                  'Login',
+                                  style: TextStyle(fontSize: 18),
+                                ),
                         ),
                       ),
                       // other login title

@@ -6,7 +6,7 @@ class ServiceItemProvider with ChangeNotifier {
   List<ServiceItem> _servicesItem = [];
   final ServiceItemRepository _serviceItemRepository = ServiceItemRepository();
 
-  List<ServiceItem> get products => _servicesItem;
+  List<ServiceItem> get servicesItem => _servicesItem;
 
   Future<void> loadServicesItem() async {
     try {

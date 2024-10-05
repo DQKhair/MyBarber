@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mybarber/src/receipts/domain/model/receipt_model.dart';
+import 'package:mybarber/src/receipts/screens/receipt_modify.dart';
 import 'package:mybarber/src/receipts/widgets/listReceiptDetail_widget.dart';
 import 'package:mybarber/src/utils/env.dart';
 
@@ -64,7 +65,7 @@ class ReceiptDetail extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        Icons.tag,
+                        Icons.person_2_outlined,
                         color: mainColor,
                       ),
                       const SizedBox(
@@ -104,7 +105,7 @@ class ReceiptDetail extends StatelessWidget {
                       ),
                       Expanded(
                           child:
-                              Text("Total quantity: ${receipt.totalQuantity}"))
+                              Text("Total quantity product: ${receipt.totalQuantity}"))
                     ],
                   )
                 ],
@@ -123,7 +124,9 @@ class ReceiptDetail extends StatelessWidget {
                       ),
                       Expanded(
                           child: Text(
-                              'Total price: ${numberFormat.format(receipt.totalPrice)}',style: const TextStyle(color: Colors.red),)),
+                        'Total price: ${numberFormat.format(receipt.totalPrice)}',
+                        style: const TextStyle(color: Colors.red),
+                      )),
                     ],
                   ),
                   const SizedBox(
@@ -256,8 +259,11 @@ class ReceiptDetail extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+      floatingActionButton: receipt.statusName == 'Payment completed' ? null : FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ReceiptModify(receipt: receipt,)));
+        },
         shape: const CircleBorder(),
         backgroundColor: Colors.yellow[700],
         child: const Icon(

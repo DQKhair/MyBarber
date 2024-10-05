@@ -78,6 +78,26 @@ class HttpMethod {
     }
   }
 
+   // put method not body
+  Future<http.Response> putNoBody(String endpoint) async {
+    final String? token = await _getToken();
+    final response = await http.put(
+      Uri.parse('$baseUrl/$endpoint'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 401) {
+      navigatorKey.currentState?.pushReplacement(
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+      return throw Exception('Fail to get method');
+    } else {
+      return response;
+    }
+  }
+
   // delete method
   Future<http.Response> delete(String endpoint) async {
     final String? token = await _getToken();

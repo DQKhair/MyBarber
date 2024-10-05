@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mybarber/src/receipts/domain/model/receipt_model.dart';
 import 'package:mybarber/src/receipts/screens/receipt_detail.dart';
+import 'package:mybarber/src/receipts/screens/receipt_modify.dart';
 import 'package:mybarber/src/utils/env.dart';
 
 void _navigateToReceiptDetail(Receipt receipt, BuildContext context) {
@@ -22,7 +23,7 @@ Widget receiptWidget(Receipt receipt, BuildContext context) {
       child: Container(
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-              colors: [Colors.white,mainColor],
+              colors: [Colors.white, mainColor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(15),
@@ -72,11 +73,24 @@ Widget receiptWidget(Receipt receipt, BuildContext context) {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.edit),
-                    color: Colors.yellow[700],
-                  ),
+                  if (receipt.statusName != 'Payment completed')
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ReceiptModify(
+                                      receipt: receipt,
+                                    )));
+                      },
+                      icon: const Icon(Icons.edit),
+                      color: Colors.yellow[700],
+                    )
+                  else
+                    const SizedBox(
+                      width: 48,
+                      height: 48,
+                    ),
                 ],
               )
             ],

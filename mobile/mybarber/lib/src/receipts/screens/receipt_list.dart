@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/receipts/providers/receipt_provider.dart';
+import 'package:mybarber/src/receipts/screens/receipt_add.dart';
 import 'package:mybarber/src/receipts/widgets/receipts_widget.dart';
 import 'package:mybarber/src/utils/env.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,9 @@ class _ReceiptListState extends State<ReceiptList> {
           }),
       floatingActionButton: FloatingActionButton(
         tooltip: "Add new receipt",
-        onPressed: () {},
+        onPressed: () {
+              _navigateCreateNewReceipt(context);
+        },
         shape: const CircleBorder(),
         backgroundColor: Colors.green[400],
         child: const Icon(
@@ -63,4 +66,10 @@ class _ReceiptListState extends State<ReceiptList> {
       ),
     );
   }
+}
+
+
+void _navigateCreateNewReceipt(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const ReceiptAdd()));
 }

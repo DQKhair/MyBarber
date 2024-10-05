@@ -17,6 +17,7 @@ class AddNewCustomer extends StatefulWidget {
 
 class _AddNewCustomerState extends State<AddNewCustomer> {
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   TextEditingController customerNameController = TextEditingController();
   TextEditingController customerPhoneController = TextEditingController();
@@ -24,6 +25,10 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
 
   void handleSubmit() async {
     if (_formKey.currentState!.validate()) {
+      // start loading
+      setState(() {
+        loading = true;
+      });
       String customerName = customerNameController.text;
       String customerPhone = customerPhoneController.text;
       String customerAddress = customerAddressController.text;
@@ -44,7 +49,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
 
         //alert
         ElegantNotification.success(
-          width: 360,
+          width: 260,
           isDismissable: false,
           stackedOptions: StackedOptions(
             key: 'top',
@@ -66,7 +71,7 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
         Navigator.pop(context);
       } else {
         ElegantNotification.error(
-          width: 360,
+          width: 260,
           stackedOptions: StackedOptions(
             key: 'topRight',
             type: StackedType.below,
@@ -79,6 +84,10 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
           onDismiss: () {},
         ).show(context);
       }
+      // end loading
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -204,17 +213,19 @@ class _AddNewCustomerState extends State<AddNewCustomer> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 10),
                       child: ElevatedButton(
-                        onPressed: handleSubmit,
+                        onPressed: loading ? null : handleSubmit,
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            backgroundColor: mainColor,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                        child: loading
+                            ? const CircularProgressIndicator()
+                            : const Text(
+                                ' Add ',
+                                style: TextStyle(fontSize: 18),
+                              ),
                       ),
                     ),
                     // other login title
