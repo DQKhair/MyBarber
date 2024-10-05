@@ -3,7 +3,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mybarber/main.dart';
 import 'package:mybarber/src/categories/screens/category_list_screen.dart';
 import 'package:mybarber/src/customers/screens/customer_list.dart';
-import 'package:mybarber/src/dashboard/widgets/dashboard_widget.dart';
+import 'package:mybarber/src/dashboard/screens/dashboard_screen.dart';
 import 'package:mybarber/src/login/screens/login.dart';
 import 'package:mybarber/src/notFoundWidget.dart';
 import 'package:mybarber/src/products/screens/product_list.dart';
@@ -67,7 +67,7 @@ class _MainPageState extends State<MainPage> {
     switch (index) {
       case 0:
         {
-          return const DashboardWidget();
+          return const DashboardScreen();
         }
       case 1:
         {

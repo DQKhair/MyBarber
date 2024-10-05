@@ -2,7 +2,6 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mybarber/src/login/domain/model/APIRes_model.dart';
 import 'package:mybarber/src/login/domain/model/login_model.dart';
 import 'package:mybarber/src/login/provider/login_provider.dart';
@@ -13,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   _LoginState createState() => _LoginState();
@@ -51,9 +50,6 @@ class _LoginState extends State<Login> {
 
       if (result.success == true && result.accessToken.toString().isNotEmpty) {
         //save data user
-        Map<String, dynamic> decodedToken =
-            JwtDecoder.decode(result.accessToken!);
-
         SharedPreferences pref = await SharedPreferences.getInstance();
         await pref.setString('accessToken', result.accessToken!);
 
@@ -181,7 +177,7 @@ class _LoginState extends State<Login> {
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextFormField(
                           controller: passwordController,
-                          obscureText: !_isVisibled, // Ẩn mật khẩu
+                          obscureText: !_isVisibled,
                           decoration: InputDecoration(
                               labelText: "Password",
                               prefixIcon: const Icon(Icons.password_outlined),

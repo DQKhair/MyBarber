@@ -17,7 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReceiptAdd extends StatefulWidget {
-  const ReceiptAdd({Key? key}) : super(key: key);
+  const ReceiptAdd({super.key});
 
   @override
   _ReceiptAddState createState() => _ReceiptAddState();
@@ -156,7 +156,7 @@ class _ReceiptAddState extends State<ReceiptAdd> {
       for (int i = 0; i < productCount; i++) {
         if (quantityProductsControllers.length > i) {
           String? quantityText = quantityProductsControllers[i].text;
-          int quantity = int.tryParse(quantityText ?? '') ?? 0;
+          int quantity = int.tryParse(quantityText) ?? 0;
           productsQuantityInput.add(quantity);
         }
       }

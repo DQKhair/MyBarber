@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mybarber/src/categories/providers/category_provider.dart';
 import 'package:mybarber/src/customers/providers/customer_provider.dart';
+import 'package:mybarber/src/dashboard/providers/statistic_provider.dart';
 import 'package:mybarber/src/login/provider/login_provider.dart';
 import 'package:mybarber/src/mainPage.dart';
 import 'package:mybarber/src/products/providers/product_provider.dart';
@@ -20,6 +21,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => ReceiptProvider()),
       ChangeNotifierProvider(create: (_) => LoginProvider()),
       ChangeNotifierProvider(create: (_) => ProfileProvider()),
+      ChangeNotifierProvider(create: (_) => StatisticProvider()),
     ],
     child: const MyApp(),
   ));
