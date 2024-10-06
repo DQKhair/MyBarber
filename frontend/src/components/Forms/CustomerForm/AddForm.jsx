@@ -40,7 +40,7 @@ const customerSchema = yup.object({
     .max(100, "Customer address must be at most 100 characters"),
 });
 
-const AddFrom = ({ addCustomer, openAdd, handleClose }) => {
+const AddFrom = ({ loading, addCustomer, openAdd, handleClose }) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     const result = await addCustomer(values);
     if (result) {
@@ -180,6 +180,7 @@ const AddFrom = ({ addCustomer, openAdd, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

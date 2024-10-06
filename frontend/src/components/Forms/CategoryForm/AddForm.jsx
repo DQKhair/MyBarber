@@ -23,10 +23,10 @@ const categorySchema = yup.object({
   categoryName: yup.string().required("Category name required"),
 });
 
-const AddFrom = ({ addCategory, openAdd, handleClose }) => {
+const AddFrom = ({ loading, addCategory, openAdd, handleClose }) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     const result = await addCategory(values);
-    console.log(result)
+    console.log(result);
     if (result) {
       toast.success("Successfully added new category!", {
         position: "top-center",
@@ -124,6 +124,7 @@ const AddFrom = ({ addCategory, openAdd, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

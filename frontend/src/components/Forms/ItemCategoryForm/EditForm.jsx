@@ -27,14 +27,14 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png"];
 
 const EditForm = ({
+  loading,
   updateItemCategoryInformation,
   updateItemCategoryImage,
   itemCategory,
   openEdit,
   handleClose,
 }) => {
-  const { categories } = useCategories();
-  const {categoriesRD} = useSelector(state => state.categories);
+  const { categoriesRD } = useSelector((state) => state.categories);
   const [isUpdateImage, setIsUpdateImage] = useState(false);
 
   // initial values
@@ -347,6 +347,7 @@ const EditForm = ({
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

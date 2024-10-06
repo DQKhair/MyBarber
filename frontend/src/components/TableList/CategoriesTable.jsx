@@ -106,6 +106,7 @@ const CategoriesTable = ({ userInfo }) => {
       {/* Form */}
       {isAdd === true ? (
         <AddFrom
+          loading={loadingRD}
           addCategory={addCategoryHook}
           openAdd={isAdd}
           handleClose={handleCloseAdd}
@@ -118,6 +119,7 @@ const CategoriesTable = ({ userInfo }) => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loadingRD}
           updateCategory={updateCategoryHook}
           category={category}
           openEdit={isEdit}
@@ -131,6 +133,7 @@ const CategoriesTable = ({ userInfo }) => {
 
       {isDelete === true ? (
         <DeleteForm
+          loading={loadingRD}
           deleteCategory={deleteCategoryHook}
           category={category}
           openDelete={isDelete}

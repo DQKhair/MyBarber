@@ -10,6 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 const DeleteForm = ({
+  loading,
   deleteItemCategory,
   itemCategory,
   openDelete,
@@ -69,6 +70,7 @@ const DeleteForm = ({
             Cancel
           </Button>
           <Button
+            disabled={loading}
             variant="contained"
             color="error"
             onClick={() => handleAcceptDelete(itemCategory.itemCategory_ID)}

@@ -69,7 +69,7 @@ const receiptSchema = yup.object({
 });
 
 const AddForm = () => {
-  const { error, addReceiptHook } = useReceipts();
+  const { loading, error, addReceiptHook } = useReceipts();
   const [productQuantity, setProductQuantity] = useState(0);
   const [serviceQuantity, setServiceQuantity] = useState(0);
   const { itemCategories } = useItemCategories();
@@ -491,6 +491,7 @@ const AddForm = () => {
                 </Grid>
               </Box>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm, margin: "10px 0 10px 0" }}
                 type="submit"

@@ -15,7 +15,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const EditForm = ({ updateCategory, category, openEdit, handleClose }) => {
+const EditForm = ({
+  loading,
+  updateCategory,
+  category,
+  openEdit,
+  handleClose,
+}) => {
   // initial value
   const initialValues = {
     categoryName: category.categoryName,
@@ -125,6 +131,7 @@ const EditForm = ({ updateCategory, category, openEdit, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

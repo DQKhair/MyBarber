@@ -15,7 +15,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
+const EditForm = ({
+  loading,
+  updateCustomer,
+  customer,
+  openEdit,
+  handleClose,
+}) => {
   // initial values
   const initialValues = {
     customerName: customer.customerName,
@@ -36,9 +42,8 @@ const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
   });
 
   const handleFormSubmit = async (values) => {
-    const result = await updateCustomer(customer.customer_ID,values)
-    if(result)
-    {
+    const result = await updateCustomer(customer.customer_ID, values);
+    if (result) {
       toast.success("Update successful!", {
         position: "top-center",
         autoClose: 5000,
@@ -162,7 +167,9 @@ const EditForm = ({ updateCustomer, customer, openEdit, handleClose }) => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              <Button type="submit">Save</Button>
+              <Button disabled={loading} type="submit">
+                Save
+              </Button>
             </DialogActions>
           </Dialog>
         )}

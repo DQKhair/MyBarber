@@ -66,8 +66,8 @@ const categorySchema = yup.object({
   category_ID: yup.string().required("Category is required"),
 });
 
-const AddForm = ({ addItemCategory, openAdd, handleClose }) => {
-  const { categories } = useCategories();
+const AddForm = ({ loading, addItemCategory, openAdd, handleClose }) => {
+  const { categoriesRD } = useCategories();
   const handleFormSubmit = async (values, { resetForm }) => {
     const formData = new FormData();
     formData.append("itemCategoryName", values.itemCategoryName);
@@ -236,7 +236,7 @@ const AddForm = ({ addItemCategory, openAdd, handleClose }) => {
                         label="Category ID"
                         error={!!touched.category_ID && !!errors.category_ID}
                       >
-                        {categories.map((category) => (
+                        {categoriesRD.map((category) => (
                           <MenuItem
                             key={category.category_ID}
                             value={category.category_ID}
@@ -283,6 +283,7 @@ const AddForm = ({ addItemCategory, openAdd, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"
