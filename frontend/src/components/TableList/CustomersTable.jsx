@@ -102,6 +102,7 @@ const CustomersTable = ({ userInfo }) => {
       {/* Form */}
       {isAdd === true ? (
         <AddFrom
+          loading={loading}
           addCustomer={addCustomerHook}
           openAdd={isAdd}
           handleClose={handleCloseAdd}
@@ -114,6 +115,7 @@ const CustomersTable = ({ userInfo }) => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loading}
           updateCustomer={updateCustomerHook}
           customer={customer}
           openEdit={isEdit}

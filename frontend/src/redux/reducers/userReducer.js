@@ -42,8 +42,8 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.userInfo = action.payload;
-        localStorage.setItem('accessToken',action.payload.accessToken);
-        localStorage.setItem('refreshToken',action.payload.refreshToken);
+        localStorage.setItem("accessToken", action.payload.accessToken);
+        localStorage.setItem("refreshToken", action.payload.refreshToken);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

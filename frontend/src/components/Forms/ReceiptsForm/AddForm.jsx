@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { ColorButtonForm } from "../../../constants/constants";
@@ -69,16 +69,28 @@ const receiptSchema = yup.object({
 });
 
 const AddForm = () => {
-  const { error, addReceiptHook } = useReceipts();
+  const { loading, error, addReceiptHook } = useReceipts();
   const [productQuantity, setProductQuantity] = useState(0);
   const [serviceQuantity, setServiceQuantity] = useState(0);
   const { itemCategories } = useItemCategories();
   const { customers } = useCustomers();
-  const services = itemCategories.filter((i) => i.category_ID === 1);
-  const products = itemCategories.filter((i) => i.category_ID !== 1);
 
-  const listAddress = [...new Set(customers.map((c) => c.customerAddress))];
-  const listCustomerName = [...new Set(customers.map((c) => c.customerName))];
+  const services = useMemo(() => {
+    return itemCategories.filter((i) => i.category_ID === 1);
+  }, [itemCategories]);
+
+  const products = useMemo(() => {
+    return itemCategories.filter((i) => i.category_ID !== 1);
+  }, [itemCategories]);
+
+  const listAddress = useMemo(
+    () => [...new Set(customers.map((c) => c.customerAddress))],
+    [customers]
+  );
+  const listCustomerName = useMemo(
+    () => [...new Set(customers.map((c) => c.customerName))],
+    [customers]
+  );
 
   const handleChangeNumSer = (event, setFieldValue, values) => {
     const newQuantity = event.target.value;
@@ -136,20 +148,22 @@ const AddForm = () => {
     resetForm();
   };
 
-   // alert
-   useEffect(() => {
-    if (error != null) {
-      toast.error(`${error.response.data.message}!`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+  // alert
+  useEffect(() => {
+    if (error !== null) {
+      if (error.status === 403) {
+        toast.error(`You don't have permission to do this!`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     }
   }, [error]);
 
@@ -477,6 +491,7 @@ const AddForm = () => {
                 </Grid>
               </Box>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm, margin: "10px 0 10px 0" }}
                 type="submit"

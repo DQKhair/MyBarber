@@ -9,12 +9,17 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteForm = ({ deleteEmployee, employee, openDelete, handleClose }) => {
+const DeleteForm = ({
+  loading,
+  deleteEmployee,
+  employee,
+  openDelete,
+  handleClose,
+}) => {
   // submit form
   const handleAcceptDelete = async (employeeID) => {
     const result = await deleteEmployee(employeeID);
-    if(result)
-    {
+    if (result) {
       toast.success("Delete successful!", {
         position: "top-center",
         autoClose: 5000,
@@ -65,6 +70,7 @@ const DeleteForm = ({ deleteEmployee, employee, openDelete, handleClose }) => {
             Cancel
           </Button>
           <Button
+            disabled={loading}
             variant="contained"
             color="error"
             onClick={() => handleAcceptDelete(employee.employee_ID)}

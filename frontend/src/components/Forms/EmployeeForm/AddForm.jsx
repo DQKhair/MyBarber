@@ -58,7 +58,7 @@ const categorySchema = yup.object({
     .required("Confirm Repassword is required"),
 });
 
-const AddFrom = ({ addEmployee, openAdd, handleClose }) => {
+const AddFrom = ({ loading, addEmployee, openAdd, handleClose }) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     const result = await addEmployee(values);
     if (result) {
@@ -267,6 +267,7 @@ const AddFrom = ({ addEmployee, openAdd, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

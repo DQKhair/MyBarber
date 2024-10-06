@@ -100,6 +100,7 @@ const ReceiptsTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loading}
           confirmHaircut={confirmHaircutHook}
           confirmHairWash={confirmHairWashHook}
           confirmFinished={confirmFinishedHook}

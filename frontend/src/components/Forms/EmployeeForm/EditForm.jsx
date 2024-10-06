@@ -22,7 +22,13 @@ import {
   Select,
 } from "@mui/material";
 
-const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
+const EditForm = ({
+  loading,
+  updateEmployee,
+  employee,
+  openEdit,
+  handleClose,
+}) => {
   // initial values
   const initialValues = {
     employeeName: employee.employeeName,
@@ -247,6 +253,7 @@ const EditForm = ({ updateEmployee, employee, openEdit, handleClose }) => {
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

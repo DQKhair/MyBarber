@@ -24,6 +24,7 @@ import {
 import DecodeToken from "../../../utils/DecodeToken";
 
 const EditForm = ({
+  loading,
   confirmHaircut,
   confirmHairWash,
   confirmFinished,
@@ -39,7 +40,6 @@ const EditForm = ({
     { statusId: 3, statusName: "Finished" },
     { statusId: 4, statusName: "Payment completed" },
   ];
-  console.log(receipt);
   // initial values
   const initialValues = {
     receipt_ID: receipt.receipt_ID,
@@ -136,7 +136,6 @@ const EditForm = ({
         });
       }
     } else if (values.statusUpdate === 4) {
-      console.log(values.receipt_ID, values.paymentMethod);
       const updated = await confirmPaymentCompleted(
         values.receipt_ID,
         values.paymentMethod
@@ -555,6 +554,7 @@ const EditForm = ({
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

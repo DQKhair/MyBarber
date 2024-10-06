@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -33,7 +33,9 @@ const ServicesTable = ({ userInfo }) => {
     updateItemCategoryImageHook,
   } = useItemCategories();
 
-  const Services = itemCategories.filter((item) => item.category_ID === 1);
+  const Services = useMemo(() => {
+    return itemCategories.filter((item) => item.category_ID === 1);
+  });
 
   const handleClickDetail = (serviceID) => {
     navigate(`/services/service_detail/${serviceID}`);
@@ -122,6 +124,7 @@ const ServicesTable = ({ userInfo }) => {
       {/* Form */}
       {isAdd === true ? (
         <AddForm
+          loading={loading}
           addItemCategory={addItemCategoryHook}
           openAdd={isAdd}
           handleClose={handleCloseAdd}
@@ -134,6 +137,7 @@ const ServicesTable = ({ userInfo }) => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loading}
           updateItemCategoryInformation={updateItemCategoryInformationHook}
           updateItemCategoryImage={updateItemCategoryImageHook}
           itemCategory={service}
@@ -148,6 +152,7 @@ const ServicesTable = ({ userInfo }) => {
 
       {isDelete === true ? (
         <DeleteForm
+          loading={loading}
           deleteItemCategory={deleteItemCategoryHook}
           itemCategory={service}
           openDelete={isDelete}

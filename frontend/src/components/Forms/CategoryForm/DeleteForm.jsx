@@ -9,7 +9,13 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const DeleteForm = ({ deleteCategory, category, openDelete, handleClose }) => {
+const DeleteForm = ({
+  loading,
+  deleteCategory,
+  category,
+  openDelete,
+  handleClose,
+}) => {
   // submit form
   const handleAcceptDelete = async (categoryID) => {
     const result = await deleteCategory(categoryID);
@@ -64,6 +70,7 @@ const DeleteForm = ({ deleteCategory, category, openDelete, handleClose }) => {
             Cancel
           </Button>
           <Button
+            disabled={loading}
             variant="contained"
             color="error"
             onClick={() => handleAcceptDelete(category.category_ID)}

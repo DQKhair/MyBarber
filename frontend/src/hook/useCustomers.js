@@ -8,6 +8,7 @@ import {
 } from "../services/customerServices";
 
 const useCustomers = () => {
+
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorLoad, setErrorLoad] = useState(null);
@@ -29,7 +30,8 @@ const useCustomers = () => {
   }, []);
 
   const getCustomerByIdLocal = (customerID) => {
-    setError(null)
+    setLoading(true);
+    setError(null);
     try {
       const customer = customers.find((c) => c.customer_ID === customerID);
       return customer
@@ -37,10 +39,14 @@ const useCustomers = () => {
       setError(err);
       console.error("Fail to get customer by ID: ", err);
       return null;
+    }finally
+    {
+      setLoading(false);
     }
   };
 
   const getCustomerByIdHook = async (customerID) => {
+    setLoading(true);
     setErrorLoad(null);
     try {
       const customer = await getCustomerById(customerID)
@@ -49,11 +55,15 @@ const useCustomers = () => {
       setErrorLoad(err);
       console.error("Fail to get customer by ID: ", err);
       return null;
+    }finally
+    {
+      setLoading(false);
     }
   };
 
   const addCustomerHook = async (customer) => {
     setError(null);
+    setLoading(true);
     try {
       const newCustomer = await addCustomer(customer);
       setCustomers([...customers, newCustomer]);
@@ -63,11 +73,15 @@ const useCustomers = () => {
       setError(err);
       console.error("Fail to add new customer from hook: ", err);
       return null;
+    }finally
+    {
+      setLoading(false);
     }
   };
 
   const deleteCustomerHook = async (customerID) => {
     setError(null);
+    setLoading(true);
     try {
       await deleteCustomer(customerID);
       setCustomers(
@@ -78,11 +92,15 @@ const useCustomers = () => {
       setError(err);
       console.error("Fail to delete customer from hook: ", err);
       return false;
+    }finally
+    {
+      setLoading(false);
     }
   };
 
   const updateCustomerHook = async (customerID, customer) => {
     setError(null);
+    setLoading(true);
     try {
       const updated = await updateCustomer(customerID, customer);
       setCustomers(
@@ -93,6 +111,9 @@ const useCustomers = () => {
       setError(err);
       console.error("Fail to update customer from hook: ", err);
       return null;
+    }finally
+    {
+      setLoading(false);
     }
   };
 

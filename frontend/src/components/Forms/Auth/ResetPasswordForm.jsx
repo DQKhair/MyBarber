@@ -21,8 +21,7 @@ const ResetPasswordForm = ({ resetForm }) => {
   const handleSubmitReset = async (values) => {
     const result = await resetPasswordHook(values);
     if (result) {
-      alert("");
-      toast.success('Reset password successful!', {
+      toast.success("Reset password successful!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -32,7 +31,7 @@ const ResetPasswordForm = ({ resetForm }) => {
         progress: undefined,
         theme: "light",
         transition: Bounce,
-        });
+      });
     }
     resetForm();
   };
@@ -88,6 +87,7 @@ const ResetPasswordForm = ({ resetForm }) => {
             </div>
             <div className="mt-3">
               <Button
+                isDisabled={loading}
                 type={"submit"}
                 nameButton={"Send"}
                 colorButton={"blue"}

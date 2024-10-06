@@ -20,19 +20,21 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
+import { useSelector } from "react-redux";
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 const SUPPORTED_FORMATS = ["image/jpeg", "image/png"];
 
 const EditForm = ({
+  loading,
   updateItemCategoryInformation,
   updateItemCategoryImage,
   itemCategory,
   openEdit,
   handleClose,
 }) => {
-  const { categories } = useCategories();
+  const { categoriesRD } = useSelector((state) => state.categories);
   const [isUpdateImage, setIsUpdateImage] = useState(false);
 
   // initial values
@@ -281,7 +283,7 @@ const EditForm = ({
                         label="Category"
                         error={!!touched.category_ID && !!errors.category_ID}
                       >
-                        {categories.map((category) => (
+                        {categoriesRD.map((category) => (
                           <MenuItem
                             key={category.category_ID}
                             value={category.category_ID}
@@ -345,6 +347,7 @@ const EditForm = ({
                 Cancel
               </Button>
               <Button
+                disabled={loading}
                 variant="contained"
                 sx={{ bgcolor: ColorButtonForm }}
                 type="submit"

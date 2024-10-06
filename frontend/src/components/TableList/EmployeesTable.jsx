@@ -122,6 +122,7 @@ const EmployeesTable = () => {
       {/* Form */}
       {isAdd === true ? (
         <AddFrom
+          loading={loading}
           addEmployee={addEmployeeHook}
           openAdd={isAdd}
           handleClose={handleCloseAdd}
@@ -134,6 +135,7 @@ const EmployeesTable = () => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loading}
           updateEmployee={updateEmployeeHook}
           employee={employee}
           openEdit={isEdit}
@@ -147,6 +149,7 @@ const EmployeesTable = () => {
 
       {isDelete === true ? (
         <DeleteForm
+          loading={loading}
           deleteEmployee={deleteEmployeeHook}
           employee={employee}
           openDelete={isDelete}

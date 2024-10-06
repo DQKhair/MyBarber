@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonCircle from "../ButtonPage/ButtonCircle";
 import stylesTableList from "./TableList.module.css";
@@ -33,7 +33,9 @@ const ProductsTable = ({ userInfo }) => {
     updateItemCategoryImageHook,
   } = useItemCategories();
 
-  const products = itemCategories.filter((p) => p.category_ID !== 1);
+  const products = useMemo(() => {
+    return itemCategories.filter((p) => p.category_ID !== 1);
+  }, [itemCategories]);
 
   const handleClickDetail = (productID) => {
     navigate(`/products/product_detail/${productID}`);
@@ -118,6 +120,7 @@ const ProductsTable = ({ userInfo }) => {
       {/* Form */}
       {isAdd === true ? (
         <AddForm
+          loading={loading}
           addItemCategory={addItemCategoryHook}
           openAdd={isAdd}
           handleClose={handleCloseAdd}
@@ -130,6 +133,7 @@ const ProductsTable = ({ userInfo }) => {
 
       {isEdit === true ? (
         <EditForm
+          loading={loading}
           updateItemCategoryInformation={updateItemCategoryInformationHook}
           updateItemCategoryImage={updateItemCategoryImageHook}
           itemCategory={product}
@@ -144,6 +148,7 @@ const ProductsTable = ({ userInfo }) => {
 
       {isDelete === true ? (
         <DeleteForm
+          loading={loading}
           deleteItemCategory={deleteItemCategoryHook}
           itemCategory={product}
           openDelete={isDelete}
